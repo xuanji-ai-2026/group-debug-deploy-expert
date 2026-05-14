@@ -15,9 +15,16 @@
 !COMPETITIVE_ADVANTAGE.md
 !WEB_PUBLISH_GUIDE.md
 !MULTI_PLATFORM_PUBLISH_GUIDE.md
+!MARKETPLACE_SUBMISSION_GUIDE.md
+!install.sh
+!install.ps1
 !VERSION
 !checksums.sha256
 !.gitignore
+
+# ✅ Allow publish directory (marketplace packages)
+!publish/
+!publish/**
 
 # ✅ Allow .trae directory (skill definitions)
 !.trae/
