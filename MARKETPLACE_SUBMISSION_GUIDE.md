@@ -1,368 +1,349 @@
-# 🚀 ClawHub & SkillHub 一键提交指南
+# 🚀 ClawHub & SkillHub 一键发布指南
+<!-- Auto-Publish Guide v2.0.0 - Updated for CLI-based publishing -->
 
-## 📦 发布包已准备就绪！
-
-| 平台 | 包位置 | 文件数 | 状态 |
-|------|--------|--------|------|
-| **ClawHub** | `publish/clawhub/group-debug-deploy-expert-v1.0.1/` | 18 files | ✅ Ready |
-| **SkillHub** | `publish/skillhub/group-debug-deploy-expert-v1.0.1/` | 19 files | ✅ Ready |
+> **Complete Automation Guide** - Publish your skills to ClawHub and SkillHub with CLI tools  
+> **完整自动化指南** - 使用CLI工具一键发布技能到ClawHub和SkillHub
 
 ---
 
-## 🔶 ClawHub 提交步骤 (3分钟)
+## 📦 Quick Start / 快速开始 (3分钟)
 
-### Step 1: 访问 ClawHub
-🔗 **URL:** https://clawhub.ai/
+### Option 1: Automated Script (Recommended) <!-- 方式1: 自动化脚本(推荐) -->
 
-### Step 2: 登录并进入发布页面
-- 使用 GitHub 账号登录
-- 点击 "Submit Skill" 或 "Publish"
-
-### Step 3: 填写信息（复制下方文本）
-
-#### 📌 Package Name:
-```
-group-debug-deploy-expert
-```
-
-#### 📌 Title:
-```
-Group Debug & Deploy Expert - Enterprise AI Team with 21 Iron Principles
-```
-
-#### 📌 Description (完整版 - 复制这段):
-```
-Universal debug & deploy expert for multi-project instances. Enforces 21 iron principles with project absolute isolation (ZERO-TH LAW). Features 11-role AI digital team (Architect, Backend, Frontend, DevOps, QA, Security, Data, Mobile, Product Owner, Scrum Master, Technical Writer), anti-hallucination system with 12-layer defense, anti-goal-drift detection, error rollback mechanisms, and comprehensive debugging framework for enterprise-grade AI agents.
-
-Compatible with: Trae IDE, OpenClaw, Hermes, Cursor, VSCode, Claude Code
-License: Dual License (Free for personal use / Paid for commercial)
-```
-
-#### 📌 Long Description (Markdown格式 - 复制这段):
-```markdown
-# 🛡️ Group Debug & Deploy Expert v1.0.1
-## 通用调试部署专家团队 - Enterprise-grade AI Debugging Framework
-
-### 🎯 Core Value Proposition
-Transform AI into your enterprise-grade debugging and deployment expert team — 11 AI digital employees collaborating seamlessly, 21 iron principles ensuring quality, ZERO-TH LAW guaranteeing absolute isolation.
-
-Make complex project debugging and deployment as simple as building blocks!
-
----
-
-## ✨ Key Features
-
-### 👥 11-Roles AI Digital Worker Team
-- **Architect** - System design & architecture review
-- **Backend Specialist** - Server-side debugging (Java/Python/Node.js/Go)
-- **Frontend Specialist** - Client-side issues (React/Vue/Angular)
-- **DevOps Engineer** - CI/CD, Docker, K8s, cloud deployment
-- **QA Engineer** - Test strategy & automation
-- **Security Expert** - Vulnerability assessment & hardening
-- **Data Engineer** - Database optimization & ETL pipelines
-- **Mobile Developer** - iOS/Android debugging
-- **Product Owner** - Requirements validation
-- **Scrum Master** - Process optimization
-- **Technical Writer** - Documentation generation
-
-### 🛡️ 21 Iron Principles (Quality Guarantee)
-1. **Truth Principles (T1-T4)**: No guessing, evidence-based conclusions
-2. **Operational Discipline (O1-O5)**: Structured workflow execution
-3. **Environment Control (E1-E4)**: Complete isolation between projects
-4. **Scope Management (S1-S4)**: Strict boundary enforcement
-5. **Compatibility (C1-C2)**: Cross-platform support
-6. **Security (X1-X2)**: Zero leakage guarantee
-
-### 🔒 ZERO-TH LAW (Project Absolute Isolation)
-- **100% file separation** between project instances
-- **Zero context contamination** guaranteed
-- **Anti-goal-drift** mechanism (P20)
-- **FIA File Integrity Audit** protocol
-
-### 🎯 Anti-Hallucination System (12-Layer Defense)
-- H13: Source code verification
-- H14: Command existence checks
-- H15: Execution result validation
-- H16: Log-based fact-checking
-- H17: Confidence scoring system
-
----
-
-## 🚀 Installation
-
-### Automated Installer (Recommended)
-```bash
-# Linux/macOS
-chmod +x install.sh && ./install.sh
-
+```powershell
 # Windows PowerShell
-.\install.ps1
+.\auto-publish.ps1 -Action publish
 ```
 
-The installer will automatically:
-✅ Verify SHA256 integrity (13 files)
-✅ Check file completeness (18+ files)
-✅ Validate critical files (SKILL.md, LICENSE, package.json)
-✅ Generate installation report
-✅ Open user manual for beginners
-
-### Manual Installation
-Extract to `~/.trae/skills/group-debug-deploy-expert/` and restart IDE.
-
----
-
-## 📖 Documentation Included
-- **README.md** (720 lines) - Bilingual documentation (EN/CN)
-- **USER_GUIDE.md** (500+ lines) - Beginner to expert guide
-- **USE_CASES.md** - 13 industry case studies
-- **COMPETITIVE_ADVANTAGE.md** - Technical differentiation analysis
-
----
-
-## 🏆 Use Cases
-- Spring Boot microservices debugging
-- React/Vue frontend issue resolution
-- Docker/Kubernetes deployment troubleshooting
-- Database performance optimization
-- API integration testing
-- Security vulnerability assessment
-- CI/CD pipeline debugging
-- Cross-platform mobile app development
-
----
-
-## 🆘 Support
-- **Author:** 周凤雄 (Henry Chow)
-- **Company:** 云南坤灿科技有限公司 (YunNan KunCan Technology Co., Ltd.)
-- **Email:** z18288090942@gmail.com
-- **Phone:** +86 19537722739 / +86 13114190794
-- **Issues:** https://github.com/xuanji-ai-2026/group-debug-deploy-expert/issues
-- **npm:** https://www.npmjs.com/package/@zfx1818/open-group
-
----
-
-## 📄 License
-**Dual License Model:**
-- ✅ Community License: Free for personal/non-commercial use
-- 💰 Commercial License: Required for company/business use
-
-See LICENSE file for complete terms.
+```bash
+# Linux/macOS Bash
+chmod +x auto-publish.sh && ./auto-publish.sh publish
 ```
 
-#### 📌 Tags (选择或输入):
-```
-debug, deploy, ai-agent, devops, debugging, deployment, testing, ci-cd, security, enterprise, production-ready, 21-iron-principles, zeroth-law, anti-hallucination, multi-project, skill-framework, openclaw, hermes, trae-ide, cursor, vscode, claude-code
-```
+### Option 2: Manual CLI Commands <!-- 方式2: 手动CLI命令 -->
 
-#### 📌 Category:
-```
-Development Tools > Debugging & Deployment
-```
+```bash
+# Step 1: Install CLI / 安装CLI工具
+npm install -g clawhub
 
-#### 📌 License:
-```
-Dual License (See LICENSE file)
-```
+# Step 2: Login with GitHub OAuth / 使用GitHub OAuth登录
+clawhub login
 
-#### 📌 Repository URL:
-```
-https://github.com/xuanji-ai-2026/group-debug-deploy-expert
-```
+# Step 3: Publish to ClawHub / 发布到ClawHub
+clawhub publish .trae/skills/group-debug-deploy-expert `
+  --slug group-debug-deploy-expert `
+  --name "Group Debug & Deploy Expert" `
+  --version 1.0.2
 
-#### 📌 Homepage:
-```
-https://github.com/xuanji-ai-2026/group-debug-deploy-expert#readme
-```
-
-### Step 4: 上传包文件
-- Upload entire `publish/clawhub/group-debug-deploy-expert-v1.0.1/` folder as ZIP
-- Or upload individual files from that directory
-
-### Step 5: 发布
-- Click "Publish" / "Submit"
-- Wait for review (usually 24-48 hours)
-
----
-
-## 🎯 SkillHub 提交步骤 (3分钟)
-
-### Step 1: 访问 SkillHub
-🔗 **URL:** [SkillHub Website](https://skillhub.ai/) *(如果网址不同请调整)*
-
-### Step 2: 登录并注册为开发者
-- Create developer account
-- Navigate to "Submit Skill" or "Add Package"
-
-### Step 3: 填写信息（复制下方文本）
-
-#### 📌 Package Name:
-```
-@zfx1818/open-group
-```
-*(or)*
-```
-group-debug-deploy-expert
-```
-
-#### 📌 Display Name:
-```
-Group Debug & Deploy Expert - Universal AI Debugging & Deployment Framework
-```
-
-#### 📌 Description (完整版 - 复制这段):
-```
-Enterprise-grade AI debug & deploy expert with 11 specialized roles, 21 iron principles, and ZERO-TH LAW absolute isolation. Comprehensive debugging framework featuring anti-hallucination system, multi-platform compatibility, and beginner-friendly installation with integrity verification. Perfect for complex project debugging, deployment troubleshooting, and DevOps automation.
-
-Includes: Automated installer (Windows/Linux/macOS), SHA256 integrity verification, post-install guidance, bilingual documentation (English/Chinese), and 13 industry use cases.
-```
-
-#### 📌 Long Description (Markdown - 同ClawHub版本，复制上方Long Description即可)
-
-#### 📌 Tags:
-```
-ai, debugging, deployment, devops, enterprise, security, testing, ci-cd, microservices, full-stack, backend, frontend, mobile, docker, kubernetes, spring-boot, react, vue, nodejs, python, java, go, quality-assurance, error-handling, troubleshooting, automation, skill-framework, agent, assistant, copilot, intelligent-debugging, production-ready
-```
-
-#### 📌 Category:
-```
-AI & Machine Learning > Development Tools > Debugging & Deployment
-```
-
-### Step 4: 上传包文件
-- Upload `publish/skillhub/group-debug-deploy-expert-v1.0.1/` as ZIP
-- Ensure all 19 files are included
-
-### Step 5: 发布
-- Submit for review
-- Share published URL once approved
-
----
-
-## ✅ 安装验证清单 (给用户的提示)
-
-当用户从ClawHub/SkillHub安装后，会看到：
-
-### 成功安装示例：
-```
-╔══════════════════════════════════════════════════════════╗
-║ 🛡️  Group Debug & Deploy Expert Installer v1.0.1         ║
-╚══════════════════════════════════════════════════════════╝
-
-▶ Step 1/6: Checking system requirements...
-✅ Shell: Bash 5.1.16
-✅ Disk space: 50GB available
-✅ Write permissions: OK
-
-▶ Step 2/6: Verifying package integrity...
-   ℹ️  Running SHA256 integrity check...
-✅ SHA256 verification passed (13 files)
-✅ File count verified: 18 files present
-
-▶ Step 3/6: Installing group-debug-deploy-expert v1.0.1...
-✅ Installed 18 files to ~/.trae/skills/group-debug-deploy-expert/
-
-▶ Step 4/6: Verifying installation...
-✅ Core skill file: OK (45.2KB)
-✅ License file: OK
-✅ Documentation (README): OK
-✅ Package metadata: OK
-✅ Installation verification: PASSED ✓
-
-▶ Step 5/6: Generating installation report...
-✅ Report saved to: .../install-report.txt
-
-▶ Step 6/6: Showing getting-started guide...
-
-╔══════════════════════════════════════════════════════════╗
-║  🎉 Installation Complete! Next Steps:                   ║
-╚══════════════════════════════════════════════════════════╝
-
-┌─────────────────────────────────────────────┐
-│  ✅ STATUS: INSTALLED SUCCESSFULLY           │
-└─────────────────────────────────────────────┘
-
-📖 Quick Start Guide for Beginners:
-
-  1. Read the User Manual:
-     📄 ~/.trae/skills/group-debug-deploy-expert/README.md
-
-  2. First Time Usage Example:
-     Say: "Help me debug my Spring Boot project"
-
-  3. Learn the 21 Iron Principles:
-     See Section 3 in README.md
-
-  4. Need Help?
-     📧 Email: z18288090942@gmail.com
-     📱 Phone: +86 19537722739
-
-ℹ️  Opening user manual...
-
-═══════════════════════════════════════════════════
- Thank you for choosing Group Debug & Deploy Expert!
- 感谢您选择通用调试部署专家团队！
-═══════════════════════════════════════════════════
-```
-
-### 失败示例（带原因）：
-```
-❌ STATUS: INSTALLATION FAILED
-
-🔍 Troubleshooting Steps:
-
-  1. Review error messages above
-  2. Check permissions on target directory:
-     ls -la ~/.trae/skills/
-  3. Ensure disk space is sufficient
-  4. Re-download the package and try again
-
-  5. Contact support with this info:
-     Platform: Linux x86_64
-     Error Log:
-     ❌ SHA256 verification FAILED for 1 file(s)
-     ❌ The package may be corrupted or tampered with
-     📧 z18288090942@gmail.com
+# Step 4: Publish to SkillHub (if needed) / 发布到SkillHub(如需要)
+CLAWHUB_REGISTRY=https://skillhub.iflytek.com clawhub publish .trae/skills/group-debug-deploy-expert `
+  --slug @zfx1818/open-group `
+  --name "Group Debug & Deploy Expert" `
+  --version 1.0.2
 ```
 
 ---
 
-## 📊 包内容对比
+## 🔧 Prerequisites / 前置条件
 
-| 文件 | ClawHub | SkillHub | 说明 |
-|------|---------|----------|------|
-| SKILL.md | ✅ | ✅ | 核心技能定义 |
-| LICENSE | ✅ | ✅ | 双重许可证 |
-| VERSION | ✅ | ✅ | 版本号 v1.0.1 |
-| package.json | ✅ | ✅ | npm元数据 |
-| skill.json | ✅ | ✅ | 技能市场元数据 |
-| README.md | ✅ | ✅ | 主文档(720行双语) |
-| README-DEPLOY.md | ✅ | ✅ | 部署指南 |
-| USER_GUIDE.md | ✅ | ✅ | 用户手册 |
-| USE_CASES.md | ✅ | ✅ | 用例集 |
-| COMPETITIVE_ADVANTAGE.md | ✅ | ✅ | 竞争优势分析 |
-| checksums.sha256 | ✅ | ✅ | SHA256校验值 |
-| install.sh | ✅ | ✅ | Linux/macOS安装脚本 |
-| install.ps1 | ✅ | ✅ | Windows安装脚本 |
-| CLAWHUB_README.md | ✅ | ❌ | ClawHub专属说明 |
-| SKILLHUB_README.md | ❌ | ✅ | SkillHub专属说明 |
-| .trae/rules/* | ✅ | ✅ | 规则文件(3个) |
-| **Total** | **18 files** | **19 files** | - |
+| Requirement | Version | Check Command |
+|-------------|---------|---------------|
+| **Node.js** | >= 16.0.0 | `node -v` |
+| **npm** | >= 8.0.0 | `npm -v` |
+| **ClawHub CLI** | Latest | `npm install -g clawhub` |
+| **GitHub Account** | Any | For OAuth login |
+| **Skill Folder** | With SKILL.md | Verify path exists |
 
 ---
 
-## 🎯 下一步操作
+## 📖 Detailed Steps / 详细步骤
 
-1. **提交到ClawHub** → 复制上方ClawHub部分文本，3分钟完成
-2. **提交到SkillHub** → 复制上方SkillHub部分文本，3分钟完成
-3. **分享发布链接** → 告诉我发布的URL，我来更新文档
+### Step 1: Install ClawHub CLI <!-- 步骤1: 安装ClawHub CLI -->
+
+#### Windows:
+```powershell
+npm install -g clawhub
+clawhub --cli-version  # Should show v0.15.0+
+```
+
+#### macOS/Linux:
+```bash
+npm install -g clawhub
+clawhub --cli-version
+```
+
+#### Verification:
+```
+✅ If you see version number → Installation successful / 安装成功
+❌ If "command not found" → Check Node.js installation / 检查Node.js安装
+```
 
 ---
 
-## 📞 需要帮助？
+### Step 2: Authentication / 身份验证 <!-- 步骤2: 登录认证 -->
 
-如果在提交过程中遇到问题：
-- 查看平台官方文档
-- 联系平台支持团队
-- 或发邮件给我：z18288090942@gmail.com
+#### Method A: GitHub OAuth (Recommended) <!-- 方法A: GitHub OAuth(推荐) -->
 
-**祝发布顺利！🚀**
+```bash
+clawhub login
+```
+
+**What happens:**
+1. Browser opens to `https://clawhub.ai/cli/auth`
+2. Login with your GitHub account
+3. Click "Authorize application"
+4. Browser redirects back to CLI automatically
+5. Token saved locally for future use
+
+**发生过程:**
+1. 浏览器打开 ClawHub 授权页面
+2. 使用 GitHub 账号登录
+3. 点击 "Authorize application"
+4. 浏览器自动跳转回 CLI
+5. Token 保存在本地供后续使用
+
+#### Method B: API Token (Headless/CI) <!-- 方法B: API Token(无头/CI环境) -->
+
+1. **Get Token from ClawHub Web UI:**
+   - Go to https://clawhub.ai
+   - Login → Settings → API Tokens
+   - Create new token → Copy it
+
+2. **Use Token:**
+   ```bash
+   clawhub login --token clh_xxxxxxxxxxxx
+   ```
+
+#### Verify Login:
+```bash
+clawhub whoami
+# Output: { handle: "your-github-username", displayName: "Your Name" }
+```
+
+---
+
+### Step 3: Prepare Skill Folder <!-- 步骤3: 准备技能文件夹 -->
+
+**Required Structure:**
+```
+your-skill/
+├── SKILL.md          # Required! Main skill definition
+├── README.md         # Documentation
+├── LICENSE           # License file
+├── VERSION           # Version info
+└── [other files...]  # Supporting files
+```
+
+**SKILL.md Frontmatter Example:**
+```markdown
+---
+name: group-debug-deploy-expert
+description: "Universal debug & deploy expert with 21 iron principles..."
+version: 1.0.2
+metadata:
+  tags:
+    - debug
+    - deploy
+    - ai-agent
+    - devops
+    - enterprise
+---
+
+# Your skill content here...
+```
+
+---
+
+### Step 4: Publish to ClawHub <!-- 步骤4: 发布到ClawHub -->
+
+#### Basic Publish:
+```bash
+clawhub publish ./path/to/skill \
+  --slug group-debug-deploy-expert \
+  --name "Group Debug & Deploy Expert" \
+  --version 1.0.2
+```
+
+#### Advanced Options:
+```bash
+clawhub publish ./path/to/skill \
+  --slug group-debug-deploy-expert \
+  --name "Group Debug & Deploy Expert" \
+  --version 1.0.2 \
+  --yes                    # Skip confirmation prompts
+  --registry https://clawhub.ai  # Custom registry (optional)
+```
+
+#### Expected Output:
+```
+✅ Uploading files... (13 files)
+✅ Validating SKILL.md frontmatter...
+✅ Processing metadata...
+✅ Creating version 1.0.2...
+✅ Published successfully!
+
+🔗 View at: https://clawhub.ai/your-handle/group-debug-deploy-expert
+```
+
+---
+
+### Step 5: Publish to SkillHub (Optional) <!-- 步骤5: 发布到SkillHub(可选) -->
+
+SkillHub uses **ClawHub-compatible API**, so same CLI works:
+
+```bash
+# Set SkillHub registry
+export CLAWHUB_REGISTRY=https://skillhub.iflytek.com  # Adjust URL if different
+
+# Login to SkillHub (if different account)
+clawhub login --token YOUR_SKILLHUB_TOKEN
+
+# Publish
+clawhub publish ./path/to/skill \
+  --slug @zfx1818/open-group \
+  --name "Group Debug & Deploy Expert" \
+  --version 1.0.2
+```
+
+**Note:** SkillHub slug format may vary by instance. Check your SkillHub admin docs.
+
+---
+
+## ✅ Post-Publish Verification / 发布后验证
+
+### Check Your Skill:
+```bash
+# Inspect published skill
+clawhub inspect group-debug-deploy-expert
+
+# Search for it
+clawhub search "debug deploy expert"
+
+# View all versions
+clawhub inspect group-debug-deploy-expert --versions
+```
+
+### Update Existing Skill:
+```bash
+# Change version in SKILL.md or use --version flag
+clawhub publish ./path/to/skill \
+  --slug group-debug-deploy-expert \
+  --version 1.0.3  # Increment version!
+```
+
+---
+
+## 🛠️ Troubleshooting / 故障排除
+
+### Common Issues:
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `EPERM: operation not permitted` | Sandbox/file permission | Run in terminal, not IDE |
+| `Unauthorized` | Invalid/expired token | Re-run `clawhub login` |
+| `Version already exists` | Duplicate version | Increment version number |
+| `SKILL.md validation failed` | Missing/invalid frontmatter | Check YAML syntax |
+| `Rate limit exceeded` | Too many requests | Wait and retry |
+
+### Permission Issues (Trae IDE Users):
+If you see sandbox errors like:
+```
+Error: EPERM: operation not permitted, mkdir '...\AppData\Roaming\clawhub'
+```
+
+**Solution:** Open PowerShell/CMD terminal directly (not through IDE):
+```powershell
+cd D:\BeijiXing-AI
+.\auto-publish.ps1 -Action publish
+```
+
+---
+
+## 📊 Platform Comparison / 平台对比
+
+| Feature | ClawHub | SkillHub |
+|---------|---------|----------|
+| **URL** | https://clawhub.ai | https://skillhub.iflytek.com* |
+| **Auth** | GitHub OAuth | API Token / OAuth |
+| **CLI** | `clawhub` | Same (compatible) |
+| **API** | `/api/v1/*` | Compatible layer |
+| **Visibility** | Public | Public/Private |
+| **Slug Format** | `skill-name` | `@namespace/skill-name` |
+| **Free Tier** | ✅ Yes | ✅ Yes |
+| **Rate Limit** | 300 writes/min | Varies by instance |
+
+*Adjust SkillHub URL based on your deployment
+
+---
+
+## 🔄 CI/CD Integration / 持续集成
+
+### GitHub Actions Example:
+```yaml
+name: Publish to ClawHub
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install ClawHub CLI
+        run: npm install -g clawhub
+      
+      - name: Publish to ClawHub
+        env:
+          CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
+        run: |
+          clawhub login --token $CLAWHUB_TOKEN
+          clawhub publish .trae/skills/group-debug-deploy-expert \
+            --slug group-debug-deploy-expert \
+            --name "Group Debug & Deploy Expert" \
+            --version ${GITHUB_REF#refs/tags/v} \
+            --yes
+```
+
+---
+
+## 📞 Support & Help / 支持与帮助
+
+### Official Resources:
+- **ClawHub Docs**: https://github.com/openclaw/clawhub/blob/main/docs/http-api.md
+- **ClawHub CLI**: https://github.com/openclaw/clawhub/blob/main/docs/cli.md
+- **SkillHub Integration**: https://github.com/iflytek/skillhub/blob/main/docs/openclaw-integration.md
+
+### Get Help:
+```bash
+# CLI help
+clawhub --help
+clawhub publish --help
+clawhub login --help
+
+# Community Discord (if available)
+# Check ClawHub website for links
+```
+
+### Contact Us:
+- **Email**: z18288090942@gmail.com
+- **Phone**: +86 19537722739
+- **GitHub Issues**: https://github.com/xuanji-ai-2026/group-debug-deploy-expert/issues
+
+---
+
+<div align="center">
+
+**🎉 Happy Publishing! / 祝发布顺利！**
+
+[Back to README](./README.md) | [User Guide](./USER_GUIDE.md) | [Use Cases](./USE_CASES.md)
+
+</div>

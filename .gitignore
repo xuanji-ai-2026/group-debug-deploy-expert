@@ -55,6 +55,10 @@
 !install.sh
 !install.ps1
 
+# ✅ Exception: Allow auto-publish scripts
+!auto-publish.sh
+!auto-publish.ps1
+
 # ❌ Block all other .sh files
 *.sh
 
