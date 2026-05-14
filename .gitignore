@@ -1,0 +1,55 @@
+# ============================================
+# ZERO-TH LAW: Project Absolute Isolation
+# WHITE-LIST MODE: Only allow skill framework files
+# ============================================
+
+# ✅ ALLOW: Skill core files (explicitly whitelist)
+!SKILL.md
+!LICENSE
+!skill.json
+!package.json
+!README-DEPLOY.md
+!README.md
+!USER_GUIDE.md
+!USE_CASES.md
+!COMPETITIVE_ADVANTAGE.md
+!VERSION
+!checksums.sha256
+!.gitignore
+
+# ✅ Allow .trae directory (skill definitions)
+!.trae/
+!.trae/**
+
+# ❌ BLOCK EVERYTHING ELSE (nuclear option)
+/*
+!/*/
+
+# ❌ Block all project directories
+/backend/
+/frontend/
+/mobile/
+/deploy/
+/tools/
+/docs/
+/scripts/
+/nacos-config/
+
+# ❌ Block all project files by pattern
+*.sh
+*.py
+*.java
+*.xml
+*.zip
+*.pem
+*.md
+!README-DEPLOY.md
+
+# ❌ Block binary and build artifacts
+*.jar
+*.war
+*.class
+*.exe
+*.dll
+*.so
+*.dylib
