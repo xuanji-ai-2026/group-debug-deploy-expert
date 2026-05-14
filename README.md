@@ -1,154 +1,160 @@
 # 🛡️ Group Debug & Deploy Expert
-# 通用调试部署专家团队
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.1-blue.svg" alt="Version" />
   <img src="https://img.shields.io/badge/license-Dual%20License-green.svg" alt="License" />
-  <img src="https://img.shields.io/badge/platform-Trae%20%7C%20OpenClaw%20%7C%20Hermes%20%7C%20Cursor-orange.svg" alt="Platforms" />
-  <a href="https://github.com/xuanji-ai-2026/group-debug-deploy-expert"><img src="https://img.shields.io/badge/GitHub-仓库-181717?style=flat&logo=github" alt="GitHub"></a>
+  <img src="https://img.shields.io/npm/v/@zfx1818/open-group.svg?label=npm" alt="npm" />
+  <a href="https://github.com/xuanji-ai-2026/group-debug-deploy-expert"><img src="https://img.shields.io/badge/GitHub-Repository-181717?style=flat&logo=github" alt="GitHub"></a>
+</p>
+
+<p align="center">
+  <strong>Enterprise-grade AI Debug & Deploy Expert Team with 11 Specialized Roles</strong><br>
+  <em>21 Iron Principles • ZERO-TH LAW Isolation • Anti-Hallucination System</em>
 </p>
 
 ---
 
-## 🎯 一句话价值主张
+## 🎯 Value Proposition
 
-> **让AI成为您的企业级调试与部署专家团队** - 11个AI数字员工协同工作，21条铁律保障质量，ZERO-TH LAW确保绝对隔离，让复杂项目的Debug & Deploy变得像搭积木一样简单！
-
----
-
-## ⚡ 为什么选择我们？（核心优势）
-
-### 🏆 传统方案 vs 本方案对比
-
-| 维度 | 传统人工调试 | 普通AI助手 | **本方案（Group Debug Deploy Expert）** |
-|------|------------|-----------|----------------------------------------|
-| **团队规模** | 1-2人 | 单体AI | **11角色AI数字团队** 👥 |
-| **隔离性** | ❌ 容易串项目 | ❌ 上下文污染 | **✅ ZERO-TH LAW 绝对隔离** 🔒 |
-| **规范性** | ⚠️ 依赖个人经验 | ❌ 随机性强 | **⭐⭐⭐⭐⭐ 21条铁律强制执行** |
-| **防幻觉** | N/A | ❌ 经常编造方案 | **🚫 12种检测模式 + 零容忍回滚** |
-| **审计追踪** | ⚠️ 手动记录 | ❌ 无 | **✅ 全链路审计 + 断点续传** |
-| **适用场景** | 简单问题 | 小型项目 | **企业级多项目/微服务/K8s** |
-| **学习成本** | 高（需资深工程师） | 中 | **低（开箱即用）** 📦 |
+> **Transform AI into your enterprise-grade debugging and deployment expert team** — 11 AI digital employees collaborating seamlessly, 21 iron principles ensuring quality, ZERO-TH LAW guaranteeing absolute isolation. Make complex project debugging and deployment as simple as building blocks!
 
 ---
 
-## ✨ 核心特性（8大亮点）
+## ⚡ Why Choose Us? (Core Advantages)
 
-### 🔒 1️⃣ ZERO-TH LAW 项目绝对隔离
+### 🏆 Traditional Approach vs. Group Debug Deploy Expert
+
+| Dimension | Manual Debugging | Generic AI Assistant | **Group Debug Deploy Expert** |
+|-----------|------------------|---------------------|------------------------------|
+| **Team Scale** | 1-2 people | Single AI | **11-Role AI Digital Team** 👥 |
+| **Isolation** | ❌ Cross-project contamination | ❌ Context pollution | **✅ ZERO-TH LAW Absolute Isolation** 🔒 |
+| **Standardization** | ⚠️ Depends on experience | ❌ Random behavior | **⭐⭐⭐⭐⭐ 21 Iron Principles Enforced** |
+| **Anti-Hallucination** | N/A | ❌ Frequently fabricates solutions | **🚫 12 Detection Modes + Zero-Tolerance Rollback** |
+| **Audit Trail** | ⚠️ Manual recording | ❌ None | **✅ Full-chain Audit + Checkpoint Resume** |
+| **Use Cases** | Simple issues | Small projects | **Enterprise Multi-project/Microservices/K8s** |
+| **Learning Curve** | High (requires senior engineers) | Medium | **📦 Low (Ready to Use Out of the Box)** |
+
+---
+
+## ✨ Core Features (8 Key Highlights)
+
+### 🔒 1. ZERO-TH LAW: Project Absolute Isolation
+
 ```
 ┌─────────────────────────────────────────┐
-│  项目A (北极星AI)    │  项目B (电商系统) │
-│  ├─ 后端代码         │  ├─ 前端代码      │
-│  ├─ 数据库密钥       │  ├─ API配置       │
-│  └─ 业务逻辑         │  └─ 支付模块      │
+│  Project A (BeijiXing AI) │ Project B (E-commerce)    │
+│  ├─ Backend Code         │ ├─ Frontend Code           │
+│  ├─ Database Secrets     │ ├─ API Configuration       │
+│  └─ Business Logic       │ └─ Payment Module          │
 ├─────────────────────────────────────────┤
-│     🔒 技能框架 (100% 隔离)             │
-│     • 零泄露 • 零污染 • 零干扰          │
+│     🔒 Skill Framework (100% Isolated)                  │
+│     • Zero Leakage • Zero Pollution • Zero Interference  │
 └─────────────────────────────────────────┘
 ```
-- ✅ **零泄露**: 技能框架永远不接触业务代码
-- ✅ **零污染**: 不修改、不读取任何项目文件（除非明确授权）
-- ✅ **零干扰**: 多个项目并行处理，互不影响
+
+- ✅ **Zero Leakage**: Skill framework never touches business code
+- ✅ **Zero Pollution**: Never modifies or reads any project files (unless explicitly authorized)
+- ✅ **Zero Interference**: Multiple projects processed in parallel without cross-contamination
 
 ---
 
-### 👥 2️⃣ 11角色AI数字员工团队
+### 👥 2. 11-Role AI Digital Employee Team
 
-| 角色 | 职责 | 专业领域 |
-|------|------|---------|
-| 🎯 **Project Manager** | 项目规划、任务分配、进度管控 | 敏捷开发、项目管理 |
-| 💻 **Tech Lead** | 技术决策、架构评审、代码审查 | 系统架构、设计模式 |
-| 🔧 **DevOps Engineer** | CI/CD、容器化、K8s部署 | Docker、Kubernetes、Jenkins |
-| 🧪 **QA Engineer** | 测试策略、自动化测试、质量门禁 | 测试金字塔、性能测试 |
-| 🛡️ **Security Analyst** | 安全扫描、漏洞修复、合规检查 | OWASP Top 10、安全编码 |
-| 🗄️ **DBA** | 数据库优化、SQL调优、迁移 | MySQL、PostgreSQL、Redis |
-| 🖥️ **Frontend Dev** | UI调试、兼容性、性能优化 | React/Vue/Angular |
-| ⚙️ **Backend Dev** | API调试、微服务、并发处理 | Spring Boot/Node.js/Go |
-| 📱 **Mobile Dev** | 移动端调试、原生/跨平台 | iOS/Android/Flutter |
-| ⚡ **Performance Eng** | 性能剖析、瓶颈定位、优化建议 | JProfiler/Flame Graph |
-| 📝 **Doc Specialist** | 文档生成、知识库、API文档 | Markdown/Swagger/OpenAPI |
+| Role | Responsibility | Expertise Domain |
+|------|---------------|------------------|
+| 🎯 **Project Manager** | Planning, task assignment, progress control | Agile Development, PM Methodologies |
+| 💻 **Tech Lead** | Technical decisions, architecture review, code review | System Architecture, Design Patterns |
+| 🔧 **DevOps Engineer** | CI/CD, containerization, K8s deployment | Docker, Kubernetes, Jenkins |
+| 🧪 **QA Engineer** | Test strategy, automation testing, quality gates | Testing Pyramid, Performance Testing |
+| 🛡️ **Security Analyst** | Security scanning, vulnerability remediation, compliance | OWASP Top 10, Secure Coding |
+| 🗄️ **DBA** | Database optimization, SQL tuning, migration | MySQL, PostgreSQL, Redis |
+| 🖥️ **Frontend Dev** | UI debugging, compatibility, performance optimization | React/Vue/Angular |
+| ⚙️ **Backend Dev** API debugging, microservices, concurrency handling | Spring Boot/Node.js/Go |
+| 📱 **Mobile Dev** | Mobile debugging, native/cross-platform | iOS/Android/Flutter |
+| ⚡ **Performance Eng** | Profiling, bottleneck identification, optimization | JProfiler/Flame Graph |
+| 📝 **Doc Specialist** | Documentation generation, knowledge base, API docs | Markdown/Swagger/OpenAPI |
 
-**工作方式**: 像真正的敏捷团队一样协作，自动分工、并行处理、交叉审核！
-
----
-
-### 📜 3️⃣ 21条铁律（Iron Principles）
-
-#### 🎯 核心原则（5条）
-1. **P0: 安全第一** - 永远不删除生产数据，不执行危险命令
-2. **P1: 最小权限** - 只在必要时请求权限，用完即弃
-3. **P2: 可追溯** - 所有操作记录完整日志，支持审计
-4. **P3: 渐进式披露** - 从高层概览到细节，按需深入
-5. **P4: 失败安全** - 出错时自动回滚到安全状态
-
-#### 🔧 调试原则（8条）
-6. **D1: 问题复现优先** - 先复现，再分析
-7. **D2: 二分法定位** - 快速缩小问题范围
-8. **D3: 日志驱动** - 用日志说话，不靠猜测
-9. **D4: 根因分析** - 找根本原因，不只治标
-10. **D5: 影响评估** - 修复前评估副作用
-11. **D6: 测试验证** - 修复后必须验证
-12. **D7: 文档沉淀** - 解决方案形成知识库
-13. **D8: 预防复发** - 类似问题不再发生
-
-#### 🚀 部署原则（8条）
-14. **DP1: 环境一致性** - 开发/测试/生产环境对齐
-15. **DP2: 幂等部署** - 重复执行不会出错
-16. **DP3: 回滚能力** - 一键回滚到上一版本
-17. **DP4: 健康检查** - 部署后自动验证
-18. **DP5: 灰度发布** - 新版本先小范围验证
-19. **DP6: 配置外置** - 敏感信息不入代码
-20. **DP7: 监控告警** - 异常立即通知
-21. **DP8: 变更记录** - 每次部署可追溯
-
-> 💡 **每条铁律都是血泪经验总结**，来自真实生产环境的踩坑教训！
+**Working Mode**: Like a real agile team — automatic task distribution, parallel processing, cross-review!
 
 ---
 
-### 🚫 4️⃣ 反幻觉执行系统（Anti-Hallucination）
+### 📜 3. 21 Iron Principles
 
-AI最大的问题是"一本正经胡说八道"，我们有**12道防线**：
+#### 🎯 Core Principles (5)
+1. **P0: Safety First** — Never delete production data, never execute dangerous commands
+2. **P1: Minimal Privilege** — Request permissions only when necessary, revoke immediately after use
+3. **P2: Full Traceability** — Complete logging for all operations, audit-ready
+4. **P3: Progressive Disclosure** — From high-level overview to details, on-demand deep-dive
+5. **P4: Fail-Safe** — Auto-rollback to safe state on errors
+
+#### 🔧 Debugging Principles (8)
+6. **D1: Reproduce First** — Reproduce before analyzing
+7. **D2: Binary Search Localization** — Quickly narrow down problem scope
+8. **D3: Log-Driven** — Let logs speak, no guessing
+9. **D4: Root Cause Analysis** — Find fundamental cause, not just symptoms
+10. **D5: Impact Assessment** — Evaluate side effects before fixing
+11. **D6: Test Verification** — Must verify after fixes
+12. **D7: Document Knowledge Base** — Form solutions into knowledge repository
+13. **D8: Prevent Recurrence** — Similar problems never happen again
+
+#### 🚀 Deployment Principles (8)
+14. **DP1: Environment Consistency** — Align dev/test/prod environments
+15. **DP2: Idempotent Deployment** — Repeated execution won't cause errors
+16. **DP3: Rollback Capability** — One-click rollback to previous version
+17. **DP4: Health Checks** — Auto-verify after deployment
+18. **DP5: Canary Release** — Validate new version with small-scale rollout first
+19. **DP6: Externalized Configuration** — Sensitive info never in code
+20. **DP7: Monitoring & Alerting** — Immediate notification on anomalies
+21. **DP8: Change Logging** — Every deployment is traceable
+
+> 💡 **Each principle is distilled from real production environment lessons learned!**
+
+---
+
+### 🚫 4. Anti-Hallucination Execution System
+
+AI's biggest problem is "confidently stating falsehoods." We have **12 lines of defense**:
 
 ```
-用户提问 → [第1关: 意图识别] → [第2关: 能力边界] → [第3关: 上下文校验]
+User Query → [Gate 1: Intent Recognition] → [Gate 2: Capability Boundary] → [Gate 3: Context Validation]
     ↓
-[第4关: 事实核查] → [第5关: 语法验证] → [第6关: 逻辑推理]
+[Gate 4: Fact Checking] → [Gate 5: Syntax Validation] → [Gate 6: Logical Reasoning]
     ↓
-[第7关: 安全扫描] → [第8关: 影响分析] → [第9关: 方案可行性]
+[Gate 7: Security Scanning] → [Gate 8: Impact Analysis] → [Gate 9: Solution Feasibility]
     ↓
-[第10关: 用户确认] → [第11关: 执行监控] → [第12关: 结果验证]
+[Gate 10: User Confirmation] → [Gate 11: Execution Monitoring] → [Gate 12: Result Verification]
     ↓
-                    ✅ 输出结果（或❌触发回滚）
+                    ✅ Output Result (or ❌ Trigger Rollback)
 ```
 
-**零容忍机制**:
-- 🚫 发现幻觉 → **立即停止** + **自动回滚**
-- 🚫 无法确认 → **明确标注不确定项** + **提供备选方案**
-- 🚫 危险操作 → **二次确认** + **审批流程**
+**Zero-Tolerance Mechanism**:
+- 🚫 Hallucination detected → **Immediate stop** + **Auto-rollback**
+- 🚫 Unable to confirm → **Explicitly mark uncertainties** + **Provide alternatives**
+- 🚫 Dangerous operation → **Double confirmation** + **Approval workflow**
 
 ---
 
-### 🔄 5️⃣ 断点续传与检查点系统
+### 🔄 5. Checkpoint & Resume System
 
 ```
-Step 1: 分析问题 ✅ (已保存)
-Step 2: 定位原因 ✅ (已保存)
-Step 3: 制定方案 ⏳ (当前)
-Step 4: 执行修复 (待执行)
-Step 5: 验证结果 (待执行)
+Step 1: Analyze Problem ✅ (Saved)
+Step 2: Locate Root Cause ✅ (Saved)
+Step 3: Formulate Solution ⏳ (Current)
+Step 4: Execute Fix (Pending)
+Step 5: Verify Results (Pending)
 
-💾 检查点已保存！即使中断也可从 Step 3 继续...
+💾 Checkpoint saved! Can resume from Step 3 even if interrupted...
 ```
 
-- ✅ **每步自动保存状态**
-- ✅ **中断后无缝恢复**
-- ✅ **支持多任务并行**
+- ✅ **Auto-save state at each step**
+- ✅ **Seamless recovery after interruption**
+- ✅ **Support multi-task parallelism**
 
 ---
 
-### 📊 6️⃣ 全链路审计追踪
+### 📊 6. Full-Chain Audit Trail
 
-每次操作都生成完整报告：
+Every operation generates a complete report:
 ```json
 {
   "timestamp": "2026-05-14T21:30:00Z",
@@ -166,120 +172,125 @@ Step 5: 验证结果 (待执行)
 
 ---
 
-### 🌐 7️⃣ 多平台兼容
+### 🌐 7. Multi-Platform Compatibility
 
-| 平台 | 兼容性 | 说明 |
-|------|--------|------|
-| **Trae IDE** | ✅ 原生支持 | 即装即用 |
-| **Cursor** | ✅ 兼容 | .rules目录格式 |
-| **Windsurf** | ✅ 兼容 | Agent Skills标准 |
-| **OpenClaw (ClawHub)** | ✅ 就绪 | skill.json元数据 |
-| **Hermes Agent** | ✅ 就绪 | package.json配置 |
-| **VS Code + Copilot** | ⚠️ 部分 | 需手动适配 |
+| Platform | Compatibility | Notes |
+|----------|--------------|-------|
+| **Trae IDE** | ✅ Native Support | Ready to use out of the box |
+| **Cursor** | ✅ Compatible | .rules directory format |
+| **Windsurf** | ✅ Compatible | Agent Skills standard |
+| **OpenClaw (ClawHub)** | ✅ Ready | skill.json metadata |
+| **Hermes Agent** | ✅ Ready | package.json configuration |
+| **VS Code + Copilot** | ⚠️ Partial | Requires manual adaptation |
 
 ---
 
-### 🎓 8️⃣ 渐进式学习路径
+### 🎓 8. Progressive Learning Path
 
 ```
-Level 1: 🌱 入门者 (0-30分钟)
-   ├── 快速开始指南
-   ├── 第一个调试任务
-   └── 理解基本概念
+Level 1: 🌱 Beginner (0-30 min)
+   ├── Quick Start Guide
+   ├── First Debug Task
+   └── Understand Basic Concepts
 
-Level 2: 🌿 进阶者 (1-3天)
-   ├── 掌握21条铁律
-   ├── 使用11角色团队
-   └── 自定义工作流
+Level 2: 🌿 Intermediate (1-3 days)
+   ├── Master 21 Iron Principles
+   ├── Use 11-Role Team
+   └── Customize Workflows
 
-Level 3: 🌳 专家级 (1-2周)
-   ├── 高级反幻觉配置
-   ├── CI/CD集成
-   └── 企业级定制
+Level 3: 🌳 Advanced (1-2 weeks)
+   ├── Advanced Anti-Hallucination Config
+   ├── CI/CD Integration
+   └── Enterprise Customization
 
-Level 4: 🌲 大师级 (持续)
-   ├── 贡献最佳实践
-   ├── 社区分享
-   └── 认证培训
+Level 4: 🌲 Master (Ongoing)
+   ├── Contribute Best Practices
+   ├── Community Sharing
+   └── Certification Training
 ```
 
 ---
 
-## 🎯 应用场景（12+行业案例）
+## 🎯 Use Cases (13+ Industry Scenarios)
 
-### 🏦 场景1: 金融科技 - 微服务故障排查
-**痛点**: 10+微服务，一个订单超时涉及5个服务，传统排查需要2小时
-**使用本方案**: 
-- 🔍 **5分钟**定位根因（分布式链路追踪 + 自动关联分析）
-- 🛠️ **15分钟**完成修复（自动生成修复PR + 代码审查）
-- ✅ **100%回归测试**通过（自动化测试矩阵）
+### 🏦 Scenario 1: FinTech - Microservice Troubleshooting
+**Pain Point**: 10+ microservices, one order timeout involves 5 services, traditional troubleshooting takes 2 hours  
+**Using Our Solution**:
+- 🔍 **5 minutes** to locate root cause (distributed tracing + auto-correlation analysis)
+- 🛠️ **15 minutes** to complete fix (auto-generate fix PR + code review)
+- ✅ **100% regression test** pass (automated test matrix)
 
-**效果提升**: **效率提升24倍，故障恢复时间(MTTR)降低90%**
-
----
-
-### 🏥 场景2: 医疗健康 - HIS系统升级部署
-**痛点**: 医院系统不能停机，升级风险极高
-**使用本方案**:
-- 🔄 **灰度发布**：先升级1台服务器验证
-- 🔒 **数据完整性检查**：自动比对前后数据差异
-- ↩️ **一键回滚**：发现异常3秒内回滚
-- 📋 **合规审计**：符合医疗行业监管要求
-
-**成果**: **零停机升级，零数据丢失，通过三甲医院验收**
+**Result**: **24x efficiency improvement, 90% reduction in MTTR (Mean Time To Recovery)**
 
 ---
 
-### 🎮 场景3: 电商平台 - 大促保障
-**痛点**: 双11/618流量激增10倍，系统崩溃风险高
-**使用本方案**:
-- ⚡ **压力测试模拟**：提前发现瓶颈
-- 📈 **实时监控**：异常自动告警+自动扩容
-- 🚨 **应急预案**：预设多种故障场景的应对方案
-- 📊 **事后复盘**：自动生成改进报告
+### 🏥 Scenario 2: Healthcare - HIS System Upgrade Deployment
+**Pain Point**: Hospital systems cannot have downtime, upgrade risk is extremely high  
+**Using Our Solution**:
+- 🔄 **Canary Release**: Upgrade 1 server first for validation
+- 🔒 **Data Integrity Check**: Auto-compare pre/post data differences
+- ↩️ **One-click Rollback**: Roll back within 3 seconds if anomaly detected
+- 📋 **Compliance Audit**: Meet healthcare regulatory requirements
 
-**战绩**: **支撑千万级QPS，零重大故障**
-
----
-
-### 📚 更多应用场景...
-
-| 行业 | 应用场景 | 关键价值 |
-|------|---------|---------|
-| 🎓 **在线教育** | 平台稳定性保障 | 保证考试期间零中断 |
-| 🚗 **智能汽车** | OTA升级管理 | 车辆远程升级安全可控 |
-| 🏭 **智能制造** | 工控系统维护 | 减少产线停机时间 |
-| 📱 **社交网络** | 功能快速迭代 | 每周多次发布无压力 |
-| 💰 **区块链** | 节点运维 | 7×24高可用保障 |
-| 🎬 **流媒体** | CDN调度优化 | 提升用户体验 |
-| 🛒 **新零售** | 全渠道系统整合 | 线上线下数据同步 |
-| ✈️ **航空物流** | 航班调度系统 | 准确率99.99% |
-| 🏛️ **政务系统** | 数字化转型 | 符合信创要求 |
-| 🧪 **生物制药** | 实验数据管理 | 符合GMP规范 |
-| 🎵 **音乐平台** | 版权管理系统 | 精确计费零误差 |
-| ⚽ **体育赛事** | 实时数据分析 | 毫秒级响应 |
+**Outcome**: **Zero-downtime upgrade, zero data loss, passed Grade-A hospital acceptance**
 
 ---
 
-## 🚀 快速开始（3步上手）
+### 🎮 Scenario 3: E-Commerce - Major Sale Event Support
+**Pain Point**: Traffic spikes 10x during Double 11/618, high risk of system crashes  
+**Using Our Solution**:
+- ⚡ **Load Testing Simulation**: Identify bottlenecks in advance
+- 📈 **Real-time Monitoring**: Auto-alert + auto-scaling on anomalies
+- 🚨 **Emergency Response Plans**: Pre-configured response scenarios for multiple failure modes
+- 📊 **Post-Mortem Analysis**: Auto-generate improvement reports
 
-### 📦 安装（30秒）
+**Achievement**: **Supported 10M+ QPS, zero major incidents**
 
-**方式1: Trae IDE（推荐）**
+---
+
+### 📚 More Use Cases...
+
+| Industry | Application Scenario | Key Value |
+|----------|---------------------|-----------|
+| 🎓 **Online Education** | Platform stability assurance | Zero interruptions during exams |
+| 🚗 **Automotive** | OTA upgrade management | Secure remote vehicle upgrades |
+| 🏭 **Manufacturing** | Industrial control maintenance | Reduce production line downtime |
+| 📱 **Social Network** | Rapid feature iteration | Multiple weekly releases with ease |
+| 💰 **Blockchain** | Node operations | 7×24 high availability |
+| 🎬 **Streaming Media** | CDN scheduling optimization | Enhanced user experience |
+| 🛒 **Retail Tech** | Omnichannel system integration | Online-offline data sync |
+| ✈️ **Aviation Logistics** | Flight scheduling system | 99.99% accuracy |
+| 🏛️ **Government** | Digital transformation | Meet local compliance requirements |
+| 🧪 **Biotech** | Experiment data management | GMP compliant |
+| 🎵 **Music Platforms** | Rights management system | Precise billing, zero error |
+| ⚽ **Sports Analytics** | Real-time data analysis | Millisecond-level response |
+
+---
+
+## 🚀 Quick Start (3 Steps)
+
+### 📦 Installation (30 seconds)
+
+**Option 1: Trae IDE (Recommended)**
 ```bash
-# 在 Trae IDE 的 .trae/skills/ 目录下解压即可
-# 或使用 Trae Marketplace 一键安装（即将上线）
+# Extract to .trae/skills/ directory in Trae IDE
+# Or install via Trae Marketplace (coming soon)
 ```
 
-**方式2: OpenClaw / Hermes**
+**Option 2: OpenClaw / Hermes**
 ```bash
-# 从 ClawHub / HermesHub 安装
+# Install from ClawHub / HermesHub
 clawhub install group-debug-deploy-expert
-# 或
+# or
 hermes install group-debug-deploy-expert
 ```
 
-**方式3: 手动安装**
+**Option 3: npm (Global)**
+```bash
+npm install -g @zfx1818/open-group
+```
+
+**Option 4: Manual Installation**
 ```bash
 git clone https://github.com/xuanji-ai-2026/group-debug-deploy-expert.git
 cd group-debug-deploy-expert
@@ -288,187 +299,189 @@ cp -r . ~/.config/your-agent/skills/
 
 ---
 
-### 🎯 第一次使用（5分钟体验）
+### 🎯 First Use (5-Minute Experience)
 
-#### 任务示例：修复数据库连接超时
+#### Task Example: Fix Database Connection Timeout
 
-**您只需说**：
+**Just say**:
 ```
-帮我的Spring Boot项目排查数据库连接超时问题，
-最近晚上10点后经常出现，错误日志在logs/error.log
+Help me troubleshoot database connection timeout in my Spring Boot project.
+It frequently occurs after 10 PM. Error logs are in logs/error.log
 ```
 
-**AI团队会自动**：
+**The AI team will automatically**:
 
-1️⃣ **Project Manager** 分配任务给DBA和Backend Dev  
-2️⃣ **DBA** 分析慢查询日志，定位瓶颈SQL  
-3️⃣ **Backend Dev** 检查连接池配置，发现maxPoolSize过小  
-4️⃣ **Security Analyst** 审查修复方案的安全性  
-5️⃣ **QA Engineer** 设计回归测试用例  
-6️⃣ **Doc Specialist** 生成修复报告  
+1️⃣ **Project Manager** assigns tasks to DBA and Backend Dev  
+2️⃣ **DBA** analyzes slow query log, locates bottleneck SQL  
+3️⃣ **Backend Dev** checks connection pool config, finds maxPoolSize too small  
+4️⃣ **Security Analyst** reviews safety of fix proposal  
+5️⃣ **QA Engineer** designs regression test cases  
+6️⃣ **Doc Specialist** generates fix report  
 
-**最终输出**：
+**Final Output**:
 ```markdown
-## 🔍 问题诊断报告
+## 🔍 Diagnosis Report
 
-**根因**: HikariCP连接池配置不当
-- 当前: maxPoolSize=10, connectionTimeout=30s
-- 建议: maxPoolSize=50, connectionTimeout=10s
+**Root Cause**: HikariCP connection pool misconfiguration
+- Current: maxPoolSize=10, connectionTimeout=30s
+- Recommended: maxPoolSize=50, connectionTimeout=10s
 
-## 🛠️ 修复方案
+## 🛠️ Fix Plan
 
-### 修改文件: src/main/resources/application.yml
+### Modified File: src/main/resources/application.yml
 ```yaml
 spring:
   datasource:
     hikari:
-      maximum-pool-size: 50  # 原: 10
-      connection-timeout: 10000  # 原: 30000
+      maximum-pool-size:50 # was: 10
+      connection-timeout:10000 # was: 30000
 ```
 
-### 验证结果
-- ✅ 连接等待时间从30s降至<1s
-- ✅ 并发支持从10提升至50
-- ✅ 压力测试通过（500并发，P99<100ms）
+### Verification Results
+- ✅ Connection wait time reduced from 30s to <1s
+- ✅ Concurrent support increased from 10 to 50
+- ✅ Stress test passed (500 concurrent, P99<100ms)
 
-### 回滚方案
-如遇问题，执行: git checkout HEAD~1 -- application.yml
+### Rollback Plan
+If issues occur, run: git checkout HEAD~1 -- application.yml
 ```
 
-**全程耗时**: **3分42秒** （传统方式需要2-4小时）
+**Total Time**: **3 minutes 42 seconds** (Traditional approach: 2-4 hours)
 
 ---
 
-## 📈 用户评价与数据
+## 📈 Statistics & Metrics
 
-### 📊 使用统计（截至2026年5月）
+### 📊 Usage Statistics (As of May 2026)
 
-| 指标 | 数值 |
-|------|------|
-| ⭐ GitHub Stars | **正在增长中...** |
-| 📥 月下载量 | **目标: 1000+** |
-| 🌍 覆盖国家/地区 | **中国、美国、欧洲、东南亚** |
-| 🏢 企业用户 | **初创公司、SMB、 Fortune 500** |
-| 🎯 平均效率提升 | **15-25倍** |
-| 😊 用户满意度 | **4.8/5.0** (目标) |
+| Metric | Value |
+|--------|-------|
+| ⭐ GitHub Stars | Growing... |
+| 📥 Monthly Downloads | Target: 1000+ |
+| 🌍 Coverage | China, US, Europe, Southeast Asia |
+| 🏢 Enterprise Users | Startups, SMBs, Fortune 500 |
+| 🎯 Avg Efficiency Gain | **15-25x** |
+| 😊 User Satisfaction | **4.8/5.0** (target) |
 
-### 💬 早期用户反馈
+### 💬 Early User Feedback
 
-> "用了这个技能包，我们团队的debug时间减少了80%，再也不用熬夜查问题了！"  
-> —— **某金融科技公司 Tech Lead**
+> "Debug time reduced by 80%. No more late-night troubleshooting!"  
+> —— **Tech Lead, Fintech Company**
 
-> "11个AI角色的协作模式太惊艳了，就像真的有一个专家团队在帮我干活。"  
-> —— **独立开发者 @open_source_lover**
+> "The 11-role AI collaboration is amazing — like having an expert team working for me."  
+> —— **Independent Developer @open_source_lover**
 
-> "ZERO-TH LAW隔离机制让我们很放心，不用担心AI误操作影响生产环境。"  
-> —— **某三甲医院 信息中心主任**
+> "ZERO-TH LAW isolation gives us peace of mind about AI not affecting production."  
+> —— **IT Director, Grade-A Hospital**
 
-> "21条铁律非常实用，特别是安全相关的原则，避免了多次潜在事故。"  
-> —— **某电商平台 DevOps负责人**
-
----
-
-## 🆚 与竞品对比
-
-| 特性 | 本方案 | A工具 | B工具 | C工具 |
-|------|--------|-------|-------|-------|
-| **AI团队协作** | ✅ 11角色 | ❌ 单体 | ⚠️ 3角色 | ❌ 无 |
-| **项目隔离** | ✅ ZERO-TH LAW | ❌ 无 | ⚠️ 基础 | ❌ 无 |
-| **防幻觉** | ✅ 12层检测 | ⚠️ 基础 | ❌ 无 | ❌ 无 |
-| **铁律体系** | ✅ 21条 | ⚠️ 5条 | ❌ 无 | ❌ 无 |
-| **断点续传** | ✅ 支持 | ❌ 无 | ❌ 无 | ❌ 无 |
-| **审计追踪** | ✅ 全链路 | ⚠️ 部分 | ❌ 无 | ❌ 无 |
-| **适用规模** | 企业级 | 中小型 | 个人 | 学习 |
-| **价格** | 社区免费/商业付费 | $20/月 | $15/月 | 免费 |
-| **性价比** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
+> "21 principles are very practical, especially security ones — prevented multiple potential accidents."  
+> —— **DevOps Lead, E-commerce Platform**
 
 ---
 
-## 📋 技术规格
+## 🆚 Competitive Comparison
 
-| 项目 | 规格 |
-|------|------|
-| **版本** | v1.0.1 |
-| **大小** | ~213KB (SKILL.md核心) |
-| **依赖** | 无外部依赖（纯规则/提示词） |
-| **支持语言** | 中文/英文双语 |
-| **更新频率** | 季度大版本，月度补丁 |
-| **兼容性** | Trae / Cursor / Windsurf / OpenClaw / Hermes |
+| Feature | This Solution | Tool A | Tool B | Tool C |
+|---------|-------------|--------|--------|--------|
+| **AI Team Collaboration** | ✅ 11 Roles | ❌ Single | ⚠️ 3 Roles | ❌ None |
+| **Project Isolation** | ✅ ZERO-TH LAW | ❌ None | ⚠️ Basic | ❌ None |
+| **Anti-Hallucination** | ✅ 12 Layers | ⚠️ Basic | ❌ None | ❌ None |
+| **Principles Framework** | ✅ 21 Rules | ⚠️ 5 Rules | ❌ None | ❌ None |
+| **Checkpoint Resume** | ✅ Supported | ❌ None | ❌ None | ❌ None |
+| **Audit Trail** | ✅ Full Chain | ⚠️ Partial | ❌ None | ❌ None |
+| **Scale Suitability** | Enterprise | Mid-size Small | Personal | Learning |
+| **Pricing** | Free/Commercial | $20/month | $15/month | Free |
+| **Value Rating** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
 
 ---
 
-## ⚖️ 许可证
+## 📋 Technical Specifications
 
-### 🎁 社区版（免费）
-- ✅ 个人学习与研究
-- ✅ 非商业开源项目
-- ✅ 教育用途
-- ✅ PoC原型开发
+| Item | Specification |
+|------|--------------|
+| **Version** | v1.0.1 |
+| **Size** | ~213KB (SKILL.md core) |
+| **Dependencies** | No external dependencies (pure rules/prompts) |
+| **Language** | English (primary), Chinese (secondary) |
+| **Update Frequency** | Quarterly major, monthly patches |
+| **Compatibility** | Trae / Cursor / Windsurf / OpenClaw / Hermes |
 
-### 💼 商业版（付费）
-- ✅ 公司内部使用
-- ✅ 商业产品集成
-- ✅ 盈利项目
-- ✅ 优先技术支持
+---
 
-**商业授权请联系**:
+## ⚖️ License
+
+### 🎁 Community License (Free)
+- ✅ Personal learning and research
+- ✅ Non-commercial open source projects
+- ✅ Educational purposes
+- ✅ PoC prototype development
+
+### 💼 Commercial License (Paid)
+- ✅ Company internal use
+- ✅ Commercial product integration
+- ✅ Revenue-generating projects
+- ✅ Priority technical support
+
+**For commercial licensing, contact**:
 - 📧 Email: z18288090942@gmail.com
 - 📱 Phone: +86 19537722739
-- 💰 价格: ¥9,999 (初创) / ¥29,999 (SMB) / ¥99,999 (企业)
+- 💰 Pricing: ¥9,999 (Startup) / ¥29,999 (SMB) / ¥99,999 (Enterprise)
 
 ---
 
-## 👥 开发团队
+## 👥 Development Team
 
-**版权所有**: 云南坤灿科技有限公司 (YunNan KunCan Technology Co., Ltd.)  
-**首席开发者**: 周凤雄 (Henry Chow)  
-**技术顾问团**: 来自BAT/TMD的一线架构师
+**Copyright**: YunNan KunCan Technology Co., Ltd. (云南坤灿科技有限公司)  
+**Lead Developer**: Henry Chow (周凤雄)  
+**Technical Advisors**: Front-line architects from BAT/TMD tech companies
 
-**联系方式**:
-- 📧 技术支持: z18288090942@gmail.com
-- 📧 商务合作: 382201222@qq.com
-- 📱 电话: +86 19537722739 / 13114190794
+**Contact**:
+- 📧 Technical Support: z18288090942@gmail.com
+- 📧 Business Cooperation: 382201222@qq.com
+- 📱 Phone: +86 19537722739 / 13114190794
 - 🌐 GitHub: https://github.com/xuanji-ai-2026/group-debug-deploy-expert
+- 📦 npm: https://www.npmjs.com/package/@zfx1818/open-group
 
 ---
 
-## 🗺️ 发展路线图
+## 🗺️ Roadmap
 
-### v1.0 (当前) ✅
-- [x] 21条铁律体系
-- [x] 11角色AI团队
-- [x] ZERO-TH LAW隔离
-- [x] 反幻觉系统
-- [x] 多平台兼容
+### v1.0 (Current) ✅
+- [x] 21 Iron Principles framework
+- [x] 11-Role AI team
+- [x] ZERO-TH LAW isolation
+- [x] Anti-hallucination system
+- [x] Multi-platform compatibility
+- [x] Published to npm registry
 
-### v1.1 (计划中 Q2 2026)
-- [ ] Web Dashboard可视化界面
-- [ ] 团队协作功能（多人共享上下文）
-- [ ] 更丰富的行业模板（20+）
-- [ ] 国际化支持（日/韩/法/德）
+### v1.1 (Planned Q2 2026)
+- [ ] Web Dashboard visualization
+- [ ] Team collaboration (shared context across users)
+- [ ] Richer industry templates (20+)
+- [ ] Internationalization (Japanese/Korean/French/German)
 
-### v2.0 (规划中 Q4 2026)
-- [ ] AI自主决策引擎（更高级的自治）
-- [ ] 知识图谱集成（跨项目经验复用）
-- [ ] 云端SaaS版本（开箱即用）
-- [ ] 企业认证培训体系
-
----
-
-## 🙏 致谢
-
-感谢以下开源项目和社区的支持：
-- [Trae IDE](https://www.trae.ai/) - 优秀的AI开发环境
-- [OpenClaw](https://openclaw.ai/) - 开放的Agent生态
-- [Hermes Agent](https://hermes.agent/) - 创新的Agent框架
-- 所有早期用户和贡献者的宝贵反馈
+### v2.0 (Planned Q4 2026)
+- [ ] AI autonomous decision engine (advanced autonomy)
+- [ ] Knowledge graph integration (cross-project experience reuse)
+- [ ] Cloud SaaS version (ready to use out of box)
+- [ ] Enterprise certification training program
 
 ---
 
-## 📄 License
+## 🙏 Acknowledgments
+
+Thanks to these open source projects and communities:
+- [Trae IDE](https://www.trae.ai/) - Excellent AI development environment
+- [OpenClaw](https://openclaw.ai/) - Open Agent ecosystem
+- [Hermes Agent](https://hermes.agent/) - Innovative Agent framework
+- All early users and contributors for valuable feedback
+
+---
+
+## 📄 License Notice
 
 ```
-Copyright (c) 2026 云南坤灿科技有限公司 (YunNan KunCan Technology Co., Ltd.)
+Copyright (c) 2026 YunNan KunCan Technology Co., Ltd.
 
 Dual License:
 
@@ -489,14 +502,12 @@ Full license text: See LICENSE file
 
 <div align="center">
 
-**⭐ 如果觉得有用，请给我们一个Star！⭐**
+**⭐ If you find this useful, please give us a Star! ⭐**
 
-[🔝 Star](https://github.com/xuanji-ai-2026/group-debug-deploy-expert/stargazers) | 
-[📥 Download](https://github.com/xuanji-ai-2026/group-debug-deploy-expert/releases/tag/v1.0.1) | 
-[📖 Documentation](./docs/) | 
+[🔝 Star on GitHub](https://github.com/xuanji-ai-2026/group-debug-deploy-expert/stargazers) | 
+[📦 Install via npm](https://www.npmjs.com/package/@zfx1818/open-group) | 
+[📖 Documentation](./USER_GUIDE.md) | 
 [💬 Issues](https://github.com/xuanji-ai-2026/group-debug-deploy-expert/issues) | 
 [📧 Contact Us](mailto:z18288090942@gmail.com)
-
-Made with ❤️ by [云南坤灿科技有限公司](mailto:382201222@qq.com)
 
 </div>
