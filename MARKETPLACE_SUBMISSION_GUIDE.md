@@ -193,7 +193,7 @@ SkillHub uses **ClawHub-compatible API**, so same CLI works:
 
 ```bash
 # Set SkillHub registry
-export CLAWHUB_REGISTRY=https://skillhub.iflytek.com  # Adjust URL if different
+export CLAWHUB_REGISTRY="https://skill.xfyun.cn"  # 讯飞云 SkillHub 公开实例
 
 # Login to SkillHub (if different account)
 clawhub login --token YOUR_SKILLHUB_TOKEN
@@ -263,7 +263,7 @@ cd D:\BeijiXing-AI
 
 | Feature | ClawHub | SkillHub |
 |---------|---------|----------|
-| **URL** | https://clawhub.ai | https://skillhub.iflytek.com* |
+| **URL** | https://clawhub.ai | https://skill.xfyun.cn |
 | **Auth** | GitHub OAuth | API Token / OAuth |
 | **CLI** | `clawhub` | Same (compatible) |
 | **API** | `/api/v1/*` | Compatible layer |

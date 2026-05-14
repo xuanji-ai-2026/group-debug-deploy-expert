@@ -22,7 +22,7 @@ param(
 # =============================================================================
 $ErrorActionPreference = "Stop"
 $CLAWHUB_REGISTRY = "https://clawhub.ai"
-$SKILLHUB_REGISTRY = "https://skillhub.iflytek.com"  # Adjust if different
+$SKILLHUB_REGISTRY = "https://skill.xfyun.cn"  # 讯飞云 SkillHub 公开实例
 
 Write-Host @"
 ╔══════════════════════════════════════════════════════════╗
