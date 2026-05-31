@@ -1,0 +1,213 @@
+version: '3.8'
+
+# 北极星AI商机获客系统 - Docker Compose 单体架构配置
+# 整合16个微服务为单一Spring Boot应用
+# 启动: docker-compose up -d
+# 最后更新: 2026-05-28 (单体清理版)
+
+services:
+  # ============================================
+  # 基础设施层 - Infrastructure
+  # ============================================
+
+  mariadb:
+    image: mariadb:10.11
+    container_name: beijixing-mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-Beijixing@2024!}
+      MYSQL_DATABASE: beijixing_ai
+      MYSQL_USER: beijixing
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-Bjx@Db2024#}
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./init/mariadb:/docker-entrypoint-initdb.d:ro
+    networks:
+      - beijixing-network
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-Beijixing@2024!}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --default-authentication-plugin=mysql_native_password
+      --innodb_buffer_pool_size=1G
+      --max_connections=500
+
+  redis:
+    image: redis:6.0-alpine
+    container_name: beijixing-redis
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./init/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    networks:
+      - beijixing-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-Redis@2026Secure!}", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    command: redis-server /usr/local/etc/redis/redis.conf --requirepass ${REDIS_PASSWORD:-Redis@2026Secure!}
+
+  mongodb:
+    image: mongo:6.0
+    container_name: beijixing-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-MongoBjx@2024!}
+      MONGO_INITDB_DATABASE: beijixing_logs
+      TZ: Asia/Shanghai
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./init/mongodb:/docker-entrypoint-initdb.d:ro
+    networks:
+      - beijixing-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  rabbitmq:
+    image: rabbitmq:3.11-management-alpine
+    container_name: beijixing-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-beijixing}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-RabbitBjx@2024}
+      RABBITMQ_DEFAULT_VHOST: /
+      TZ: Asia/Shanghai
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - beijixing-network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  elasticsearch:
+    image: elasticsearch:8.11.0
+    container_name: beijixing-elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - TZ=Asia/Shanghai
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - beijixing-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  # ============================================
+  # 单体应用 - beijixing-app (端口 8080)
+  # ============================================
+
+  app:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    image: beijixing/beijixing-ai-app:${APP_VERSION:-latest}
+    container_name: beijixing-app
+    restart: unless-stopped
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_NAME=beijixing_ai
+      - DB_USER=root
+      - DB_PASSWORD=${MYSQL_ROOT_PASSWORD:-Beijixing@2024!}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-Redis@2026Secure!}
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=${RABBITMQ_USER:-beijixing}
+      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-RabbitBjx@2024}
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_USERNAME=${MONGO_USERNAME:-admin}
+      - MONGO_PASSWORD=${MONGO_PASSWORD:-MongoBjx@2024!}
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
+      - TZ=Asia/Shanghai
+    ports:
+      - "8080:8080"
+    volumes:
+      - app_logs:/opt/beijixing-ai/logs
+      - app_uploads:/opt/beijixing-ai/uploads
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - beijixing-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+networks:
+  beijixing-network:
+    driver: bridge
+    name: beijixing-network
+
+volumes:
+  mariadb_data:
+    driver: local
+  redis_data:
+    driver: local
+  mongodb_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
+  app_logs:
+    driver: local
+  app_uploads:
+    driver: local

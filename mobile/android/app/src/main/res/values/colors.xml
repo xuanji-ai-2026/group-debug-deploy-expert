@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors - 蓝紫色系（与PC端一致） -->
+    <color name="md_theme_light_primary">#667EEA</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#E0E7FF</color>
+    <color name="md_theme_light_onPrimaryContainer">#1E3A8A</color>
+
+    <!-- Secondary Colors -->
+    <color name="md_theme_light_secondary">#764BA2</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#F3E8FF</color>
+    <color name="md_theme_light_onSecondaryContainer">#4C1D95</color>
+
+    <!-- Tertiary Colors -->
+    <color name="md_theme_light_tertiary">#4F46E5</color>
+    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_tertiaryContainer">#E0E7FF</color>
+    <color name="md_theme_light_onTertiaryContainer">#312E81</color>
+
+    <!-- Error Colors -->
+    <color name="md_theme_light_error">#DC2626</color>
+    <color name="md_theme_light_errorContainer">#FEE2E2</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_onErrorContainer">#7F1D1D</color>
+
+    <!-- Background Colors -->
+    <color name="md_theme_light_background">#F8FAFC</color>
+    <color name="md_theme_light_onBackground">#1E293B</color>
+
+    <!-- Surface Colors -->
+    <color name="md_theme_light_surface">#FFFFFF</color>
+    <color name="md_theme_light_onSurface">#1E293B</color>
+    <color name="md_theme_light_surfaceVariant">#F1F5F9</color>
+    <color name="md_theme_light_onSurfaceVariant">#64748B</color>
+
+    <!-- Dark Theme Colors -->
+    <color name="md_theme_dark_primary">#818CF8</color>
+    <color name="md_theme_dark_onPrimary">#1E3A8A</color>
+    <color name="md_theme_dark_primaryContainer">#3730A3</color>
+    <color name="md_theme_dark_onPrimaryContainer">#C7D2FE</color>
+
+    <color name="md_theme_dark_secondary">#A78BFA</color>
+    <color name="md_theme_dark_onSecondary">#F3E8FF</color>
+    <color name="md_theme_dark_secondaryContainer">#5B21B6</color>
+    <color name="md_theme_dark_onSecondaryContainer">#F3E8FF</color>
+
+    <color name="md_theme_dark_tertiary">#6366F1</color>
+    <color name="md_theme_dark_onTertiary">#E0E7FF</color>
+    <color name="md_theme_dark_tertiaryContainer">#3730A3</color>
+    <color name="md_theme_dark_onTertiaryContainer">#C7D2FE</color>
+
+    <color name="md_theme_dark_error">#FCA5A5</color>
+    <color name="md_theme_dark_errorContainer">#991B1B</color>
+    <color name="md_theme_dark_onError">#7F1D1D</color>
+    <color name="md_theme_dark_onErrorContainer">#FEE2E2</color>
+
+    <color name="md_theme_dark_background">#0F172A</color>
+    <color name="md_theme_dark_onBackground">#E2E8F0</color>
+
+    <color name="md_theme_dark_surface">#1E293B</color>
+    <color name="md_theme_dark_onSurface">#E2E8F0</color>
+    <color name="md_theme_dark_surfaceVariant">#334155</color>
+    <color name="md_theme_dark_onSurfaceVariant">#94A3B8</color>
+
+    <!-- App Specific Colors - 品牌蓝紫色系 -->
+    <color name="brand_primary">#667EEA</color>
+    <color name="brand_secondary">#764BA2</color>
+    <color name="accent_color">#818CF8</color>
+    <color name="success_color">#10B981</color>
+    <color name="warning_color">#F59E0B</color>
+    <color name="error_color">#EF4444</color>
+    <color name="info_color">#3B82F6</color>
+
+    <!-- Status Colors -->
+    <color name="status_running">#10B981</color>
+    <color name="status_pending">#F59E0B</color>
+    <color name="status_paused">#3B82F6</color>
+    <color name="status_completed">#22C55E</color>
+    <color name="status_failed">#EF4444</color>
+    <color name="status_cancelled">#9CA3AF</color>
+
+    <!-- Common UI Colors -->
+    <color name="divider_color">#E2E8F0</color>
+    <color name="text_primary">#1E293B</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="text_hint">#94A3B8</color>
+    <color name="text_tertiary">#94A3B8</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="bg_card">#FFFFFF</color>
+    <color name="bg_input">#F1F5F9</color>
+    <color name="ripple_color">#1A000000</color>
+
+    <!-- Navigation Colors -->
+    <color name="nav_selected">#667EEA</color>
+    <color name="nav_unselected">#64748B</color>
+
+    <!-- Gradient Colors - 蓝紫渐变（与PC端一致） -->
+    <color name="gradient_start">#667EEA</color>
+    <color name="gradient_end">#764BA2</color>
+
+    <!-- Alpha Colors -->
+    <color name="brand_primary_alpha_10">#1A667EEA</color>
+    <color name="brand_primary_light">#EEF2FF</color>
+    <color name="error_alpha_10">#1AEF4444</color>
+
+    <!-- Lead Level Colors -->
+    <color name="lead_level_high">#EF4444</color>
+
+    <!-- Info Background -->
+    <color name="info_bg">#EFF6FF</color>
+
+    <!-- Error (alias) -->
+    <color name="error">#EF4444</color>
+
+    <!-- Additional Required Colors -->
+    <color name="success">#10B981</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bg_page">#F8FAFC</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="quality_good">#10B981</color>
+
+    <!-- Additional Colors for Layouts -->
+    <color name="info">#3B82F6</color>
+    <color name="bg_divider">#E2E8F0</color>
+    <color name="bg_overlay">#80000000</color>
+    <color name="success_bg">#ECFDF5</color>
+    <color name="warning_bg">#FFFBEB</color>
+    <color name="warning">#F59E0B</color>
+    <color name="brand_primary_alpha_20">#33667EEA</color>
+
+    <!-- Additional Colors Round 2 -->
+    <color name="success_alpha_10">#1A10B981</color>
+    <color name="quality_high">#F59E0B</color>
+    <color name="quality_normal">#3B82F6</color>
+    <color name="quality_low">#9CA3AF</color>
+    <color name="error_bg">#FEF2F2</color>
+    <color name="status_success">#10B981</color>
+    <color name="status_warning">#F59E0B</color>
+</resources>

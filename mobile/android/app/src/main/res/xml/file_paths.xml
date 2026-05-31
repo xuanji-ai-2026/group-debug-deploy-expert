@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- 外部存储路径 -->
+    <external-path
+        name="external"
+        path="." />
+    
+    <!-- 外部缓存路径 -->
+    <external-cache-path
+        name="external_cache"
+        path="." />
+    
+    <!-- 文件路径 -->
+    <files-path
+        name="files"
+        path="." />
+    
+    <!-- 缓存路径 -->
+    <cache-path
+        name="cache"
+        path="." />
+    
+    <!-- 下载目录（用于存放APK文件） -->
+    <external-files-path
+        name="downloads"
+        path="Download" />
+
+</paths>

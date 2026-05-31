@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    北极星AI商机获客系统 - Android清单文件
+    北极星AI商机获客系统 Android Manifest
+
+    权限说明（按产品需求文档 v2.0 第5.1节）：
+    - 悬浮窗：后台操作、快捷入口（必需）
+    - 自启动：后台保活（必需）
+    - 网络：数据传输（必需）
+    - 通知：消息推送（必需）
+    - 设备信息：生成设备指纹（必需）
+    - 麦克风：语音输入（推荐）
+    - 存储：数据缓存（推荐）
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ==================== 网络权限 ==================== -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- ==================== 通知权限（Android 13+） ==================== -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- ==================== 语音输入权限 ==================== -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- ==================== 存储权限 ==================== -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29"
+        tools:ignore="ScopedStorage" />
+
+    <!-- ==================== 设备信息权限（设备指纹） ==================== -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- ==================== 后台服务权限 ==================== -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- ==================== 悬浮窗权限 ==================== -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- ==================== 自启动权限（部分厂商需要） ==================== -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <!-- ==================== Wi-Fi权限（检测Wi-Fi状态） ==================== -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <!-- ==================== 第三方APP调用权限 ==================== -->
+    <!-- 查询已安装应用（Android 11+需要，用于检测抖音/快手/小红书等是否安装） -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
+    <!-- 安装APK权限（Android 8.0+ 应用内更新必需） -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <!-- 启动其他应用（用于打开抖音/快手/小红书等发布内容） -->
+    <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- 获取账户信息（用于社交媒体账号绑定） -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS_PRIVILEGED"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- ==================== 剪切板权限（用于读取/写入剪贴板内容） ==================== -->
+    <!-- Android 10+ (API 29) 需要此权限才能读取剪贴板内容 -->
+    <uses-permission android:name="android.permission.READ_CLIPBOARD_IN_BACKGROUND"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- ==================== 应用启动入口 ==================== -->
+    
+    <!-- 查询第三方APP声明（Android 11+ 必需） -->
+    <queries>
+        <!-- 抖音相关包名 -->
+        <package android:name="com.ss.android.ugc.aweme" />
+        <package android:name="com.zhiliaoapp.musically" />
+        
+        <!-- 快手相关包名 -->
+        <package android:name="com.smile.gifmaker" />
+        <package android:name="com.kuaishou.nebula" />
+        <package android:name="com.yxcorp.gifshow" />
+        
+        <!-- 小红书相关包名 -->
+        <package android:name="com.xingin.xhs" />
+        
+        <!-- 微信相关包名 -->
+        <package android:name="com.tencent.mm" />
+        <package android:name="com.tencent.mobileqq" />
+        
+        <!-- 微博 -->
+        <package android:name="com.sina.weibo" />
+        
+        <!-- 通用浏览器（用于打开链接） -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".BxApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BeiJiXing"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:targetApi="34">
+
+        <!-- 启动页Activity（显示logo、版本信息、检查更新） -->
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.BeiJiXing.Splash"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 主启动Activity（登录/注册页面） -->
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BeiJiXing.Splash"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 首页Activity -->
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTop" />
+
+        <!-- 商机列表Activity -->
+        <activity
+            android:name=".ui.lead.LeadListActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 商机详情Activity -->
+        <activity
+            android:name=".ui.lead.LeadDetailActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 任务列表Activity -->
+        <activity
+            android:name=".ui.task.TaskActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 任务详情Activity -->
+        <activity
+            android:name=".ui.task.TaskDetailActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 截客任务Activity -->
+        <activity
+            android:name=".ui.intercept.InterceptTaskActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 创建截客任务Activity -->
+        <activity
+            android:name=".ui.intercept.CreateInterceptTaskActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 获客任务Activity -->
+        <activity
+            android:name=".ui.acquire.AcquireTaskActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 创建获客任务Activity -->
+        <activity
+            android:name=".ui.acquire.CreateAcquireTaskActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 获客任务统计Activity -->
+        <activity
+            android:name=".ui.acquire.AcquireTaskStatsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 账号管理Activity -->
+        <activity
+            android:name=".ui.account.AccountActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 积分充值Activity -->
+        <activity
+            android:name=".ui.recharge.RechargeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 个人中心Activity -->
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 评论抓取管理Activity -->
+        <activity
+            android:name=".ui.crawl.CrawlManagementActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 发送私信Activity -->
+        <activity
+            android:name=".ui.crawl.SendMessageActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- ==================== 保持活跃Service ==================== -->
+        <!-- 用于后台保活、任务执行 -->
+        <service
+            android:name=".service.KeepAliveService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+
+        <!-- ==================== FileProvider (用于APK安装) ==================== -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- ==================== 通知工具类（非Service）==================== -->
+        <!-- NotificationService 是一个单例工具类，无需在Manifest中声明 -->
+
+        <!-- ==================== 极光/Firebase推送Receiver（预留） ==================== -->
+        <!-- 如需接入第三方推送，在此处配置 -->
+        <!--
+        <receiver
+            android:name=".receiver.PushReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.beijixing.PUSH_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        -->
+
+    </application>
+
+</manifest>

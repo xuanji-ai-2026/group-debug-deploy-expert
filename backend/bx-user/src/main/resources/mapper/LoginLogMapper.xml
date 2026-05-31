@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.bxuser.mapper.LoginLogMapper">
+
+    <!-- 基础结果映射 -->
+    <resultMap id="BaseResultMap" type="com.beijixing.bxuser.entity.LoginLog">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="login_type" property="loginType"/>
+        <result column="ip_address" property="ipAddress"/>
+        <result column="user_agent" property="userAgent"/>
+        <result column="device_fingerprint" property="deviceFingerprint"/>
+        <result column="device_type" property="deviceType"/>
+        <result column="os" property="os"/>
+        <result column="browser" property="browser"/>
+        <result column="location" property="location"/>
+        <result column="latitude" property="latitude"/>
+        <result column="longitude" property="longitude"/>
+        <result column="login_result" property="loginResult"/>
+        <result column="fail_reason" property="failReason"/>
+        <result column="is_geo_abnormal" property="isGeoAbnormal"/>
+        <result column="is_device_abnormal" property="isDeviceAbnormal"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+
+    <!-- 基础列 -->
+    <sql id="Base_Column_List">
+        id, user_id, login_type, ip_address, user_agent, device_fingerprint,
+        device_type, os, browser, location, latitude, longitude,
+        login_result, fail_reason, is_geo_abnormal, is_device_abnormal, created_at
+    </sql>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM login_logs
+        WHERE id = #{id}
+    </select>
+
+    <!-- 插入登录日志 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO login_logs (
+            user_id, login_type, ip_address, user_agent, device_fingerprint,
+            device_type, os, browser, location, latitude, longitude,
+            login_result, fail_reason, is_geo_abnormal, is_device_abnormal, created_at
+        ) VALUES (
+            #{userId}, #{loginType}, #{ipAddress}, #{userAgent}, #{deviceFingerprint},
+            #{deviceType}, #{os}, #{browser}, #{location}, #{latitude}, #{longitude},
+            #{loginResult}, #{failReason}, #{isGeoAbnormal}, #{isDeviceAbnormal}, NOW()
+        )
+    </insert>
+
+    <!-- 删除登录日志 -->
+    <delete id="deleteById">
+        DELETE FROM login_logs WHERE id = #{id}
+    </delete>
+
+    <!-- 分页查询用户登录日志 -->
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM login_logs
+        WHERE user_id = #{userId}
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 查询最后成功登录记录 -->
+    <select id="selectLastSuccessfulLogin" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM login_logs
+        WHERE user_id = #{userId} AND login_result = 'SUCCESS'
+        ORDER BY created_at DESC
+        LIMIT 1
+    </select>
+
+    <!-- 统计指定IP登录次数 -->
+    <select id="countLoginsFromIp" resultType="long">
+        SELECT COUNT(*)
+        FROM login_logs
+        WHERE user_id = #{userId}
+          AND ip_address = #{ip}
+          AND login_result = 'SUCCESS'
+          AND created_at > #{since}
+    </select>
+
+    <!-- 统计指定设备登录次数 -->
+    <select id="countLoginsFromDevice" resultType="long">
+        SELECT COUNT(*)
+        FROM login_logs
+        WHERE user_id = #{userId}
+          AND device_fingerprint = #{fingerprint}
+          AND login_result = 'SUCCESS'
+          AND created_at > #{since}
+    </select>
+
+    <!-- 查询异常登录记录 -->
+    <select id="selectAbnormalLogins" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM login_logs
+        WHERE (is_geo_abnormal = true OR is_device_abnormal = true)
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="startTime != null">
+            AND created_at >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND created_at &lt;= #{endTime}
+        </if>
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 查询登录失败记录 -->
+    <select id="selectFailedLogins" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM login_logs
+        WHERE login_result = 'FAILURE'
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="startTime != null">
+            AND created_at >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND created_at &lt;= #{endTime}
+        </if>
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 统计用户登录次数（分页） -->
+    <select id="selectLoginLogPage" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM login_logs
+        <where>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="loginType != null and loginType != ''">
+                AND login_type = #{loginType}
+            </if>
+            <if test="loginResult != null and loginResult != ''">
+                AND login_result = #{loginResult}
+            </if>
+            <if test="isGeoAbnormal != null">
+                AND is_geo_abnormal = #{isGeoAbnormal}
+            </if>
+            <if test="isDeviceAbnormal != null">
+                AND is_device_abnormal = #{isDeviceAbnormal}
+            </if>
+            <if test="ipAddress != null and ipAddress != ''">
+                AND ip_address LIKE CONCAT('%', #{ipAddress}, '%')
+            </if>
+            <if test="startTime != null">
+                AND created_at >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND created_at &lt;= #{endTime}
+            </if>
+        </where>
+        ORDER BY created_at DESC
+    </select>
+
+    <!-- 批量插入登录日志 -->
+    <insert id="batchInsert">
+        INSERT INTO login_logs (
+            user_id, login_type, ip_address, user_agent, device_fingerprint,
+            device_type, os, browser, location, latitude, longitude,
+            login_result, fail_reason, is_geo_abnormal, is_device_abnormal, created_at
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.userId}, #{item.loginType}, #{item.ipAddress}, #{item.userAgent}, #{item.deviceFingerprint},
+                #{item.deviceType}, #{item.os}, #{item.browser}, #{item.location}, #{item.latitude}, #{item.longitude},
+                #{item.loginResult}, #{item.failReason}, #{item.isGeoAbnormal}, #{item.isDeviceAbnormal}, NOW()
+            )
+        </foreach>
+    </insert>
+
+    <!-- 更新异常标记 -->
+    <update id="updateAbnormalFlag">
+        UPDATE login_logs
+        SET is_geo_abnormal = #{isGeoAbnormal},
+            is_device_abnormal = #{isDeviceAbnormal}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除过期日志 -->
+    <delete id="deleteExpiredLogs">
+        DELETE FROM login_logs
+        WHERE created_at &lt; #{expireTime}
+    </delete>
+
+</mapper>

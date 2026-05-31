@@ -1,0 +1,168 @@
+version: '3.8'
+
+# 北极星AI商机获客系统 - 极速启动版 (单体架构)
+# 快速启动: docker-compose -f docker-compose.quick.yml up -d
+# 所有中间件使用最简配置，适合本地开发调试
+# 最后更新: 2026-05-28 (单体清理版)
+
+services:
+  # ============================================
+  # 基础设施 - 最简配置
+  # ============================================
+
+  mariadb:
+    image: mariadb:10.11
+    container_name: bx-mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: beijixing_ai
+      MYSQL_USER: beijixing
+      MYSQL_PASSWORD: dev123
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - bx-network
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-uroot", "-proot123"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --max_connections=200
+
+  redis:
+    image: redis:6.0-alpine
+    container_name: bx-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass dev123
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - bx-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "dev123", "ping"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3.11-management-alpine
+    container_name: bx-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: dev
+      RABBITMQ_DEFAULT_PASS: dev123
+      RABBITMQ_DEFAULT_VHOST: /
+      TZ: Asia/Shanghai
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - bx-network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  elasticsearch:
+    image: elasticsearch:8.11.0
+    container_name: bx-elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - TZ=Asia/Shanghai
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - bx-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+
+  # ============================================
+  # 单体应用 - beijixing-app (端口 8080)
+  # ============================================
+
+  app:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    image: beijixing/beijixing-ai-app:quick
+    container_name: bx-app
+    restart: unless-stopped
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_NAME=beijixing_ai
+      - DB_USER=root
+      - DB_PASSWORD=root123
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=dev123
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=dev
+      - RABBITMQ_PASSWORD=dev123
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
+      - TZ=Asia/Shanghai
+    ports:
+      - "8080:8080"
+    volumes:
+      - app_logs:/opt/beijixing-ai/logs
+      - app_uploads:/opt/beijixing-ai/uploads
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - bx-network
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+networks:
+  bx-network:
+    driver: bridge
+    name: beijixing-ai-network
+
+volumes:
+  mariadb_data:
+    driver: local
+  redis_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
+  app_logs:
+    driver: local
+  app_uploads:
+    driver: local

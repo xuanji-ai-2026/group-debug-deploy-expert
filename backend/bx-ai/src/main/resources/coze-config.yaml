@@ -1,0 +1,265 @@
+# ============================================================
+# 北极星AI商机获客系统 - 扣子(Coze)平台配置
+# 配置文件: coze-config.yaml
+# 说明: 此文件包含扣子Bot配置和火山引擎API密钥
+# 安全提示: 生产环境请使用环境变量或密钥管理服务
+# ============================================================
+
+# 扣子平台基础配置
+coze:
+  # API基础地址
+  base-url: https://api.coze.cn
+  
+  # API访问令牌
+  # 从扣子平台获取: https://www.coze.cn/open/oauth/pats
+  api-token: ${COZE_API_TOKEN}
+  
+  # 北极星AI助手Bot配置
+  bots:
+    # 主Bot - 北极星AI助手
+    beijixing-assistant:
+      bot-id: ${COZE_BOT_ID_BEIJIXING}
+      name: "北极星AI助手"
+      description: "北极星AI商机获客系统主助手"
+      # 工作流配置
+      workflow-id: ${COZE_WORKFLOW_ID}
+      # 知识库配置
+      knowledge-base-id: ${COZE_KB_ID}
+      
+    # 文案生成Bot
+    content-generator:
+      bot-id: ${COZE_BOT_ID_CONTENT}
+      name: "文案生成助手"
+      description: "社交媒体文案批量生成"
+      
+    # 图片生成Bot
+    image-generator:
+      bot-id: ${COZE_BOT_ID_IMAGE}
+      name: "图片生成助手"
+      description: "营销图片素材生成"
+      
+    # 意图识别Bot
+    intent-recognizer:
+      bot-id: ${COZE_BOT_ID_INTENT}
+      name: "意图识别助手"
+      description: "用户意图分析与分类"
+
+# 火山引擎 Ark API配置
+volcengine:
+  # API端点
+  base-url: https://ark.cn-beijing.volces.com/api/v3
+  
+  # API密钥
+  api-key: ${VOLCENGINE_API_KEY}
+  
+  # 模型端点配置
+  # 从火山引擎Ark控制台获取
+  endpoints:
+    # 轻量版模型 - 用于快速响应场景
+    doubao-lite-4k:
+      endpoint-id: ${VOLC_ENDPOINT_LITE_4K}
+      max-tokens: 4096
+      temperature: 0.7
+      
+    doubao-lite-32k:
+      endpoint-id: ${VOLC_ENDPOINT_LITE_32K}
+      max-tokens: 32768
+      temperature: 0.7
+      
+    # 专业版模型 - 用于复杂任务
+    doubao-pro-4k:
+      endpoint-id: ${VOLC_ENDPOINT_PRO_4K}
+      max-tokens: 4096
+      temperature: 0.7
+      
+    doubao-pro-32k:
+      endpoint-id: ${VOLC_ENDPOINT_PRO_32K}
+      max-tokens: 32768
+      temperature: 0.7
+      
+    doubao-pro-128k:
+      endpoint-id: ${VOLC_ENDPOINT_PRO_128K}
+      max-tokens: 131072
+      temperature: 0.7
+      
+    # 视觉理解模型
+    doubao-vision:
+      endpoint-id: ${VOLC_ENDPOINT_VISION}
+      max-tokens: 4096
+      temperature: 0.7
+      
+    # 角色扮演模型
+    doubao-character:
+      endpoint-id: ${VOLC_ENDPOINT_CHARACTER}
+      max-tokens: 4096
+      temperature: 0.8
+      
+    # 向量化模型
+    doubao-embedding:
+      endpoint-id: ${VOLC_ENDPOINT_EMBEDDING}
+      
+    # 语音合成
+    tts:
+      endpoint-id: ${VOLC_ENDPOINT_TTS}
+      voice-type: ${VOLC_TTS_VOICE_TYPE:BV001}
+      
+    # 语音识别
+    asr:
+      endpoint-id: ${VOLC_ENDPOINT_ASR}
+
+# 备用模型池配置
+backup-models:
+  # 是否启用备用模型降级
+  enabled: true
+  
+  # 主模型失败多少次后切换
+  failure-threshold: 3
+  
+  # 备用模型列表（按优先级排序）
+  providers:
+    # 百度文心一言
+    wenxin:
+      name: "文心一言"
+      enabled: true
+      api-key: ${WENXIN_API_KEY}
+      secret-key: ${WENXIN_SECRET_KEY}
+      base-url: https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop
+      models:
+        - ernie-bot-4
+        - ernie-bot-8k
+        - ernie-speed-128k
+      
+    # 阿里通义千问
+    tongyi:
+      name: "通义千问"
+      enabled: true
+      api-key: ${TONGYI_API_KEY}
+      base-url: https://dashscope.aliyuncs.com/api/v1
+      models:
+        - qwen-turbo
+        - qwen-plus
+        - qwen-max
+        
+    # 腾讯混元
+    hunyuan:
+      name: "腾讯混元"
+      enabled: true
+      api-key: ${HUNYUAN_API_KEY}
+      base-url: https://hunyuan.tencentcloudapi.com
+      models:
+        - hunyuan-lite
+        - hunyuan-standard
+        - hunyuan-standard-256K
+        
+    # 讯飞星火
+    xinghuo:
+      name: "讯飞星火"
+      enabled: true
+      api-key: ${XINGHUO_API_KEY}
+      app-id: ${XINGHUO_APP_ID}
+      api-secret: ${XINGHUO_API_SECRET}
+      base-url: wss://spark-api.xf-yun.com/v3.5/chat
+      models:
+        - spark-v3.5
+        - spark-v3.1
+        - spark-v2.1
+
+# 模型网关路由配置
+model-gateway:
+  # 默认路由策略: round_robin, weighted, priority, latency
+  default-strategy: priority
+  
+  # 模型映射表
+  model-mapping:
+    # 文案生成 -> 豆包Pro
+    text-generation: doubao-pro-32k
+    # 图片生成 -> 豆包视觉
+    image-generation: doubao-vision
+    # 意图识别 -> 豆包轻量版(快速响应)
+    intent-recognition: doubao-lite-4k
+    # 对话 -> 豆包专业版
+    chat: doubao-pro-128k
+    # 嵌入 -> 豆包嵌入模型
+    embedding: doubao-embedding
+
+# AI服务模块功能配置
+features:
+  # 文案生成
+  text-generation:
+    enabled: true
+    max-input-length: 4000
+    max-output-length: 2000
+    timeout-ms: 30000
+    
+  # 图片生成
+  image-generation:
+    enabled: true
+    supported-sizes:
+      - 1024x1024
+      - 1024x768
+      - 768x1024
+      - 1792x1024
+      - 1024x1792
+    timeout-ms: 60000
+    
+  # 语音识别
+  speech-recognition:
+    enabled: true
+    supported-formats:
+      - mp3
+      - mp4
+      - mpeg
+      - mpga
+      - m4a
+      - wav
+      - webm
+    max-file-size-mb: 25
+    timeout-ms: 15000
+    
+  # 语音合成
+  speech-synthesis:
+    enabled: true
+    supported-voices:
+      - zh-CN-Xiaoxiao
+      - zh-CN-Yunxi
+      - zh-CN-Yunjian
+    timeout-ms: 10000
+    
+  # 意图识别
+  intent-recognition:
+    enabled: true
+    supported-intents:
+      - lead_inquiry      # 商机咨询
+      - product_query     # 产品查询
+      - price_query       # 价格查询
+      - complaint         # 投诉反馈
+      - support_request   # 技术支持
+      - general_chat      # 闲聊
+    timeout-ms: 5000
+    
+  # 反AI检测
+  ai-detection:
+    enabled: true
+    threshold: 0.7
+    timeout-ms: 10000
+
+# 计费与日志
+billing:
+  # 是否记录详细调用日志
+  enable-detailed-log: true
+  
+  # 费用统计维度
+  metrics:
+    - model_name
+    - request_type
+    - user_id
+    - timestamp
+    - token_count
+    - cost_usd
+
+# 幂等与去重
+idempotency:
+  # 幂等key过期时间（分钟）
+  key-ttl-minutes: 30
+  # 请求去重窗口（秒）
+  dedup-window-seconds: 60

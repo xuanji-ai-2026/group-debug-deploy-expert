@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.risk.repository.mapper.RiskMapper">
+
+    <!-- RiskRecord 结果映射 -->
+    <resultMap id="BaseResultMap" type="com.beijixing.risk.entity.RiskRecord">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="account_id" property="accountId"/>
+        <result column="operation_type" property="operationType"/>
+        <result column="risk_type" property="riskType"/>
+        <result column="risk_score" property="riskScore"/>
+        <result column="risk_level" property="riskLevel"/>
+        <result column="action" property="action"/>
+        <result column="triggered_rule_id" property="triggeredRuleId"/>
+        <result column="triggered_rule_name" property="triggeredRuleName"/>
+        <result column="request_params" property="requestParams"/>
+        <result column="risk_details" property="riskDetails"/>
+        <result column="decision_time_ms" property="decisionTimeMs"/>
+        <result column="ip_address" property="ipAddress"/>
+        <result column="device_fingerprint" property="deviceFingerprint"/>
+        <result column="user_id" property="userId"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="handle_by" property="handleBy"/>
+        <result column="handle_time" property="handleTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <!-- RiskRule 结果映射 -->
+    <resultMap id="RiskRuleResultMap" type="com.beijixing.risk.entity.RiskRule">
+        <id column="id" property="id"/>
+        <result column="platform_id" property="platformId"/>
+        <result column="rule_name" property="ruleName"/>
+        <result column="rule_type" property="ruleType"/>
+        <result column="rule_category" property="ruleCategory"/>
+        <result column="rule_code" property="ruleCode"/>
+        <result column="description" property="description"/>
+        <result column="rule_config" property="ruleConfig"/>
+        <result column="risk_type" property="riskType"/>
+        <result column="risk_level" property="riskLevel"/>
+        <result column="deduct_score" property="deductScore"/>
+        <result column="priority" property="priority"/>
+        <result column="status" property="status"/>
+        <result column="built_in" property="builtIn"/>
+        <result column="effective_time" property="effectiveTime"/>
+        <result column="expire_time" property="expireTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,461 @@
+/**
+ * @fileoverview 全局样式表
+ * @description 项目全局样式、工具类和组件样式覆盖
+ * @author EMP-FE-001 张婷
+ */
+
+// @use rules must be written first (before any other rules including comments)
+
+
+// ============================================================
+// 全局字体
+// ============================================================
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-base;
+  color: $color-text-primary;
+  background-color: $color-bg-page;
+}
+
+// ============================================================
+// 链接样式
+// ============================================================
+a {
+  color: $color-primary;
+  transition: color $transition-duration-fast $transition-timing-ease;
+
+  &:hover {
+    color: $color-primary-dark;
+  }
+
+  &.link--muted {
+    color: $color-text-regular;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+// ============================================================
+// 选中文字样式
+// ============================================================
+::selection {
+  background-color: rgba($color-primary, 0.15);
+  color: $color-primary-dark;
+}
+
+// ============================================================
+// 应用容器
+// ============================================================
+#app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// ============================================================
+// 布局工具类
+// ============================================================
+
+// Flex
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  @include flex-center;
+}
+
+.flex-between {
+  @include flex-between;
+}
+
+.flex-start {
+  @include flex-start;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+// Gap
+.gap-xs { gap: $spacing-xs; }
+.gap-sm { gap: $spacing-sm; }
+.gap-md { gap: $spacing-md; }
+.gap-base { gap: $spacing-base; }
+.gap-lg { gap: $spacing-lg; }
+.gap-xl { gap: $spacing-xl; }
+
+// ============================================================
+// 间距工具类
+// ============================================================
+
+// Margin
+.m-0 { margin: 0; }
+.m-auto { margin: auto; }
+.mt-xs { margin-top: $spacing-xs; }
+.mt-sm { margin-top: $spacing-sm; }
+.mt-base { margin-top: $spacing-base; }
+.mt-lg { margin-top: $spacing-lg; }
+.mt-xl { margin-top: $spacing-xl; }
+
+.mb-xs { margin-bottom: $spacing-xs; }
+.mb-sm { margin-bottom: $spacing-sm; }
+.mb-base { margin-bottom: $spacing-base; }
+.mb-lg { margin-bottom: $spacing-lg; }
+.mb-xl { margin-bottom: $spacing-xl; }
+
+.ml-xs { margin-left: $spacing-xs; }
+.ml-sm { margin-left: $spacing-sm; }
+.ml-base { margin-left: $spacing-base; }
+.ml-lg { margin-left: $spacing-lg; }
+.ml-auto { margin-left: auto; }
+
+.mr-xs { margin-right: $spacing-xs; }
+.mr-sm { margin-right: $spacing-sm; }
+.mr-base { margin-right: $spacing-base; }
+.mr-lg { margin-right: $spacing-lg; }
+.mr-auto { margin-right: auto; }
+
+// Padding
+.p-0 { padding: 0; }
+.p-xs { padding: $spacing-xs; }
+.p-sm { padding: $spacing-sm; }
+.p-base { padding: $spacing-base; }
+.p-lg { padding: $spacing-lg; }
+.p-xl { padding: $spacing-xl; }
+
+// ============================================================
+// 文本工具类
+// ============================================================
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.text-xs { font-size: $font-size-xs; }
+.text-sm { font-size: $font-size-sm; }
+.text-base { font-size: $font-size-base; }
+.text-lg { font-size: $font-size-lg; }
+.text-xl { font-size: $font-size-xl; }
+.text-2xl { font-size: $font-size-2xl; }
+
+.font-normal { font-weight: $font-weight-normal; }
+.font-medium { font-weight: $font-weight-medium; }
+.font-semibold { font-weight: $font-weight-semibold; }
+.font-bold { font-weight: $font-weight-bold; }
+
+.text-primary { color: $color-text-primary; }
+.text-regular { color: $color-text-regular; }
+.text-secondary { color: $color-text-secondary; }
+.text-danger { color: $color-danger; }
+.text-success { color: $color-success; }
+.text-warning { color: $color-warning; }
+
+.text-ellipsis {
+  @include text-ellipsis(1);
+}
+
+.text-ellipsis-2 {
+  @include text-ellipsis(2);
+}
+
+.text-ellipsis-3 {
+  @include text-ellipsis(3);
+}
+
+.break-all {
+  word-break: break-all;
+}
+
+// ============================================================
+// 颜色工具类
+// ============================================================
+.bg-white { background-color: $color-white; }
+.bg-page { background-color: $color-bg-page; }
+.bg-primary { background-color: $color-primary; }
+.bg-success { background-color: $color-success; }
+.bg-warning { background-color: $color-warning; }
+.bg-danger { background-color: $color-danger; }
+
+// ============================================================
+// 圆角
+// ============================================================
+.rounded-sm { border-radius: $radius-sm; }
+.rounded { border-radius: $radius-base; }
+.rounded-md { border-radius: $radius-md; }
+.rounded-lg { border-radius: $radius-lg; }
+.rounded-xl { border-radius: $radius-xl; }
+.rounded-full { border-radius: $radius-full; }
+
+// ============================================================
+// 阴影
+// ============================================================
+.shadow-sm { box-shadow: $shadow-sm; }
+.shadow { box-shadow: $shadow-base; }
+.shadow-md { box-shadow: $shadow-md; }
+.shadow-lg { box-shadow: $shadow-lg; }
+.shadow-xl { box-shadow: $shadow-xl; }
+
+// ============================================================
+// 显示
+// ============================================================
+.hidden { display: none; }
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+
+// ============================================================
+// 定位
+// ============================================================
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+
+// ============================================================
+// 溢出
+// ============================================================
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+.overflow-x-auto { overflow-x: auto; }
+.overflow-y-auto { overflow-y: auto; }
+
+// ============================================================
+// 宽度 / 高度
+// ============================================================
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.h-full { height: 100%; }
+.h-auto { height: auto; }
+.min-h-screen { min-height: 100vh; }
+
+// ============================================================
+// 卡片组件
+// ============================================================
+.card {
+  background-color: $color-white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  border: 1px solid $color-border-light;
+  padding: $spacing-lg;
+
+  &__header {
+    @include flex-between;
+    padding-bottom: $spacing-md;
+    border-bottom: 1px solid $color-border-light;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  &__body {
+    // 内容区域
+  }
+
+  &__footer {
+    @include flex-between;
+    padding-top: $spacing-md;
+    border-top: 1px solid $color-border-light;
+    margin-top: $spacing-lg;
+  }
+}
+
+// ============================================================
+// 页面标题区
+// ============================================================
+.page-header {
+  @include flex-between;
+  padding: $spacing-lg 0;
+  border-bottom: 1px solid $color-border-light;
+  margin-bottom: $spacing-lg;
+
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+  }
+
+  &__desc {
+    margin-top: $spacing-xs;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+}
+
+// ============================================================
+// 空状态
+// ============================================================
+.empty-state {
+  @include flex-center;
+  flex-direction: column;
+  padding: $spacing-3xl $spacing-lg;
+  color: $color-text-secondary;
+
+  &__icon {
+    font-size: 48px;
+    margin-bottom: $spacing-base;
+    opacity: 0.5;
+  }
+
+  &__text {
+    font-size: $font-size-base;
+  }
+}
+
+// ============================================================
+// 加载状态
+// ============================================================
+.loading-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($color-white, 0.8);
+  @include flex-center;
+  z-index: $z-index-sticky;
+}
+
+// ============================================================
+// Element Plus 组件样式覆盖
+// ============================================================
+
+// 按钮
+.el-button {
+  font-family: $font-family-base;
+  border-radius: $radius-md;
+  transition: all $transition-duration-fast $transition-timing-ease;
+}
+
+// 输入框
+.el-input__wrapper {
+  border-radius: $radius-md;
+}
+
+// 表格
+.el-table {
+  border-radius: $radius-lg;
+  overflow: hidden;
+
+  th.el-table__cell {
+    background-color: $color-gray-50;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+}
+
+// 标签
+.el-tag {
+  border-radius: $radius-full;
+}
+
+// 卡片
+.el-card {
+  border-radius: $radius-lg;
+  border: 1px solid $color-border-light;
+  box-shadow: $shadow-sm;
+}
+
+// 分页
+.el-pagination {
+  justify-content: flex-end;
+  padding: $spacing-lg 0;
+}
+
+// 对话框
+.el-dialog {
+  border-radius: $radius-xl;
+}
+
+// 消息提示
+.el-message {
+  border-radius: $radius-lg;
+}
+
+// ============================================================
+// 动画
+// ============================================================
+
+// 淡入
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// 滑入
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 旋转
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn $transition-duration-base $transition-timing-ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn $transition-duration-base $transition-timing-ease-out;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}

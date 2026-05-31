@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.tenant.repository.mapper.TenantPackageMapper">
+
+    <!-- 基础结果映射 -->
+    <resultMap id="BaseResultMap" type="com.beijixing.tenant.entity.TenantPackage">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="package_id" property="packageId"/>
+        <result column="package_name" property="packageName"/>
+        <result column="package_type" property="packageType"/>
+        <result column="price" property="price"/>
+        <result column="point_amount" property="pointAmount"/>
+        <result column="effective_time" property="effectiveTime"/>
+        <result column="expire_time" property="expireTime"/>
+        <result column="purchase_type" property="purchaseType"/>
+        <result column="order_id" property="orderId"/>
+        <result column="audit_status" property="auditStatus"/>
+        <result column="audit_remark" property="auditRemark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <!-- 基础列 -->
+    <sql id="Base_Column_List">
+        id, tenant_id, package_id, package_name, package_type, price, point_amount,
+        effective_time, expire_time, purchase_type, order_id, audit_status, audit_remark,
+        create_time, update_time, create_by, update_by, deleted
+    </sql>
+
+    <!-- 查询租户的所有套餐记录 -->
+    <select id="selectByTenantId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM tenant_package
+        WHERE tenant_id = #{tenantId}
+          AND deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 查询租户当前生效的套餐 -->
+    <select id="selectCurrentByTenantId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM tenant_package
+        WHERE tenant_id = #{tenantId}
+          AND audit_status = 1
+          AND (expire_time IS NULL OR expire_time > NOW())
+          AND deleted = 0
+        ORDER BY effective_time DESC
+        LIMIT 1
+    </select>
+
+</mapper>

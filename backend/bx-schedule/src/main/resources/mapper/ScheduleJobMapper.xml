@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.schedule.mapper.ScheduleJobMapper">
+
+    <resultMap id="BaseResultMap" type="com.beijixing.schedule.entity.ScheduleJob">
+        <id column="id" property="id"/>
+        <result column="job_name" property="jobName"/>
+        <result column="description" property="description"/>
+        <result column="job_type" property="jobType"/>
+        <result column="cron" property="cron"/>
+        <result column="params" property="params"/>
+        <result column="status" property="status"/>
+        <result column="distributed" property="distributed"/>
+        <result column="retry_times" property="retryTimes"/>
+        <result column="timeout_seconds" property="timeoutSeconds"/>
+        <result column="executor_handler" property="executorHandler"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <select id="selectJobList" resultType="com.beijixing.schedule.vo.JobVO">
+        SELECT id, job_name, description, job_type, cron, params, status,
+               distributed, retry_times, timeout_seconds, executor_handler,
+               create_time, update_time, create_by, update_by
+        FROM schedule_job
+        WHERE deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectJobById" resultType="com.beijixing.schedule.vo.JobVO">
+        SELECT id, job_name, description, job_type, cron, params, status,
+               distributed, retry_times, timeout_seconds, executor_handler,
+               create_time, update_time, create_by, update_by
+        FROM schedule_job
+        WHERE deleted = 0 AND id = #{id}
+    </select>
+</mapper>

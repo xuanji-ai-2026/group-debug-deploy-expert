@@ -1,0 +1,1 @@
+{"applinks": {"details": [{"appIDs": ["TEAMID.com.beijixing.BxApp"], "components": ["/**", "/oauth/callback/douyin", "/oauth/callback/xiaohongshu", "/oauth/callback/kuaishou", "/oauth/callback/wechat"], "paths": ["/oauth/*"]}]}}

@@ -1,0 +1,296 @@
+/**
+ * @fileoverview SCSS 全局变量定义
+ * @description 定义项目全局使用的颜色、尺寸、字体等 CSS 变量
+ * @author EMP-FE-001 张婷
+ */
+
+// ============================================================
+// 主题色彩系统
+// ============================================================
+
+// 主色调
+$color-primary: #4F46E5; // Indigo 主色
+$color-primary-light: #818CF8; // 主色浅色
+$color-primary-dark: #3730A3; // 主色深色
+
+// 功能色
+$color-success: #10B981; // 成功绿
+$color-warning: #F59E0B; // 警告橙
+$color-danger: #EF4444; // 危险红
+$color-info: #6366F1; // 信息紫
+
+// 辅助色
+$color-secondary: #8B5CF6; // 次要色
+$color-accent: #06B6D4; // 强调色
+
+// 中性色（灰阶）
+$color-white: #FFFFFF;
+$color-black: #000000;
+$color-gray-50: #F9FAFB;
+$color-gray-100: #F3F4F6;
+$color-gray-200: #E5E7EB;
+$color-gray-300: #D1D5DB;
+$color-gray-400: #9CA3AF;
+$color-gray-500: #6B7280;
+$color-gray-600: #4B5563;
+$color-gray-700: #374151;
+$color-gray-800: #1F2937;
+$color-gray-900: #111827;
+
+// ============================================================
+// 文字颜色
+// ============================================================
+$color-text-primary: $color-gray-900; // 主要文字
+$color-text-regular: $color-gray-600; // 常规文字
+$color-text-secondary: $color-gray-400; // 次要文字
+$color-text-placeholder: $color-gray-300; // 占位符文字
+$color-text-disabled: $color-gray-300; // 禁用状态文字
+
+// ============================================================
+// 背景颜色
+// ============================================================
+$color-bg-page: $color-gray-50; // 页面背景
+$color-bg-container: $color-white; // 容器背景
+$color-bg-hover: $color-gray-50; // 悬停背景
+$color-bg-active: $color-gray-100; // 激活背景
+$color-bg-disabled: $color-gray-100; // 禁用背景
+
+// ============================================================
+// 边框颜色
+// ============================================================
+$color-border-base: $color-gray-200; // 基础边框
+$color-border-light: $color-gray-100; // 浅色边框
+$color-border-lighter: $color-gray-50; // 更浅边框
+$color-border-dark: $color-gray-300; // 深色边框
+
+// ============================================================
+// 品牌专属色彩（北极星主题）
+// ============================================================
+$color-north-star: #4F46E5; // 北极星主色
+$color-north-star-glow: rgba(79, 70, 229, 0.15); // 光晕效果
+$color-north-star-gradient: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); // 渐变
+
+// ============================================================
+// 尺寸系统
+// ============================================================
+
+// 基础尺寸单位
+$size-unit: 4px;
+$size-base: 16px;
+
+// 间距（基于 4px 单位）
+$spacing-xs: $size-unit; // 4px
+$spacing-sm: $size-unit * 2; // 8px
+$spacing-md: $size-unit * 3; // 12px
+$spacing-base: $size-unit * 4; // 16px
+$spacing-lg: $size-unit * 6; // 24px
+$spacing-xl: $size-unit * 8; // 32px
+$spacing-2xl: $size-unit * 10; // 40px
+$spacing-3xl: $size-unit * 15; // 60px
+
+// 圆角
+$radius-sm: 2px;
+$radius-base: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+$radius-xl: 12px;
+$radius-2xl: 16px;
+$radius-full: 9999px;
+
+// ============================================================
+// 字体系统
+// ============================================================
+$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+$font-family-code: 'SF Mono', Monaco, Inconsolata, 'Roboto Mono', Menlo, Consolas, monospace;
+
+// 字体大小
+$font-size-xs: 12px;
+$font-size-sm: 13px;
+$font-size-base: 14px;
+$font-size-md: 15px;
+$font-size-lg: 16px;
+$font-size-xl: 18px;
+$font-size-2xl: 20px;
+$font-size-3xl: 24px;
+$font-size-4xl: 30px;
+
+// 字体粗细
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// 行高
+$line-height-base: 1.5;
+$line-height-tight: 1.25;
+$line-height-loose: 1.75;
+
+// ============================================================
+// 阴影系统
+// ============================================================
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+// ============================================================
+// Z-Index 层级
+// ============================================================
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+$z-index-toast: 1080;
+
+// ============================================================
+// 过渡动画
+// ============================================================
+$transition-duration-fast: 150ms;
+$transition-duration-base: 250ms;
+$transition-duration-slow: 350ms;
+$transition-timing-ease: ease;
+$transition-timing-linear: linear;
+$transition-timing-ease-in: ease-in;
+$transition-timing-ease-out: ease-out;
+$transition-timing-ease-in-out: ease-in-out;
+
+// ============================================================
+// 布局尺寸
+// ============================================================
+
+// 顶部导航栏
+$header-height: 60px;
+$header-bg: $color-white;
+
+// 侧边栏
+$sidebar-width: 220px;
+$sidebar-collapsed-width: 64px;
+$sidebar-bg: $color-white;
+$sidebar-text-color: $color-text-regular;
+$sidebar-active-bg: $color-north-star-glow;
+$sidebar-active-color: $color-primary;
+
+// 内容区域
+$content-padding: $spacing-lg;
+
+// 底部（如果需要）
+$footer-height: 48px;
+
+// ============================================================
+// 断点（响应式）
+// ============================================================
+$breakpoint-xs: 480px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-2xl: 1400px;
+$breakpoint-3xl: 1600px;
+
+// ============================================================
+// Element Plus 主题变量覆盖
+// ============================================================
+$--colors-primary: (
+  'base': $color-primary,
+  'light-3': lighten($color-primary, 10%),
+  'light-5': lighten($color-primary, 20%),
+  'light-7': lighten($color-primary, 30%),
+  'light-8': lighten($color-primary, 40%),
+  'light-9': lighten($color-primary, 50%),
+  'dark-2': darken($color-primary, 5%),
+);
+
+// ============================================================
+// 混入会话（Mixins）
+// ============================================================
+
+// Flex 布局混会
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+// 文本截断
+@mixin text-ellipsis($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// 滚动条美化
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-gray-300;
+    border-radius: $radius-full;
+
+    &:hover {
+      background-color: $color-gray-400;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
+
+// 响应式混入
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: #{$breakpoint-xs}) {
+      @content;
+    }
+  } @else if $breakpoint == sm {
+    @media (min-width: #{$breakpoint-xs}) and (max-width: #{$breakpoint-sm}) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @media (min-width: #{$breakpoint-sm}) and (max-width: #{$breakpoint-md}) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @media (min-width: #{$breakpoint-md}) and (max-width: #{$breakpoint-lg}) {
+      @content;
+    }
+  } @else if $breakpoint == xl {
+    @media (min-width: #{$breakpoint-lg}) and (max-width: #{$breakpoint-xl}) {
+      @content;
+    }
+  } @else if $breakpoint == xxl {
+    @media (min-width: #{$breakpoint-xl}) {
+      @content;
+    }
+  }
+}

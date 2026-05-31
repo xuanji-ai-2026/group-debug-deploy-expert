@@ -1,0 +1,419 @@
+# ==============================================
+# 北极星AI - 极简单体应用统一配置
+# 整合16个微服务为单一Spring Boot应用
+# 端口: 8080 | Context Path: / | 数据库: beijixing_ai (统一)
+# 最后更新: 2026-05-20 (极简单体版 v1.0)
+# 设计原则: 零重构、最小改动、最大化收益
+# ==============================================
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+    connection-timeout: 10000
+    max-connections: 1000
+    compression:
+      enabled: true
+      mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+
+spring:
+  application:
+    name: beijixing-ai-app
+
+  # ====== 允许Bean定义覆盖 (微服务合并必需) ======
+  main:
+    allow-bean-definition-overriding: true
+
+  # ====== MariaDB统一数据库配置 ======
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:beijixing_ai}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD}
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 50
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      pool-name: beijixing-hikari-pool
+      leak-detection-threshold: 60000
+
+  # ====== Redis统一配置 ======
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: Redis@2026Secure!
+      database: 0
+      timeout: 10000ms
+      lettuce:
+        pool:
+          max-active: 50
+          max-idle: 20
+          min-idle: 10
+          max-wait: 5000ms
+        shutdown-timeout: 200ms
+
+  # ====== Jackson JSON配置 (正确位置) ======
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+
+  # ====== 文件上传配置 (取各服务最大值) ======
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+
+  # ====== Spring Boot核心配置 ======
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+
+  # ====== 禁用Spring Cloud (单体架构不需要) ======
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    bootstrap:
+      enabled: false
+    nacos:
+      config:
+        import-check:
+          enabled: false
+      discovery:
+        enabled: false
+
+  # ====== 邮件服务配置 (bx-user + bx-monitor共用) ======
+  mail:
+    host: ${SMTP_HOST:smtp.qq.com}
+    port: ${SMTP_PORT:465}
+    username: ${SMTP_USERNAME:admin@beijixing.com}
+    password: ${SMTP_PASSWORD:Smtp@2026Secure!}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+    default-encoding: UTF-8
+
+  # ====== RabbitMQ配置 (可选，按需启用) ======
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    virtual-host: /
+
+# ====== MyBatis-Plus统一配置 (扫描所有模块Mapper) ======
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.beijixing.*.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# ====== JWT认证配置 (统一) ======
+jwt:
+  secret: ${JWT_SECRET:BeijixingAiJwtSecretKey2024!@#$}
+  expiration: 86400000
+  refresh-expiration: 604800000
+  issuer: beijixing-ai-monolith-prod
+  token-header: Authorization
+  token-prefix: Bearer
+
+# ====== AI模型配置 (bx-ai + bx-content共用) ======
+ai:
+  service:
+    url: ${AI_SERVICE_URL:http://localhost:8080}
+    api-key: ${AI_SERVICE_API_KEY:bx-ai-local-dev-key}
+  provider:
+    type: ${AI_PROVIDER_TYPE:volcano}
+  volcengine:
+    api-key: ${VOLCENGINE_API_KEY}
+    base-url: ${VOLCENGINE_BASE_URL:https://ark.cn-beijing.volces.com/api/v3}
+  deepseek:
+    api-key: ${DEEPSEEK_API_KEY}
+    base-url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com/v1}
+
+# ====== 腾讯云短信服务配置 (bx-user) ======
+tencent:
+  secretId: ${TENCENT_SECRET_ID:}
+  secretKey: ${TENCENT_SECRET_KEY:}
+  sms:
+    sdkAppId: "1401091734"
+    signName: "云南坤灿科技"
+    templateId: "2641916"
+
+# ====== 支付配置 (bx-billing) ======
+payment:
+  alipay:
+    enabled: false
+    app-id: ""
+    private-key: ""
+    public-key: ""
+    notify-url: http://localhost:8080/api/payment/alipay/notify
+  wechat:
+    enabled: false
+    app-id: ""
+    mch-id: ""
+    api-key: ""
+    notify-url: http://localhost:8080/api/payment/wechat/notify
+
+# ====== OAuth平台配置 (bx-social) ======
+oauth:
+  douyin:
+    app-key: ""
+    app-secret: ""
+    authorize-url: https://open.douyin.com/oauth/authorize
+    token-url: https://open.douyin.com/oauth/access_token
+    user-info-url: https://open.douyin.com/oauth/userinfo
+  xiaohongshu:
+    app-key: ""
+    app-secret: ""
+    authorize-url: https://developers.xiaohongshu.com/oauth2/authorize
+    token-url: https://developers.xiaohongshu.com/api/messages/oauth2/access_token
+    user-info-url: https://developers.xiaohongshu.com/api/messages/userinfo
+  weixin:
+    app-id: ""
+    app-secret: ""
+    authorize-url: https://open.weixin.qq.com/connect/oauth2/authorize
+    token-url: https://api.weixin.qq.com/sns/oauth2/access_token
+    user-info-url: https://api.weixin.qq.com/sns/userinfo
+
+# ====== 多平台发布API配置 (bx-content, 基于开源SDK集成) ======
+# 参考项目：
+# - 微信公众号: WxJava SDK (29.9k⭐) - https://github.com/Wechat-Group/WxJava
+# - 微博: 官方开放平台API - https://open.weibo.com/
+# - 抖音: dy-java SDK (Dromara社区) + 开放平台API - https://open.douyin.com/
+# - 小红书: Playwright自动化方案 (参考MediaCrawler 27.7k⭐)
+# - B站: B站开放平台API - https://open.bilibili.com/
+wechat:
+  api:
+    base-url: https://api.weixin.qq.com
+  access-token: ${WECHAT_ACCESS_TOKEN:}
+  app-id: ${WECHAT_APP_ID:}
+  app-secret: ${WECHAT_APP_SECRET:}
+
+weibo:
+  api:
+    base-url: https://api.weibo.com
+  access-token: ${WEIBO_ACCESS_TOKEN:}
+  app-key: ${WEIBO_APP_KEY:}
+  app-secret: ${WEIBO_APP_SECRET:}
+
+douyin:
+  api:
+    base-url: https://open.douyin-oauth.douyinsso.com
+  access-token: ${DOUYIN_ACCESS_TOKEN:}
+  app-key: ${DOUYIN_APP_KEY:}
+  app-secret: ${DOUYIN_APP_SECRET:}
+
+xiaohongshu:
+  api:
+    base-url: https://open.xiaohongsho.com
+  access-token: ${XIAOHONGSHU_ACCESS_TOKEN:}
+  app-key: ${XIAOHONGSHU_APP_KEY:}
+  app-secret: ${XIAOHONGSHU_APP_SECRET:}
+
+bilibili:
+  api:
+    base-url: https://api.bilibili.com
+  access-token: ${BILIBILI_ACCESS_TOKEN:}
+  app-key: ${BILIBILI_APP_KEY:}
+
+# ====== WebSocket配置 (bx-message) ======
+websocket:
+  enabled: true
+  path: /ws/message
+  allowed-origins: "*"
+
+# ====== XXL-Job配置 (bx-schedule, 可选) ======
+xxl:
+  job:
+    admin:
+      addresses: http://localhost:8080/xxl-job-admin
+    executor:
+      appname: beijixing-executor
+      port: 9999
+      logpath: /opt/beijixing-ai/logs/xxl-job/jobhandler
+      logretentiondays: 30
+    access-token: beijixing-schedule-token
+    i18n: zh_CN
+
+# ====== 调度服务配置 (bx-schedule) ======
+schedule:
+  task-timeout: 300
+  retry-times: 3
+  retry-interval: 60
+  enable-distributed-lock: true
+  health-check-cron: "0/30 * * * * ?"
+  backup-cron: "0 0 2 * * ?"
+  ai-billing-cron: "0 0 0 * * ?"
+
+# ====== 风控规则配置 (bx-risk) ======
+risk:
+  rules:
+    login-rate-limit:
+      enabled: true
+      max-attempts: 5
+      window-minutes: 15
+    ip-blacklist:
+      enabled: true
+      check-interval: 300
+    sensitive-operation:
+      enabled: true
+      operations:
+        - change_password
+        - change_phone
+        - withdraw
+
+# ====== 监控配置 (bx-monitor) ======
+monitor:
+  collect:
+    system-interval: 30
+    app-interval: 15
+    business-interval: 60
+    database-interval: 30
+    cache-interval: 30
+  alert:
+    cooldown-minutes: 10
+    dingtalk-webhook: ""
+    wecom-webhook: ""
+    email-receivers: ""
+  redis:
+    metrics-prefix: "bx:monitor:metrics:"
+    metrics-ttl: 300
+
+# ====== 文件存储路径 (bx-system) ======
+file:
+  upload:
+    path: /opt/beijixing-ai/uploads/
+    allowed-extensions: jpg,jpeg,png,gif,pdf,doc,docx,xls,xlsx,zip,rar
+    max-size: 104857600
+
+# ====== 定时任务线程池 (bx-system) ======
+spring.task.scheduling:
+  pool:
+    size: 10
+  shutdown:
+    await-termination: true
+    await-termination-seconds: 60
+
+# ====== 日志配置 (统一输出到控制台+文件) ======
+logging:
+  level:
+    root: INFO
+    com.beijixing: DEBUG
+    com.baomidou.mybatisplus: WARN
+    com.zaxxer.hikari: WARN
+    org.springframework.web: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+# ====== Actuator监控端点 (生产环境) ======
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+      probes:
+        enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# ====== Swagger/Knife4j - 生产环境关闭 ======
+springdoc:
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: false
+
+# ====== 合规性配置 (bx-social, Phase 1合规基线) ======
+# 设计理念: 零封号风险、平台规则引擎、敏感词过滤、频率限制
+# 更新时间: 2026-05-20
+compliance:
+  # 敏感词过滤服务配置
+  sensitive-word:
+    enabled: true
+    cloud-api:
+      enabled: false  # TODO: 启用前需申请句易网API Key (https://www.ju1.cn/)
+      api-key: ""
+      api-url: https://api.ju1.cn/v2/text/check
+    replacement-char: "*"
+    cache-ttl: 3600  # 检测结果缓存时间(秒)
+  
+  # 平台规则引擎配置（2026年最新版）
+  platforms:
+    DOUYIN:
+      max-daily-total: 50              # 全局日私信限额
+      max-daily-messages-per-user: 3   # 单用户日私信限额
+      max-messages-per-conversation: 6 # 单会话消息数(24h窗口)
+      min-interval-seconds: 60         # 最小发送间隔(秒)
+      allowed-time-window: "09:00-21:00"  # 允许发送的时间窗口
+      required-scopes: ["im.chat.create"]   # 所需OAuth权限scope
+      allowed-account-types: ["enterprise", "staff"]  # 允许的账号类型
+      
+    XIAOHONGSHU:
+      max-daily-total: 20              # 全局日私信限额(小红书更严格)
+      max-daily-messages-per-user: 5   # 单用户日私信限额
+      min-interval-seconds: 120        # 最小发送间隔(秒，比抖音更严格)
+      allowed-time-window: "09:00-21:00"
+      required-scopes: ["im.message.send"]
+      allowed-account-types: ["enterprise", "professional"]
+      
+    KUAISHOU:
+      max-daily-total: 30
+      max-daily-messages-per-user: 3
+      min-interval-seconds: 90
+      allowed-time-window: "09:00-21:00"
+      required-scopes: ["im.message.send"]
+      allowed-account-types: ["enterprise"]
+      
+    WECHAT:
+      max-daily-total: 100             # 微信限制较宽松
+      max-daily-messages-per-user: 10
+      min-interval-seconds: 30
+      allowed-time-window: "08:00-22:00"
+      required-scopes: ["message.send"]
+      allowed-account-types: ["service", "subscription"]
+
+  # Token加密存储配置
+  token-security:
+    encryption-enabled: true           # 是否启用AES-256加密
+    encryption-algorithm: AES/GCM/NoPadding
+    key-rotation-days: 90              # 密钥轮换周期(天)
+
+  # 合规检查开关
+  pre-send-check:
+    enabled: true                      # 发送前强制合规检查
+    sensitive-word-check: true         # 敏感词检测
+    rate-limit-check: true             # 频率限制检查
+    time-window-check: true            # 时间窗口检查
+    content-similarity-check: true     # 内容相似度检测(防重复文案)
+    similarity-threshold: 0.8          # 相似度阈值(超过此值触发警告)

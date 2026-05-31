@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <item
+        android:id="@+id/action_create_acquire"
+        android:title="创建获客任务"
+        android:icon="@drawable/ic_add"
+        app:showAsAction="never" />
+    
+    <item
+        android:id="@+id/action_create_intercept"
+        android:title="创建截客任务"
+        android:icon="@drawable/ic_intercept"
+        app:showAsAction="never" />
+    
+    <item
+        android:id="@+id/action_refresh"
+        android:title="刷新"
+        android:icon="@drawable/ic_refresh"
+        app:showAsAction="ifRoom" />
+</menu>

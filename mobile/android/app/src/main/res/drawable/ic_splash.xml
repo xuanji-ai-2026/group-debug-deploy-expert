@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 北极星图标 - 星形设计 -->
+    <group android:translateX="27" android:translateY="27">
+        <!-- 星星主体 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M27,2 L32.5,18.5 L50,20 L37,31 L41,48 L27,39 L13,48 L17,31 L4,20 L21.5,18.5 Z" />
+        <!-- 北极星光线 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:fillAlpha="0.6"
+            android:pathData="M27,0 L27,8 M27,46 L27,54 M0,25 L8,25 M46,25 L54,25" />
+    </group>
+</vector>

@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    北极星AI商机获客系统 - 登录页面布局 v2.1
+    修复要点：
+    1. 微信登录整合到主卡片内（解决视觉分离问题）
+    2. 紧凑间距设计（解决需要滚动问题）
+    3. 固定高度分配（防止内容溢出遮盖Logo）
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page"
+    android:orientation="vertical">
+
+    <!-- 顶部背景区域 -->
+    <FrameLayout
+        android:id="@+id/topContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="42"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <View
+            android:id="@+id/topBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_gradient_primary" />
+
+        <View
+            android:id="@+id/decorCircle1"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="-30dp"
+            android:alpha="0.15"
+            android:background="@drawable/bg_circle_white" />
+
+        <View
+            android:id="@+id/decorCircle2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="-24dp"
+            android:layout_marginBottom="-24dp"
+            android:alpha="0.12"
+            android:background="@drawable/bg_circle_white" />
+
+        <!-- Logo区域（居中） -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_splash" />
+
+            <TextView
+                android:id="@+id/tvAppName"
+                style="@style/LoginTextAppearance.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/app_name_full" />
+
+            <TextView
+                android:id="@+id/tvSubtitle"
+                style="@style/LoginTextAppearance.Subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/login_subtitle" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- 登录卡片（包含所有登录元素和微信登录） -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardLogin"
+        style="@style/LoginCardStyle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="58"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="-28dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="16dp">
+
+                <!-- TAB选择器 -->
+                <LinearLayout
+                    android:id="@+id/tabContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_input_round"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <TextView
+                        android:id="@+id/tabSms"
+                        style="@style/LoginTabStyle.Compact"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="验证码"
+                        android:onClick="onTabSmsClick" />
+
+                    <TextView
+                        android:id="@+id/tabPassword"
+                        style="@style/LoginTabStyle.Compact"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="密码"
+                        android:onClick="onTabPasswordClick" />
+
+                    <TextView
+                        android:id="@+id/tabEmail"
+                        style="@style/LoginTabStyle.Compact"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="邮箱"
+                        android:onClick="onTabEmailClick" />
+                </LinearLayout>
+
+                <!-- 手机号输入 -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPhone"
+                    style="@style/LoginInputStyle.Default"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:hint="手机号"
+                    app:prefixText="+86 "
+                    app:prefixTextColor="@color/text_secondary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:maxLength="11"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- 邮箱输入（默认隐藏） -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilEmail"
+                    style="@style/LoginInputStyle.Default"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="邮箱地址"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- 验证码输入 + 发送按钮 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="12dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilCode"
+                        style="@style/LoginInputStyle.Default"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/login_code_hint"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="6">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLength="6"
+                            android:singleLine="true" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSendCode"
+                        style="@style/LoginButtonStyle.Secondary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="12dp"
+                        android:minWidth="100dp"
+                        android:text="@string/login_code_send"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <!-- 密码输入（默认隐藏） -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
+                    style="@style/LoginInputStyle.Default"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="@string/login_password_hint"
+                    android:visibility="gone"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/text_tertiary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:maxLength="20"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- 新密码设置（默认隐藏） -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNewPassword"
+                    style="@style/LoginInputStyle.Default"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="设置密码（首次登录需设置）"
+                    android:visibility="gone"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/text_tertiary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNewPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:maxLength="20"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- 忘记密码链接 -->
+                <TextView
+                    android:id="@+id/tvForgetPassword"
+                    style="@style/LoginTextAppearance.Body.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="8dp"
+                    android:paddingVertical="4dp"
+                    android:text="@string/login_forget_password"
+                    android:textColor="@color/brand_primary"
+                    android:visibility="gone" />
+
+                <!-- 登录按钮 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLogin"
+                    style="@style/LoginButtonStyle.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/login_btn"
+                    android:textSize="16sp" />
+
+                <!-- 协议勾选 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/cbAgreement"
+                        style="@style/LoginCheckBoxStyle.Agreement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
+
+                    <TextView
+                        android:id="@+id/tvAgreement"
+                        style="@style/LoginTextAppearance.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="登录即表示同意《用户协议》和《隐私政策》"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="onAgreementClick" />
+                </LinearLayout>
+
+                <!-- 第三方登录分割线 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/bg_divider" />
+
+                    <TextView
+                        style="@style/LoginTextAppearance.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:text="其他登录方式"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/bg_divider" />
+                </LinearLayout>
+
+                <!-- 微信登录按钮（整合到卡片内） -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnWechat"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/login_wechat_hint"
+                    android:textSize="15sp"
+                    app:cornerRadius="22dp"
+                    app:icon="@drawable/ic_wechat"
+                    app:iconGravity="textStart"
+                    app:iconPadding="8dp"
+                    app:iconTint="#07C160"
+                    app:strokeColor="@color/bg_divider" />
+
+                <!-- 版本信息 -->
+                <LinearLayout
+                    android:id="@+id/versionContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvVersion"
+                        style="@style/LoginTextAppearance.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tvUpdateHint"
+                        style="@style/LoginTextAppearance.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="🎉 v1.0.25：登录页优化 · 微信整合 · TAB紧凑化"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp"
+                        android:visibility="visible" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- 加载遮罩层 -->
+    <FrameLayout
+        android:id="@+id/loadingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_overlay"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorColor="@color/brand_primary"
+            app:trackThickness="3dp" />
+    </FrameLayout>
+</LinearLayout>

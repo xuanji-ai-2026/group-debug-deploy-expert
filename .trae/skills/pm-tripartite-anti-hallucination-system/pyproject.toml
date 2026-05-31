@@ -1,0 +1,163 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pm-tripartite-anti-hallucination-system"
+version = "1.0.0"
+description = "项目经理驱动的三权分立防幻觉系统 - 企业级AI协作治理框架"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+    {name = "Project Manager Driven System", email = "pm-system@example.com"},
+]
+maintainers = [
+    {name = "PM System Team", email = "team@example.com"},
+]
+keywords = [
+    "ai-agent",
+    "anti-hallucination",
+    "tripartite-separation",
+    "code-quality",
+    "zero-trust",
+    "circuit-breaker",
+    "developer-workflow",
+    "audit-system",
+    "acceptance-testing",
+    "role-based-access-control",
+    "file-integrity",
+    "automated-testing",
+    "root-cause-analysis",
+    "micro-surgery",
+    "self-driving-engine",
+    "log-management",
+    "file-locking",
+    "dispatcher-pattern",
+    "openclaw",
+    "hermes",
+    "claude-code",
+    "cursor",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Security",
+]
+dependencies = [
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+    "flake8>=6.0.0",
+    "bandit>=1.7.0",
+]
+audit = [
+    "flake8>=6.0.0",
+    "bandit>=1.7.0",
+]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+web = [
+    "flask>=2.3.0",
+    "redis>=4.5.0",
+]
+all = [
+    "pm-tripartite-anti-hallucination-system[dev,audit,test,web]",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-org/pm-tripartite-anti-hallucination-system"
+Documentation = "https://github.com/your-org/pm-tripartite-anti-hallucination-system#readme"
+Repository = "https://github.com/your-org/pm-tripartite-anti-hallucination-system.git"
+Issues = "https://github.com/your-org/pm-tripartite-anti-hallucination-system/issues"
+Changelog = "https://github.com/your-org/pm-tripartite-anti-hallucination-system/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+packages = ["."]
+include-package-data = true
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+known_first_party = ["pm_tripartite"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+addopts = "-v --tb=short --strict-markers"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["."]
+branch = true
+omit = [
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/\.*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+fail_under = 80
+show_missing = true
+skip_covered = true
+
+[tool.bandit]
+exclude_dirs = [".git", "__pycache__", ".venv", "venv", "tests", "build", "dist"]
+skips = ["B101", "B601"]

@@ -1,85 +1,293 @@
-# ============================================
-# ZERO-TH LAW: Project Absolute Isolation
-# WHITE-LIST MODE: Only allow skill framework files
-# ============================================
+# ============================================================
+#  北极星AI - Git忽略规则 (.gitignore)
+#  保护敏感信息，防止密码和密钥泄露到版本控制
+#
+#  最后更新: 2026-05-20
+#  安全级别: 🔴 高 (必须严格遵守)
+# ============================================================
 
-# ✅ ALLOW: Skill core files (explicitly whitelist)
-!SKILL.md
-!LICENSE
-!skill.json
-!package.json
-!README-DEPLOY.md
+# ====== 🔒 敏感配置文件 (绝对禁止提交!) ======
+
+# 环境变量文件 (包含密码、密钥、API Key)
+.env
+.env.local
+.env.prod
+.env.*.local
+
+# 外部配置覆盖文件 (可能包含敏感信息)
+config/application-override.yml
+
+# ====== 📝 日志文件 ======
+*.log
+logs/
+*.log.*
+
+# Spring Boot日志
+log/
+
+# ====== 💾 运行时生成文件 ======
+
+# PID文件
+*.pid
+app.pid
+
+# 数据库备份 (可能包含用户数据)
+backup/
+*.sql
+*.sql.gz
+*.dump
+
+# H2数据库 (嵌入式数据库)
+*.db
+*.mv.db
+
+# ====== 🐳 Docker/容器相关 ======
+
+docker-compose.override.yml    # 本地开发覆盖配置
+.docker/                        # Docker本地配置
+
+# ====== 🛠️ IDE和编辑器 ======
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VSCode
+.vscode/
+!.vscode/settings.json         # 可选: 共享编辑器设置
+!.vscode/tasks.json
+!.vscode/launch.json
+*.code-workspace
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ====== 📦 构建产物 ======
+
+# Maven
+target/
+!target/classes/META-INF/       # 保留必要资源
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle
+build/
+.gradle/
+gradle-app.setting
+
+# Node.js (前端)
+node_modules/
+dist/
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+
+# ====== 📊 测试和覆盖率报告 ======
+
+# JUnit
+TEST-*.xml
+
+# JaCoCo
+jacoco.exec
+*.exec
+
+# 覆盖率HTML
+coverage/
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+.pytest_cache/
+nosetests.xml
+
+# ====== 🖥️ 操作系统文件 ======
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ====== 🔑 密钥和证书 ======
+
+# SSL/TLS证书
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+keystore/
+*.jks
+*.keystore
+
+# SSH密钥
+id_rsa
+id_rsa.pub
+id_dsa
+id_dsa.pub
+*.ppk
+
+# AWS/GCP/Azure凭证
+credentials.json
+.gcp/
+.aws/
+.azure/
+
+# ====== 🤖 CI/CD临时文件 ======
+
+# Jenkins
+.jenkins/
+
+# GitHub Actions
+.github/workflows/*.yml.tmp
+
+# GitLab CI
+.gitlab-ci.yml.local
+
+# ====== 📱 移动端构建产物 ======
+
+# Android
+apk/
+*.apk
+*.aab
+*.ap_
+local.properties
+
+# iOS
+DerivedData/
+build/
+*.ipa
+*.dSYM.zip
+*.xcworkspace/xcuserdata/
+
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+/pub/
+/build/
+
+# ====== 🎨 其他常见忽略项 ======
+
+# 临时文件
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+\#*\#
+.#*
+*.bak
+*.orig
+
+# 压缩包归档
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# 数据库文件
+*.sqlite
+*.db
+*.mdb
+*.accdb
+
+# 大型媒体文件 (建议用Git LFS)
+*.mp4
+*.mov
+*.avi
+*.mp3
+*.wav
+*.psd
+*.ai
+
+# ====== ✅ 特殊例外 (需要跟踪的文件) ======
+
+# 示例配置文件 (可以提交，供参考)
+!.env.example
+!.env.dev
+!.env.test
+!.env.prod.example
+!config/application-override.yml.example
+
+# README文档
 !README.md
-!USER_GUIDE.md
-!USE_CASES.md
-!COMPETITIVE_ADVANTAGE.md
-!WEB_PUBLISH_GUIDE.md
-!MULTI_PLATFORM_PUBLISH_GUIDE.md
-!MARKETPLACE_SUBMISSION_GUIDE.md
-!install.sh
-!install.ps1
-!VERSION
-!checksums.sha256
+!DEPLOY-GUIDE.md
+!CHANGELOG.md
+
+# 版本控制元数据
+!.gitattributes
 !.gitignore
 
-# ✅ Allow publish directory (marketplace packages)
-!publish/
-!publish/**
-
-# ✅ Allow .trae directory (skill definitions)
-!.trae/
-!.trae/**
-
-# ❌ BLOCK EVERYTHING ELSE (nuclear option)
-/*
-!/*/
-
-# ❌ Block all project directories
-/backend/
-/frontend/
-/mobile/
-/deploy/
-/tools/
-/docs/
-/scripts/
-/nacos-config/
-
-# ❌ Block all project files by pattern
-*.py
-*.java
-*.xml
-*.zip
-*.pem
-
-# ✅ Exception: Allow install scripts (after block rule)
-!install.sh
-!install.ps1
-
-# ✅ Exception: Allow auto-publish scripts
-!auto-publish.sh
-!auto-publish.ps1
-
-# ❌ Block all other .sh files
-*.sh
-
-# ✅ Exception: Allow specific .md files (after block rule)
-!README.md
-!USER_GUIDE.md
-!USE_CASES.md
-!COMPETITIVE_ADVANTAGE.md
-!WEB_PUBLISH_GUIDE.md
-!MULTI_PLATFORM_PUBLISH_GUIDE.md
-!MARKETPLACE_SUBMISSION_GUIDE.md
-!README-DEPLOY.md
-
-# ❌ Block all other .md files
-*.md
-
-# ❌ Block binary and build artifacts
-*.jar
-*.war
-*.class
-*.exe
-*.dll
-*.so
-*.dylib
+# ============================================================
+#  安全提醒:
+#
+#  ❌ 绝对禁止提交:
+#     - 包含真实密码的 .env 文件
+#     - API密钥、Token、Secret Key
+#     - 私钥、证书文件
+#     - 用户数据备份
+#     - 生产环境配置
+#
+#  ✅ 可以提交:
+#     - *.example 模板文件 (不含真实密码)
+#     - 文档文件 (*.md)
+#     - 代码文件 (*.java, *.js, *.vue等)
+#     - 配置模板 (application.yml, pom.xml等)
+#
+#  🔍 定期检查命令:
+#     git status --ignored           # 查看被忽略的文件
+#     git ls-files --others --exclude-standard  # 查看未跟踪文件
+#
+#  ⚠️  如果不小心提交了敏感信息:
+#     1. 立即从远程仓库删除: git push --force
+#     2. 更改所有泄露的密码和密钥
+#     3. 使用 BFG Repo Cleaner 清除历史记录
+#     4. 通知安全团队评估影响范围
+#
+# ============================================================

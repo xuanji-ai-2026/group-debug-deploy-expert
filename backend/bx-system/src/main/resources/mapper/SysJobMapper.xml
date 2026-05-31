@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.system.mapper.SysJobMapper">
+
+    <resultMap id="BaseResultMap" type="com.beijixing.system.entity.SysJob">
+        <id column="id" property="id"/>
+        <result column="job_name" property="jobName"/>
+        <result column="job_group" property="jobGroup"/>
+        <result column="bean_name" property="beanName"/>
+        <result column="cron_expression" property="cronExpression"/>
+        <result column="description" property="description"/>
+        <result column="exec_params" property="execParams"/>
+        <result column="status" property="status"/>
+        <result column="concurrent" property="concurrent"/>
+        <result column="misfire_policy" property="misfirePolicy"/>
+        <result column="last_exec_time" property="lastExecTime"/>
+        <result column="next_exec_time" property="nextExecTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <select id="selectRunningJobs" resultMap="BaseResultMap">
+        SELECT * FROM sys_job
+        WHERE status = 1 AND deleted = 0
+        ORDER BY id ASC
+    </select>
+
+    <select id="selectPausedJobs" resultMap="BaseResultMap">
+        SELECT * FROM sys_job
+        WHERE status = 0 AND deleted = 0
+        ORDER BY id ASC
+    </select>
+
+    <select id="selectByJobGroup" resultMap="BaseResultMap">
+        SELECT * FROM sys_job
+        WHERE job_group = #{jobGroup} AND deleted = 0
+        ORDER BY id ASC
+    </select>
+
+</mapper>

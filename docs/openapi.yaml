@@ -1,0 +1,1563 @@
+openapi: 3.0.3
+info:
+  title: 北极星AI商机获客系统 API 文档
+  description: |
+    ## 系统概述
+    北极星AI商机获客系统是一套完整的智能客户获取和管理平台，提供以下核心功能：
+    
+    - **用户认证**：手机号登录、注册、Token刷新
+    - **商机管理**：潜在客户的获取、跟进、转化全流程管理
+    - **任务管理**：AI驱动的获客任务和截客任务自动化执行
+    - **账号管理**：多平台社交媒体账号统一管理
+    - **消息通知**：实时消息推送和历史记录查询
+    - **充值支付**：套餐购买、订单管理和余额查询
+    - **AI内容生成**：智能化营销内容创作和发布
+    - **数据统计**：多维度数据分析和可视化报表
+    
+    ## 认证方式
+    所有需要认证的接口需要在Header中携带JWT Token：
+    ```
+    Authorization: Bearer <your_token>
+    ```
+    
+    ## 基础URL
+    - 生产环境: `https://api.beijixing.com`
+    - 测试环境: `https://test-api.beijixing.com`
+    
+    ## 版本信息
+    - 当前版本: v1.0.0
+    - 更新日期: 2026-05-05
+    
+  version: 1.0.0
+  contact:
+    name: 北极星技术支持
+    email: support@beijixing.com
+    url: https://www.beijixing.com
+
+servers:
+  - url: https://api.beijixing.com/v1
+    description: 生产环境
+  - url: https://test-api.beijixing.com/v1
+    description: 测试环境
+
+tags:
+  - name: Auth
+    description: 用户认证模块
+  - name: User
+    description: 用户信息管理
+  - name: Lead
+    description: 商机（线索）管理
+  - name: Task
+    description: 任务管理
+  - name: Account
+    description: 社交媒体账号管理
+  - name: Message
+    description: 消息通知
+  - name: Recharge
+    description: 充值支付
+  - name: Content
+    description: AI内容生成
+  - name: Statistics
+    description: 数据统计
+
+paths:
+  # ============================================
+  # 用户认证模块 (Auth)
+  # ============================================
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: 用户登录
+      description: 使用手机号和密码进行用户登录
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            examples:
+              normal_login:
+                summary: 正常登录
+                value:
+                  phone: "13800138000"
+                  password: "123456"
+                  loginType: "password"
+      responses:
+        '200':
+          description: 登录成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_LoginResponse'
+              example:
+                code: 200
+                msg: "登录成功"
+                data:
+                  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  refreshToken: "refresh_token_string"
+                  expiresIn: 86400
+                  user:
+                    id: 1
+                    nickname: "测试用户"
+                    phone: "13800138000"
+                    avatar: null
+        '400':
+          description: 参数错误
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              example:
+                code: 400
+                msg: "手机号或密码不能为空"
+                data: null
+        '401':
+          description: 认证失败
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              example:
+                code: 401
+                msg: "账号或密码错误"
+                data: null
+        '403':
+          description: 账号被禁用
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              example:
+                code: 403
+                msg: "账号已被禁用，请联系客服"
+                data: null
+
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: 用户注册
+      description: 注册新用户账号
+      operationId: register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '200':
+          description: 注册成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_User'
+
+  /auth/send-code:
+    post:
+      tags:
+        - Auth
+      summary: 发送短信验证码
+      description: 向指定手机号发送验证码
+      operationId: sendSmsCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - phone
+              properties:
+                phone:
+                  type: string
+                  pattern: '^1[3-9]\d{9}$'
+                  example: "13800138000"
+      responses:
+        '200':
+          description: 验证码发送成功
+
+  /auth/verify-code:
+    post:
+      tags:
+        - Auth
+      summary: 验证短信验证码
+      operationId: verifyCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - phone
+                - code
+              properties:
+                phone:
+                  type: string
+                code:
+                  type: string
+                  maxLength: 6
+      responses:
+        '200':
+          description: 验证成功
+
+  /auth/refresh-token:
+    post:
+      tags:
+        - Auth
+      summary: 刷新访问令牌
+      description: 使用刷新令牌获取新的访问令牌
+      operationId: refreshToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: 刷新成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_LoginResponse'
+
+  /auth/logout:
+    post:
+      tags:
+        - Auth
+      summary: 用户登出
+      description: 注销当前用户的登录状态
+      operationId: logout
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 登出成功
+
+  # ============================================
+  # 用户信息模块 (User)
+  # ============================================
+  /user/info:
+    get:
+      tags:
+        - User
+      summary: 获取当前用户信息
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_User'
+
+  /user/profile:
+    put:
+      tags:
+        - User
+      summary: 更新用户资料
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProfileRequest'
+      responses:
+        '200':
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_User'
+
+  /user/password:
+    put:
+      tags:
+        - User
+      summary: 修改密码
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+      responses:
+        '200':
+          description: 密码修改成功
+
+  /user/balance:
+    get:
+      tags:
+        - User
+      summary: 查询用户余额
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 查询成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_UserBalance'
+
+  # ============================================
+  # 商机管理模块 (Lead)
+  # ============================================
+  /lead/list:
+    get:
+      tags:
+        - Lead
+      summary: 获取商机列表
+      description: 分页获取商机列表，支持关键词搜索和状态筛选
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          description: 页码，从1开始
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: size
+          in: query
+          description: 每页数量
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: keyword
+          in: query
+          description: 搜索关键词（公司名/联系人/手机号）
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: 商机状态
+          required: false
+          schema:
+            type: string
+            enum: [NEW, CONTACTED, NEGOTIATING, CONVERTED, LOST]
+        - name: level
+          in: query
+          description: 客户等级
+          required: false
+          schema:
+            type: string
+            enum: [A, B, C, D]
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_PageResult_Lead'
+
+  /lead/{id}:
+    get:
+      tags:
+        - Lead
+      summary: 获取商机详情
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_Lead'
+
+    put:
+      tags:
+        - Lead
+      summary: 更新商机信息
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddLeadRequest'
+      responses:
+        '200':
+          description: 更新成功
+
+    delete:
+      tags:
+        - Lead
+      summary: 删除商机
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 删除成功
+
+  /lead/add:
+    post:
+      tags:
+        - Lead
+      summary: 新增商机
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddLeadRequest'
+      responses:
+        '201':
+          description: 创建成功
+
+  /lead/{id}/follow:
+    post:
+      tags:
+        - Lead
+      summary: 添加跟进记录
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FollowRecordRequest'
+      responses:
+        '200':
+          description: 添加成功
+
+  /lead/{id}/follows:
+    get:
+      tags:
+        - Lead
+      summary: 获取跟进记录列表
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功
+
+  /lead/stats:
+    get:
+      tags:
+        - Lead
+      summary: 获取商机统计数据
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_LeadStats'
+
+  # ============================================
+  # 任务管理模块 (Task)
+  # ============================================
+  /task/list:
+    get:
+      tags:
+        - Task
+      summary: 获取任务列表
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [ACQUIRE, INTERCEPT]
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [PENDING, RUNNING, PAUSED, COMPLETED, STOPPED, FAILED]
+      responses:
+        '200':
+          description: 成功
+
+  /task/create-acquire:
+    post:
+      tags:
+        - Task
+      summary: 创建获客任务
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAcquireTaskRequest'
+      responses:
+        '200':
+          description: 创建成功
+
+  /task/create-intercept:
+    post:
+      tags:
+        - Task
+      summary: 创建截客任务
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInterceptTaskRequest'
+      responses:
+        '200':
+          description: 创建成功
+
+  /task/{id}/start:
+    post:
+      tags:
+        - Task
+      summary: 启动任务
+      security:
+        - bearerAuth: []
+
+  /task/{id}/pause:
+    post:
+      tags:
+        - Task
+      summary: 暂停任务
+      security:
+        - bearerAuth: []
+
+  /task/{id}/resume:
+    post:
+      tags:
+        - Task
+      summary: 恢复任务
+      security:
+        - bearerAuth: []
+
+  /task/{id}/stop:
+    post:
+      tags:
+        - Task
+      summary: 停止任务
+      security:
+        - bearerAuth: []
+
+  # ============================================
+  # 账号管理模块 (Account)
+  # ============================================
+  /account/list:
+    get:
+      tags:
+        - Account
+      summary: 获取社交媒体账号列表
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: platform
+          in: query
+          schema:
+            type: string
+            enum: [WECHAT, DOUYIN, XIAOHONGSHU, WEIBO, LINKEDIN]
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [ACTIVE, INACTIVE, BANNED]
+      responses:
+        '200':
+          description: 成功
+
+  /account/add:
+    post:
+      tags:
+        - Account
+      summary: 添加社交媒体账号
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddAccountRequest'
+      responses:
+        '200':
+          description: 添加成功
+
+  /account/{id}/check-health:
+    post:
+      tags:
+        - Account
+      summary: 检查账号健康状态
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 检测完成
+
+  # ============================================
+  # 消息通知模块 (Message)
+  # ============================================
+  /message/list:
+    get:
+      tags:
+        - Message
+      summary: 获取消息列表
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [SYSTEM, LEAD, TASK, BILLING, SECURITY]
+        - name: isRead
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: 成功
+
+  /message/unread-count:
+    get:
+      tags:
+        - Message
+      summary: 获取未读消息数量
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 成功
+
+  # ============================================
+  # 充值支付模块 (Recharge)
+  # ============================================
+  /recharge/packages:
+    get:
+      tags:
+        - Recharge
+      summary: 获取充值套餐列表
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 成功
+
+  /recharge/create-order:
+    post:
+      tags:
+        - Recharge
+      summary: 创建充值订单
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '200':
+          description: 订单创建成功
+
+  /recharge/balance:
+    get:
+      tags:
+        - Recharge
+      summary: 查询账户余额
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 查询成功
+
+  # ============================================
+  # AI内容生成模块 (Content)
+  # ============================================
+  /content/generate:
+    post:
+      tags:
+        - Content
+      summary: AI生成营销内容
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateContentRequest'
+      responses:
+        '200':
+          description: 内容生成成功
+
+  /content/templates:
+    get:
+      tags:
+        - Content
+      summary: 获取内容模板列表
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+
+  # ============================================
+  # 数据统计模块 (Statistics)
+  # ============================================
+  /stats/dashboard:
+    get:
+      tags:
+        - Statistics
+      summary: 获取仪表盘数据
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 成功
+
+  /stats/lead-trend:
+    get:
+      tags:
+        - Statistics
+      summary: 获取商机趋势数据
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: days
+          in: query
+          schema:
+            type: integer
+            default: 30
+      responses:
+        '200':
+          description: 成功
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Authorization header using the Bearer scheme. Example: "Bearer {token}"
+
+  schemas:
+    # 通用响应结构
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 状态码，200表示成功
+          example: 200
+        msg:
+          type: string
+          description: 提示消息
+          example: "操作成功"
+        data:
+          description: 返回数据
+
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 400
+        msg:
+          type: string
+          example: "参数错误"
+        data:
+          nullable: true
+
+    # 认证相关
+    LoginRequest:
+      type: object
+      required:
+        - phone
+        - password
+      properties:
+        phone:
+          type: string
+          pattern: '^1[3-9]\d{9}$'
+          description: 手机号码
+          example: "13800138000"
+        password:
+          type: string
+          minLength: 6
+          maxLength: 32
+          description: 密码
+          example: "123456"
+        loginType:
+          type: string
+          enum: [password, sms_code, wechat]
+          default: password
+          description: 登录方式
+
+    RegisterRequest:
+      type: object
+      required:
+        - phone
+        - password
+      properties:
+        phone:
+          type: string
+          pattern: '^1[3-9]\d{9}$'
+        password:
+          type: string
+          minLength: 6
+          maxLength: 32
+        smsCode:
+          type: string
+          description: 短信验证码（可选）
+
+    RefreshTokenRequest:
+      type: object
+      required:
+        - refreshToken
+      properties:
+        refreshToken:
+          type: string
+          description: 刷新令牌
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: JWT访问令牌
+        refreshToken:
+          type: string
+          description: 刷新令牌
+        expiresIn:
+          type: integer
+          description: 令牌过期时间（秒）
+          example: 86400
+        user:
+          $ref: '#/components/schemas/User'
+
+    # 用户相关
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nickname:
+          type: string
+          example: "测试用户"
+        phone:
+          type: string
+          example: "138****8000"
+        avatar:
+          type: string
+          format: uri
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          description: 用户状态 1-正常 0-禁用
+          example: 1
+        createTime:
+          type: string
+          format: date-time
+
+    UpdateProfileRequest:
+      type: object
+      properties:
+        nickname:
+          type: string
+          maxLength: 50
+        avatar:
+          type: string
+          format: uri
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+          pattern: '^1[3-9]\d{9}$'
+
+    ChangePasswordRequest:
+      type: object
+      required:
+        - oldPassword
+        - newPassword
+      properties:
+        oldPassword:
+          type: string
+          minLength: 6
+        newPassword:
+          type: string
+          minLength: 6
+          maxLength: 32
+
+    UserBalance:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+          description: 可用余额
+          example: 9999.00
+        points:
+          type: integer
+          description: 积分
+          example: 5000
+        frozen:
+          type: number
+          format: double
+          description: 冻结金额
+          example: 100.00
+        totalRecharge:
+          type: number
+          format: double
+          description: 累计充值
+          example: 19999.00
+
+    # 商机相关
+    Lead:
+      type: object
+      properties:
+        id:
+          type: integer
+        companyName:
+          type: string
+          description: 公司名称
+          example: "北京科技有限公司"
+        contactName:
+          type: string
+          description: 联系人
+          example: "张三"
+        phone:
+          type: string
+          description: 联系电话
+        wechat:
+          type: string
+          description: 微信号
+        source:
+          type: string
+          description: 来源渠道
+          enum: [WECHAT, DOUYIN, XIAOHONGSHU, MANUAL, IMPORT]
+        status:
+          type: string
+          enum: [NEW, CONTACTED, NEGOTIATING, CONVERTED, LOST]
+        level:
+          type: string
+          enum: [A, B, C, D]
+          description: 客户等级
+        remark:
+          type: string
+          description: 备注
+        createTime:
+          type: string
+          format: date-time
+        updateTime:
+          type: string
+          format: date-time
+
+    AddLeadRequest:
+      type: object
+      required:
+        - companyName
+        - contactName
+        - phone
+      properties:
+        companyName:
+          type: string
+          maxLength: 100
+        contactName:
+          type: string
+          maxLength: 50
+        phone:
+          type: string
+          pattern: '^1[3-9]\d{9}$'
+        wechat:
+          type: string
+        source:
+          type: string
+          enum: [WECHAT, DOUYIN, XIAOHONGSHU, MANUAL, IMPORT]
+        level:
+          type: string
+          enum: [A, B, C, D]
+        remark:
+          type: string
+          maxLength: 500
+
+    FollowRecordRequest:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          minLength: 1
+          maxLength: 1000
+          description: 跟进内容
+        type:
+          type: string
+          enum: [NOTE, CALL, MEETING, EMAIL, WECHAT]
+          default: NOTE
+          description: 跟进方式
+
+    PageResult:
+      type: object
+      properties:
+        records:
+          type: array
+          description: 数据列表
+        total:
+          type: integer
+          description: 总记录数
+        page:
+          type: integer
+          description: 当前页码
+        size:
+          type: integer
+          description: 每页大小
+        isLastPage:
+          type: boolean
+          description: 是否最后一页
+
+    LeadStats:
+      type: object
+      properties:
+        totalLeads:
+          type: integer
+          description: 总商机数
+        todayNew:
+          type: integer
+          description: 今日新增
+        thisWeekNew:
+          type: integer
+          description: 本周新增
+        thisMonthNew:
+          type: integer
+          description: 本月新增
+        convertedCount:
+          type: integer
+          description: 已转化数
+        conversionRate:
+          type: number
+          format: double
+          description: 转化率
+        byStatus:
+          type: object
+          additionalProperties:
+            type: integer
+          description: 按状态统计
+        byLevel:
+          type: object
+          additionalProperties:
+            type: integer
+          description: 按等级统计
+
+    # 任务相关
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          description: 任务名称
+        type:
+          type: string
+          enum: [ACQUIRE, INTERCEPT]
+          description: 任务类型
+        status:
+          type: string
+          enum: [PENDING, RUNNING, PAUSED, COMPLETED, STOPPED, FAILED]
+        platform:
+          type: string
+          description: 目标平台
+        config:
+          type: object
+          description: 任务配置
+        createTime:
+          type: string
+          format: date-time
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+
+    CreateAcquireTaskRequest:
+      type: object
+      required:
+        - name
+        - platform
+        - keywords
+        - targetCount
+      properties:
+        name:
+          type: string
+          maxLength: 100
+          description: 任务名称
+        platform:
+          type: string
+          enum: [WECHAT, DOUYIN, XIAOHONGSHU, WEIBO]
+          description: 目标平台
+        keywords:
+          type: array
+          items:
+            type: string
+          description: 关键词列表
+          minItems: 1
+          maxItems: 50
+        targetCount:
+          type: integer
+          minimum: 1
+          maximum: 10000
+          description: 目标获取数量
+        config:
+          type: object
+          description: 高级配置选项
+          properties:
+            region:
+              type: string
+              description: 地区限制
+            industry:
+              type: string
+              description: 行业限制
+            autoFollow:
+              type: boolean
+              description: 是否自动关注
+
+    CreateInterceptTaskRequest:
+      type: object
+      required:
+        - name
+        - targetPlatform
+        - interceptRules
+      properties:
+        name:
+          type: string
+        targetPlatform:
+          type: string
+          enum: [WECHAT, DOUYIN, XIAOHONGSHU]
+        interceptRules:
+          type: array
+          items:
+            type: object
+            properties:
+              keyword:
+                type: string
+              action:
+                type: string
+                enum: [reply, like, follow, comment]
+          minItems: 1
+        autoReply:
+          type: boolean
+          default: false
+        replyTemplate:
+          type: string
+          description: 自动回复模板
+
+    TaskStats:
+      type: object
+      properties:
+        totalProcessed:
+          type: integer
+        successCount:
+          type: integer
+        failCount:
+          type: integer
+        pendingCount:
+          type: integer
+        durationSeconds:
+          type: integer
+        avgProcessTime:
+          type: number
+          format: double
+
+    # 账号相关
+    SocialAccount:
+      type: object
+      properties:
+        id:
+          type: integer
+        platform:
+          type: string
+          enum: [WECHAT, DOUYIN, XIAOHONGSHU, WEIBO, LINKEDIN]
+        accountName:
+          type: string
+          description: 账号昵称
+        accountNo:
+          type: string
+          description: 账号ID
+        avatar:
+          type: string
+          format: uri
+        status:
+          type: string
+          enum: [ACTIVE, INACTIVE, BANNED]
+        healthStatus:
+          type: string
+          enum: [HEALTHY, WARNING, ERROR, UNKNOWN]
+        lastCheckTime:
+          type: string
+          format: date-time
+
+    AddAccountRequest:
+      type: object
+      required:
+        - platform
+        - accountName
+        - accountNo
+      properties:
+        platform:
+          type: string
+          enum: [WECHAT, DOUYIN, XIAOHONGSHU, WEIBO, LINKEDIN]
+        accountName:
+          type: string
+          maxLength: 100
+        accountNo:
+          type: string
+          maxLength: 200
+
+    AccountHealthResult:
+      type: object
+      properties:
+        accountId:
+          type: integer
+        isHealthy:
+          type: boolean
+        status:
+          type: string
+          enum: [HEALTHY, WARNING, ERROR]
+        message:
+          type: string
+        lastCheckTime:
+          type: string
+          format: date-time
+
+    # 消息相关
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+        type:
+          type: string
+          enum: [SYSTEM, LEAD, TASK, BILLING, SECURITY]
+        isRead:
+          type: boolean
+        createTime:
+          type: string
+          format: date-time
+
+    # 支付相关
+    RechargePackage:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          description: 套餐名称
+        price:
+          type: number
+          format: double
+          description: 价格（元）
+        points:
+          type: integer
+          description: 赠送积分
+        bonus:
+          type: string
+          description: 额外赠送说明
+        originalPrice:
+          type: number
+          format: double
+          description: 原价
+        recommended:
+          type: boolean
+          description: 是否推荐
+
+    CreateOrderRequest:
+      type: object
+      required:
+        - packageId
+        - payMethod
+      properties:
+        packageId:
+          type: integer
+          description: 套餐ID
+        payMethod:
+          type: string
+          enum: [ALIPAY, WECHAT, BALANCE]
+          description: 支付方式
+
+    RechargeOrder:
+      type: object
+      properties:
+        orderId:
+          type: string
+        packageId:
+          type: integer
+        amount:
+          type: number
+          format: double
+        status:
+          type: string
+          enum: [PENDING, PAID, FAILED, REFUNDED]
+        payMethod:
+          type: string
+        payTime:
+          type: string
+          format: date-time
+        createTime:
+          type: string
+          format: date-time
+
+    # 内容生成相关
+    GenerateContentRequest:
+      type: object
+      required:
+        - contentType
+        - topic
+      properties:
+        contentType:
+          type: string
+          enum: [ARTICLE, POST, VIDEO_SCRIPT, AD_COPY]
+          description: 内容类型
+        topic:
+          type: string
+          maxLength: 200
+          description: 主题/关键词
+        platform:
+          type: string
+          enum: [WECHAT, DOUYIN, XIAOHONGSHU, WEIBO]
+          description: 发布平台
+        style:
+          type: string
+          enum: [PROFESSIONAL, CASUAL, HUMOROUS, FORMAL]
+          description: 文风风格
+        length:
+          type: string
+          enum: [SHORT, MEDIUM, LONG]
+          default: MEDIUM
+          description: 内容长度
+        keywords:
+          type: array
+          items:
+            type: string
+          description: 包含的关键词
+
+    GeneratedContent:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+        contentType:
+          type: string
+        platform:
+          type: string
+        wordCount:
+          type: integer
+        createTime:
+          type: string
+          format: date-time
+
+    ContentTemplate:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+        preview:
+          type: string
+          description: 模板预览
+
+    # 统计相关
+    DashboardData:
+      type: object
+      properties:
+        todayLeads:
+          type: integer
+        todayTasks:
+          type: integer
+        activeAccounts:
+          type: integer
+        unreadMessages:
+          type: integer
+        balance:
+          type: number
+          format: double
+        conversionRate:
+          type: number
+          format: double
+        recentActivities:
+          type: array
+          items:
+            type: object
+
+    TrendData:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        count:
+          type: integer
+        converted:
+          type: integer
+
+    TaskSummary:
+      type: object
+      properties:
+        totalTasks:
+          type: integer
+        runningTasks:
+          type: integer
+        completedToday:
+          type: integer
+        successRate:
+          type: number
+          format: double
+        avgDuration:
+          type: number
+          format: double
+
+    # 泛型响应类型
+    ApiResponse_User:
+      allOf:
+        - $ref: '#/components/schemas/ApiResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/User'
+
+    ApiResponse_LoginResponse:
+      allOf:
+        - $ref: '#/components/schemas/ApiResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/LoginResponse'
+
+    ApiResponse_UserBalance:
+      allOf:
+        - $ref: '#/components/schemas/ApiResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/UserBalance'
+
+    ApiResponse_PageResult_Lead:
+      allOf:
+        - $ref: '#/components/schemas/ApiResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/PageResult'
+
+    ApiResponse_Lead:
+      allOf:
+        - $ref: '#/components/schemas/ApiResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/Lead'
+
+    ApiResponse_LeadStats:
+      allOf:
+        - $ref: '#/components/schemas/ApiResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/LeadStats'

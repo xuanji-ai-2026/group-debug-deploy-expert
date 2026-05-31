@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    北极星AI商机获客系统 - 消息筛选菜单
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/filter_all"
+        android:title="全部消息" />
+
+    <item
+        android:id="@+id/filter_unread"
+        android:title="未读消息" />
+
+    <item
+        android:id="@+id/filter_read"
+        android:title="已读消息" />
+
+</menu>

@@ -1,0 +1,164 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: beijixing-metrics
+  namespace: beijixing
+  labels:
+    app.kubernetes.io/name: beijixing-metrics
+    app.kubernetes.io/part-of: beijixing-ai
+    release: prometheus
+spec:
+  namespaceSelector:
+    matchNames:
+    - beijixing
+  selector:
+    matchLabels:
+      app.kubernetes.io/part-of: beijixing-ai
+  endpoints:
+  # Gateway metrics
+  - port: metrics
+    path: /metrics
+    interval: 15s
+    scrapeTimeout: 10s
+    honorLabels: true
+  # 各个服务metrics（通过HTTP端口）
+  - port: http
+    path: /metrics
+    interval: 30s
+    scrapeTimeout: 10s
+    honorLabels: true
+---
+# PodMonitor用于直接监控Pod
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: beijixing-pods
+  namespace: beijixing
+  labels:
+    app.kubernetes.io/name: beijixing-pods
+    app.kubernetes.io/part-of: beijixing-ai
+    release: prometheus
+spec:
+  namespaceSelector:
+    matchNames:
+    - beijixing
+  selector:
+    matchLabels:
+      app.kubernetes.io/part-of: beijixing-ai
+  podMetricsEndpoints:
+  - port: metrics
+    path: /metrics
+    interval: 15s
+    scrapeTimeout: 10s
+  - port: http
+    path: /metrics
+    interval: 30s
+    scrapeTimeout: 10s
+---
+# PrometheusRule - 告警规则
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: beijixing-alerts
+  namespace: beijixing
+  labels:
+    app.kubernetes.io/name: beijixing-alerts
+    app.kubernetes.io/part-of: beijixing-ai
+    release: prometheus
+spec:
+  groups:
+  - name: beijixing-service-alerts
+    rules:
+    # 服务不可用告警
+    - alert: ServiceDown
+      expr: up{namespace="beijixing"} == 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "服务 {{ $labels.service }} 不可用"
+        description: "服务 {{ $labels.service }} 已停止运行超过5分钟"
+    
+    # 高错误率告警
+    - alert: HighErrorRate
+      expr: |
+        (
+          sum(rate(http_requests_total{namespace="beijixing",status=~"5.."}[5m]))
+          /
+          sum(rate(http_requests_total{namespace="beijixing"}[5m]))
+        ) > 0.05
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "服务 {{ $labels.service }} 错误率过高"
+        description: "错误率超过5% 持续5分钟"
+    
+    # 高延迟告警
+    - alert: HighLatency
+      expr: |
+        histogram_quantile(0.95, 
+          sum(rate(http_request_duration_seconds_bucket{namespace="beijixing"}[5m])) by (le, service)
+        ) > 1
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "服务 {{ $labels.service }} 响应延迟过高"
+        description: "95%请求延迟超过1秒"
+    
+    # Pod重启告警
+    - alert: PodCrashLooping
+      expr: |
+        rate(kube_pod_container_status_restarts_total{namespace="beijixing"}[10m]) > 0
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Pod {{ $labels.pod }} 频繁重启"
+        description: "Pod在10分钟内发生重启"
+    
+    # 内存使用告警
+    - alert: HighMemoryUsage
+      expr: |
+        (
+          container_memory_usage_bytes{namespace="beijixing", container!=""}
+          /
+          container_spec_memory_limit_bytes{namespace="beijixing", container!=""}
+        ) > 0.85
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "服务 {{ $labels.container }} 内存使用率过高"
+        description: "内存使用率超过85%"
+    
+    # CPU使用告警
+    - alert: HighCPUUsage
+      expr: |
+        (
+          rate(container_cpu_usage_seconds_total{namespace="beijixing", container!=""}[5m])
+          /
+          (container_spec_cpu_quota{namespace="beijixing", container!=""} / container_spec_cpu_period{namespace="beijixing", container!=""})
+        ) > 0.8
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "服务 {{ $labels.container }} CPU使用率过高"
+        description: "CPU使用率超过80%"
+    
+    # 磁盘空间告警
+    - alert: DiskSpaceRunningOut
+      expr: |
+        (
+          kubelet_volume_stats_available_bytes{namespace="beijixing"}
+          /
+          kubelet_volume_stats_capacity_bytes{namespace="beijixing"}
+        ) < 0.1
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "PVC {{ $labels.persistentvolumeclaim }} 磁盘空间不足"
+        description: "剩余空间不足10%"

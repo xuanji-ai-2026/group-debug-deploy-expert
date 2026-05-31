@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+北极星AI商机获客系统 - 数据处理脚本依赖包
+================================================
+Author: 孙丽 (EMP-DATA-002)
+Version: 1.0.0
+Python: 3.9+
+"""
+
+# 数据库连接
+pymysql>=1.1.0          # MySQL数据库连接
+redis>=5.0.0            # Redis缓存连接
+pymongo>=4.6.0          # MongoDB连接
+
+# 数据处理
+pandas>=2.1.0           # 数据分析和处理
+openpyxl>=3.1.0         # Excel文件处理
+
+# 工具库
+python-dotenv>=1.0.0    # 环境变量管理
+click>=8.1.0            # 命令行接口
+schedule>=1.2.0         # 定时任务
+faker>=20.0.0           # 模拟数据生成
+
+# 日志和配置
+pyyaml>=6.0.1           # YAML配置文件
+loguru>=0.7.0           # 高级日志（可选增强）

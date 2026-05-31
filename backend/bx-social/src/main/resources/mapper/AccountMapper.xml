@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.social.mapper.AccountMapper">
+
+    <select id="selectExpiringAccounts" resultType="com.beijixing.social.entity.SocialAccount">
+        SELECT * FROM social_account
+        WHERE deleted = 0
+          AND status = 1
+          AND token_expire_time IS NOT NULL
+          AND token_expire_time BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL #{days} DAY)
+        ORDER BY token_expire_time ASC
+    </select>
+
+    <select id="selectAbnormalAccounts" resultType="com.beijixing.social.entity.SocialAccount">
+        SELECT * FROM social_account
+        WHERE deleted = 0
+          AND status = 2
+        ORDER BY update_time DESC
+    </select>
+
+    <update id="updateLastActiveTime">
+        UPDATE social_account
+        SET last_active_time = NOW()
+        WHERE id = #{accountId}
+    </update>
+
+</mapper>

@@ -1,0 +1,181 @@
+/*
+  Localizable.strings
+  北极星AI商机获客系统 - iOS客户端
+  本地化字符串资源
+  
+  用于支持多语言国际化，包含中文(zh-Hans)和英文(en)两种语言。
+*/
+
+/* Common */
+"app.name" = "北极星AI";
+"app.version" = "版本 %@";
+"common.ok" = "确定";
+"common.cancel" = "取消";
+"common.save" = "保存";
+"common.delete" = "删除";
+"common.edit" = "编辑";
+"common.close" = "关闭";
+"common.confirm" = "确认";
+"common.retry" = "重试";
+"common.loading" = "加载中...";
+"common.success" = "操作成功";
+"common.error" = "操作失败";
+"common.no.data" = "暂无数据";
+
+/* Error */
+"error.network" = "网络连接失败，请检查网络设置";
+"error.timeout" = "请求超时，请稍后重试";
+"error.server" = "服务器错误，请稍后重试";
+"error.unknown" = "未知错误";
+"error.invalid.params" = "参数错误";
+"error.unauthorized" = "未授权，请先登录";
+
+/* Login */
+"login.title" = "登录";
+"login.phone" = "手机号";
+"login.phone.placeholder" = "请输入手机号";
+"login.code" = "验证码";
+"login.code.placeholder" = "请输入验证码";
+"login.password" = "密码";
+"login.password.placeholder" = "请输入密码";
+"login.get.code" = "获取验证码";
+"login.resend.code" = "重新发送";
+"login.login.type.phone" = "验证码登录";
+"login.login.type.password" = "密码登录";
+"login.login.type.wechat" = "微信登录";
+"login.login.type.apple" = "Apple登录";
+"login.remember.phone" = "记住手机号";
+"login.agreement" = "登录即表示同意";
+"login.terms" = "用户协议";
+"login.privacy" = "隐私政策";
+"login.error.phone.invalid" = "请输入正确的手机号";
+"login.error.code.invalid" = "请输入6位验证码";
+"login.error.password.invalid" = "密码不能少于6位";
+"login.error.code.empty" = "请先获取验证码";
+
+/* Home */
+"home.title" = "首页";
+"home.welcome" = "欢迎回来";
+"home.today.overview" = "今日概览";
+"home.new.leads" = "新增商机";
+"home.running.tasks" = "进行中任务";
+"home.completed.tasks" = "完成任务";
+"home.account.balance" = "账户余额";
+"home.recent.leads" = "最新商机";
+"home.view.all" = "查看全部";
+"home.quick.action" = "快捷操作";
+
+/* Leads */
+"leads.title" = "商机";
+"leads.list" = "商机列表";
+"leads.add" = "添加商机";
+"leads.search" = "搜索商机";
+"leads.filter" = "筛选";
+"leads.filter.clear" = "清除筛选";
+"leads.filter.apply" = "应用筛选";
+"leads.empty" = "暂无商机";
+"leads.empty.filter" = "没有符合筛选条件的商机";
+"leads.create.success" = "商机创建成功";
+"leads.delete.confirm" = "确定要删除这条商机吗？";
+"leads.delete.success" = "商机已删除";
+"leads.update.status" = "更新状态";
+"leads.update.intention" = "更新意向";
+
+/* Lead Detail */
+"lead.detail.title" = "商机详情";
+"lead.customer.info" = "客户信息";
+"lead.customer.name" = "客户姓名";
+"lead.customer.phone" = "手机号";
+"lead.customer.wechat" = "微信";
+"lead.customer.company" = "公司";
+"lead.customer.position" = "职位";
+"lead.customer.address" = "地址";
+"lead.source.info" = "来源信息";
+"lead.source.platform" = "来源平台";
+"lead.source.keyword" = "关键词";
+"lead.source.content" = "截客内容";
+"lead.intention.info" = "意向信息";
+"lead.intention.level" = "意向等级";
+"lead.intention.tags" = "意向标签";
+"lead.intention.desc" = "意向描述";
+"lead.followup.record" = "跟进记录";
+"lead.followup.add" = "添加跟进记录";
+"lead.followup.status" = "跟进状态";
+"lead.followup.time" = "跟进时间";
+"lead.followup.content" = "跟进内容";
+"lead.task.record" = "任务记录";
+"lead.basic.info" = "基本信息";
+"lead.remark" = "备注";
+
+/* Lead Status */
+"lead.status.notStarted" = "未开始";
+"lead.status.inProgress" = "跟进中";
+"lead.status.closed" = "已成交";
+"lead.status.lost" = "已流失";
+"lead.status.paused" = "暂不跟进";
+
+/* Lead Intention */
+"lead.intention.high" = "高意向";
+"lead.intention.medium" = "中意向";
+"lead.intention.low" = "低意向";
+"lead.intention.none" = "无意向";
+
+/* Tasks */
+"tasks.title" = "任务";
+"tasks.list" = "任务列表";
+"tasks.add" = "创建任务";
+"tasks.search" = "搜索任务";
+"tasks.filter" = "筛选";
+"tasks.empty" = "暂无任务";
+"tasks.empty.filter" = "没有符合条件的状态的任务";
+"tasks.overview" = "任务概览";
+"tasks.pending" = "待执行";
+"tasks.running" = "执行中";
+"tasks.completed" = "已完成";
+"tasks.failed" = "失败";
+
+/* Task Detail */
+"task.detail.title" = "任务详情";
+"task.progress" = "执行进度";
+"task.steps" = "执行步骤";
+"task.logs" = "执行日志";
+"task.result" = "执行结果";
+"task.type" = "任务类型";
+"task.name" = "任务名称";
+"task.desc" = "任务描述";
+"task.priority" = "优先级";
+"task.creator" = "创建人";
+"task.executor" = "执行人";
+"task.start.time" = "开始时间";
+"task.end.time" = "结束时间";
+"task.schedule.start" = "计划开始";
+"task.schedule.end" = "计划结束";
+
+/* Task Actions */
+"task.action.pause" = "暂停任务";
+"task.action.resume" = "继续执行";
+"task.action.retry" = "重试任务";
+"task.action.cancel" = "取消任务";
+
+/* Step Status */
+"step.status.pending" = "待执行";
+"step.status.running" = "进行中";
+"step.status.completed" = "已完成";
+"step.status.failed" = "失败";
+"step.status.skipped" = "已跳过";
+
+/* Profile */
+"profile.title" = "我的";
+"profile.account.info" = "账户信息";
+"profile.settings" = "设置";
+"profile.about" = "关于我们";
+"profile.logout" = "退出登录";
+"profile.logout.confirm" = "确定要退出登录吗？";
+
+/* Time Format */
+"time.just.now" = "刚刚";
+"time.minutes.ago" = "%d分钟前";
+"time.hours.ago" = "%d小时前";
+"time.days.ago" = "%d天前";
+"time.today" = "今天";
+"time.yesterday" = "昨天";

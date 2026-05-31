@@ -1,0 +1,256 @@
+{
+  "exported_at": "2026-05-31T22:34:06.822181",
+  "exporter": "RoleLogManager",
+  "total_entries": 12,
+  "entries": [
+    {
+      "timestamp": "2026-05-31T22:34:06.782840",
+      "role": "developer",
+      "agent_name": "Dev-Agent-A",
+      "action": "file_modify",
+      "target_file": "src/backend/auth.py",
+      "details": "Added rate limiting feature (post-audit modification)",
+      "level": "INFO",
+      "session_id": "developer-Dev-Agent-A-1780238046782-99760",
+      "previous_hash": "",
+      "new_hash": "ghi789",
+      "dev_timestamp": "2026-05-31T22:34:06.782840",
+      "audit_timestamp": null,
+      "accept_timestamp": null,
+      "related_issue": null,
+      "metadata": {}
+    },
+    {
+      "timestamp": "2026-05-31T22:34:06.769919",
+      "role": "acceptor",
+      "agent_name": "TestRunner-Pro",
+      "action": "verification_decision",
+      "target_file": "src/backend/auth.py",
+      "details": "PROMOTED TO VERIFIED - All 15 unit tests passed, coverage 87%",
+      "level": "INFO",
+      "session_id": "acceptor-TestRunner-Pro-1780238046769-99760",
+      "previous_hash": "",
+      "new_hash": "",
+      "dev_timestamp": null,
+      "audit_timestamp": null,
+      "accept_timestamp": "2026-05-31T22:34:06.769919",
+      "related_issue": null,
+      "metadata": {
+        "tests_run": 15,
+        "tests_passed": 15,
+        "coverage_pct": 87
+      }
+    },
+    {
+      "timestamp": "2026-05-31T22:34:06.769919",
+      "role": "acceptor",
+      "agent_name": "TestRunner-Pro",
+      "action": "verification_decision",
+      "target_file": "src/backend/auth.py",
+      "details": "PROMOTED TO VERIFIED - All 15 unit tests passed, coverage 87%",
+      "level": "INFO",
+      "session_id": "acceptor-TestRunner-Pro-1780238046769-99760",
+      "previous_hash": "",
+      "new_hash": "",
+      "dev_timestamp": null,
+      "audit_timestamp": null,
+      "accept_timestamp": "2026-05-31T22:34:06.769919",
+      "related_issue": null,
+      "metadata": {
+        "tests_run": 15,
+        "tests_passed": 15,
+        "coverage_pct": 87
+      }
+    },
+    {
+      "timestamp": "2026-05-31T22:34:06.456389",
+      "role": "auditor",
+      "agent_name": "Audit-Bot-X",
+      "action": "approval_decision",
+      "target_file": "src/backend/auth.py",
+      "details": "APPROVED - Code quality acceptable, no security issues found",
+      "level": "INFO",
+      "session_id": "auditor-Audit-Bot-X-1780238046456-99760",
+      "previous_hash": "",
+      "new_hash": "",
+      "dev_timestamp": null,
+      "audit_timestamp": "2026-05-31T22:34:06.456389",
+      "accept_timestamp": null,
+      "related_issue": null,
+      "metadata": {
+        "lint_errors": 0,
+        "security_issues": 0
+      }
+    },
+    {
+      "timestamp": "2026-05-31T22:34:06.456389",
+      "role": "auditor",
+      "agent_name": "Audit-Bot-X",
+      "action": "approval_decision",
+      "target_file": "src/backend/auth.py",
+      "details": "APPROVED - Code quality acceptable, no security issues found",
+      "level": "INFO",
+      "session_id": "auditor-Audit-Bot-X-1780238046456-99760",
+      "previous_hash": "",
+      "new_hash": "",
+      "dev_timestamp": null,
+      "audit_timestamp": "2026-05-31T22:34:06.456389",
+      "accept_timestamp": null,
+      "related_issue": null,
+      "metadata": {
+        "lint_errors": 0,
+        "security_issues": 0
+      }
+    },
+    {
+      "timestamp": "2026-05-31T22:34:06.155463",
+      "role": "developer",
+      "agent_name": "Dev-Agent-A",
+      "action": "file_modify",
+      "target_file": "src/backend/auth.py",
+      "details": "Fixed null pointer exception in auth.py",
+      "level": "INFO",
+      "session_id": "developer-Dev-Agent-A-1780238046155-99760",
+      "previous_hash": "abc123",
+      "new_hash": "def456",
+      "dev_timestamp": "2026-05-31T22:34:06.155463",
+      "audit_timestamp": null,
+      "accept_timestamp": null,
+      "related_issue": null,
+      "metadata": {
+        "lines_changed": 5,
+        "function_affected": "login_user"
+      }
+    },
+    {
+      "timestamp": "2026-05-31T22:33:50.115690",
+      "role": "developer",
+      "agent_name": "Dev-Agent-A",
+      "action": "file_modify",
+      "target_file": "src/backend/auth.py",
+      "details": "Added rate limiting feature (post-audit modification)",
+      "level": "INFO",
+      "session_id": "developer-Dev-Agent-A-1780238030115-100160",
+      "previous_hash": "",
+      "new_hash": "ghi789",
+      "dev_timestamp": "2026-05-31T22:33:50.115690",
+      "audit_timestamp": null,
+      "accept_timestamp": null,
+      "related_issue": null,
+      "metadata": {}
+    },
+    {
+      "timestamp": "2026-05-31T22:33:50.114661",
+      "role": "acceptor",
+      "agent_name": "TestRunner-Pro",
+      "action": "verification_decision",
+      "target_file": "src/backend/auth.py",
+      "details": "PROMOTED TO VERIFIED - All 15 unit tests passed, coverage 87%",
+      "level": "INFO",
+      "session_id": "acceptor-TestRunner-Pro-1780238030114-100160",
+      "previous_hash": "",
+      "new_hash": "",
+      "dev_timestamp": null,
+      "audit_timestamp": null,
+      "accept_timestamp": "2026-05-31T22:33:50.114661",
+      "related_issue": null,
+      "metadata": {
+        "tests_run": 15,
+        "tests_passed": 15,
+        "coverage_pct": 87
+      }
+    },
+    {
+      "timestamp": "2026-05-31T22:33:50.114661",
+      "role": "acceptor",
+      "agent_name": "TestRunner-Pro",
+      "action": "verification_decision",
+      "target_file": "src/backend/auth.py",
+      "details": "PROMOTED TO VERIFIED - All 15 unit tests passed, coverage 87%",
+      "level": "INFO",
+      "session_id": "acceptor-TestRunner-Pro-1780238030114-100160",
+      "previous_hash": "",
+      "new_hash": "",
+      "dev_timestamp": null,
+      "audit_timestamp": null,
+      "accept_timestamp": "2026-05-31T22:33:50.114661",
+      "related_issue": null,
+      "metadata": {
+        "tests_run": 15,
+        "tests_passed": 15,
+        "coverage_pct": 87
+      }
+    },
+    {
+      "timestamp": "2026-05-31T22:33:49.813287",
+      "role": "auditor",
+      "agent_name": "Audit-Bot-X",
+      "action": "approval_decision",
+      "target_file": "src/backend/auth.py",
+      "details": "APPROVED - Code quality acceptable, no security issues found",
+      "level": "INFO",
+      "session_id": "auditor-Audit-Bot-X-1780238029813-100160",
+      "previous_hash": "",
+      "new_hash": "",
+      "dev_timestamp": null,
+      "audit_timestamp": "2026-05-31T22:33:49.813287",
+      "accept_timestamp": null,
+      "related_issue": null,
+      "metadata": {
+        "lint_errors": 0,
+        "security_issues": 0
+      }
+    },
+    {
+      "timestamp": "2026-05-31T22:33:49.813287",
+      "role": "auditor",
+      "agent_name": "Audit-Bot-X",
+      "action": "approval_decision",
+      "target_file": "src/backend/auth.py",
+      "details": "APPROVED - Code quality acceptable, no security issues found",
+      "level": "INFO",
+      "session_id": "auditor-Audit-Bot-X-1780238029813-100160",
+      "previous_hash": "",
+      "new_hash": "",
+      "dev_timestamp": null,
+      "audit_timestamp": "2026-05-31T22:33:49.813287",
+      "accept_timestamp": null,
+      "related_issue": null,
+      "metadata": {
+        "lint_errors": 0,
+        "security_issues": 0
+      }
+    },
+    {
+      "timestamp": "2026-05-31T22:33:49.512106",
+      "role": "developer",
+      "agent_name": "Dev-Agent-A",
+      "action": "file_modify",
+      "target_file": "src/backend/auth.py",
+      "details": "Fixed null pointer exception in auth.py",
+      "level": "INFO",
+      "session_id": "developer-Dev-Agent-A-1780238029512-100160",
+      "previous_hash": "abc123",
+      "new_hash": "def456",
+      "dev_timestamp": "2026-05-31T22:33:49.512106",
+      "audit_timestamp": null,
+      "accept_timestamp": null,
+      "related_issue": null,
+      "metadata": {
+        "lines_changed": 5,
+        "function_affected": "login_user"
+      }
+    }
+  ],
+  "statistics": {
+    "total_entries_written": 4,
+    "entries_by_role": {
+      "developer": 2,
+      "auditor": 1,
+      "acceptor": 1
+    },
+    "timestamp_validations": 4,
+    "timestamp_violations": 0,
+    "cross_role_reads": 16
+  }
+}

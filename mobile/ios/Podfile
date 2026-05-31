@@ -1,0 +1,136 @@
+# Podfile
+# CocoaPods依赖配置文件 - 北极星AI商机获客系统 iOS客户端
+# 平台版本: iOS 12.0+
+# Ruby版本: >= 2.6.0
+
+# 最低CocoaPods版本
+min_cocoapods_version = "1.12.0"
+
+# 平台配置
+platform :ios, '12.0'
+use_frameworks!
+inhibit_all_warnings!
+
+# Xcode 15兼容配置
+install! 'cocoapods', :deterministic_uuids => false
+
+# Swift版本
+swift_version = '5.0'
+
+target 'BxApp' do
+  # 测试目标
+  target 'BxAppTests' do
+    inherit! :search_paths
+  end
+
+  target 'BxAppUITests' do
+    inherit! :search_paths
+  end
+
+  # ============================================
+  # 网络请求库
+  # ============================================
+  
+  # Alamofire - HTTP网络请求库
+  # 功能: 支持RESTful API请求、请求/响应拦截器、证书校验、请求重试等
+  pod 'Alamofire', '~> 5.8'
+  
+  # ============================================
+  # 数据持久化
+  # ============================================
+  
+  # KeychainAccess - 钥匙串访问工具
+  # 功能: 安全存储用户凭证、Token等敏感信息
+  pod 'KeychainAccess', '~> 4.2'
+  
+  # ============================================
+  # JSON解析与数据绑定
+  # ============================================
+  
+  # ObjectMapper - JSON转模型工具
+  # 功能: 将JSON数据映射到Swift模型对象
+  pod 'ObjectMapper', '~> 4.2'
+  
+  # SwiftyJSON - JSON解析库
+  # 功能: 简化JSON解析操作
+  pod 'SwiftyJSON', '~> 5.0'
+  
+  # ============================================
+  # UI组件
+  # ============================================
+  
+  # SnapKit - AutoLayout DSL
+  # 功能: 声明式布局约束，用于UIKit视图
+  pod 'SnapKit', '~> 5.6'
+  
+  # Kingfisher - 图片加载与缓存
+  # 功能: 图片异步加载、缓存、占位图、淡入动画等
+  pod 'Kingfisher', '~> 7.10'
+  
+  # ============================================
+  # 工具库
+  # ============================================
+  
+  # Toast-Swift - Toast提示组件
+  # 功能: 轻量级消息提示
+  pod 'Toast-Swift', '~> 5.0'
+  
+  # HandyJSON - JSON序列化库
+  # 功能: 高性能JSON解析，支持任意类型
+  pod 'HandyJSON', '~> 1.4'
+  
+  # ============================================
+  # 开发调试工具（仅Debug构建）
+  # ============================================
+  
+  pod 'FLEX', '~> 5.6', :configurations => ['Debug']
+
+end
+
+# ============================================
+# 发布配置
+# ============================================
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      # 设置Swift版本
+      config.build_settings['SWIFT_VERSION'] = swift_version
+      
+      # iOS 12.0兼容设置
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+      
+      # 禁用BITCODE（Xcode 14已废弃）
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+      
+      # Debug配置额外设置
+      if config.name == 'Debug'
+        # 启用测试符号
+        config.build_settings['DEBUG_INFORMATION_FORMAT'] = 'dwarf-with-dsym'
+      end
+      
+      # Release配置优化
+      if config.name == 'Release'
+        # 启用优化
+        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-O'
+        # 剥离无用符号
+        config.build_settings['STRIP_INSTALLED_PRODUCT'] = 'YES'
+      end
+    end
+  end
+end
+
+# ============================================
+# 依赖版本说明
+# ============================================
+# 
+# Alamofire ~> 5.8:    iOS 12.0+, Swift 5.0+
+# KeychainAccess ~> 4.2: iOS 12.0+, Swift 5.0+
+# ObjectMapper ~> 4.2:  iOS 12.0+, Swift 5.0+
+# SwiftyJSON ~> 5.0:   iOS 12.0+, Swift 5.0+
+# SnapKit ~> 5.6:      iOS 12.0+, Swift 5.0+
+# Kingfisher ~> 7.10:   iOS 12.0+, Swift 5.0+
+# Toast-Swift ~> 5.0:  iOS 12.0+, Swift 5.0+
+# HandyJSON ~> 1.4:    iOS 12.0+, Swift 5.0+
+# FLEX ~> 5.6:         iOS 12.0+, Swift 5.0+
+#

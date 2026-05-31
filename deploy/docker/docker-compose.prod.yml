@@ -1,0 +1,384 @@
+version: '3.8'
+
+# 北极星AI商机获客系统 - 生产环境单体配置
+# 启动: docker-compose -f docker-compose.prod.yml up -d
+# 最后更新: 2026-05-28 (单体清理版)
+# 特性: Docker Secrets、资源限制、日志轮转、监控
+
+services:
+  # ============================================
+  # 基础设施层 - Infrastructure (生产级)
+  # ============================================
+
+  mariadb:
+    image: mariadb:10.11
+    container_name: beijixing-mariadb-prod
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+      MYSQL_DATABASE: beijixing_ai
+      MYSQL_USER: beijixing
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
+      TZ: Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data_prod:/var/lib/mysql
+      - ./init/mariadb:/docker-entrypoint-initdb.d:ro
+      - ./config/mysql/my.cnf:/etc/mysql/my.cnf:ro
+      - mariadb_backup:/backup
+    networks:
+      - beijixing-network-prod
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "-p$(cat /run/secrets/mysql_root_password)"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --default-authentication-plugin=mysql_native_password
+      --innodb_buffer_pool_size=4G
+      --innodb_log_file_size=1G
+      --innodb_flush_log_at_trx_commit=2
+      --max_connections=1000
+      --slow-query-log=1
+      --slow-query-log-file=/var/lib/mysql/slow.log
+      --long_query_time=2
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 8G
+        reservations:
+          cpus: '2.0'
+          memory: 4G
+    secrets:
+      - mysql_root_password
+      - mysql_password
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+  redis:
+    image: redis:6.0-alpine
+    container_name: beijixing-redis-prod
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data_prod:/data
+      - ./config/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    networks:
+      - beijixing-network-prod
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    command: redis-server /usr/local/etc/redis/redis.conf --requirepass ${REDIS_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+  mongodb:
+    image: mongo:6.0
+    container_name: beijixing-mongodb-prod
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo_root_username
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo_root_password
+      MONGO_INITDB_DATABASE: beijixing_logs
+      TZ: Asia/Shanghai
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data_prod:/data/db
+    networks:
+      - beijixing-network-prod
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+    secrets:
+      - mongo_root_username
+      - mongo_root_password
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+  rabbitmq:
+    image: rabbitmq:3.11-management-alpine
+    container_name: beijixing-rabbitmq-prod
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER_FILE: /run/secrets/rabbitmq_user
+      RABBITMQ_DEFAULT_PASS_FILE: /run/secrets/rabbitmq_password
+      RABBITMQ_DEFAULT_VHOST: /
+      TZ: Asia/Shanghai
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data_prod:/var/lib/rabbitmq
+    networks:
+      - beijixing-network-prod
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+    secrets:
+      - rabbitmq_user
+      - rabbitmq_password
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+  elasticsearch:
+    image: elasticsearch:8.11.0
+    container_name: beijixing-elasticsearch-prod
+    restart: always
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - TZ=Asia/Shanghai
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_data_prod:/usr/share/elasticsearch/data
+    networks:
+      - beijixing-network-prod
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 8G
+        reservations:
+          cpus: '2.0'
+          memory: 4G
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+  # ============================================
+  # 单体应用 - beijixing-app (端口 8080)
+  # ============================================
+
+  app:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    image: beijixing/beijixing-ai-app:${APP_VERSION:-latest}
+    container_name: beijixing-app-prod
+    restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_NAME=beijixing_ai
+      - DB_USER=root
+      - DB_PASSWORD_FILE=/run/secrets/mysql_root_password
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER_FILE=/run/secrets/rabbitmq_user
+      - RABBITMQ_PASSWORD_FILE=/run/secrets/rabbitmq_password
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_USERNAME_FILE=/run/secrets/mongo_root_username
+      - MONGO_PASSWORD_FILE=/run/secrets/mongo_root_password
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
+      - JWT_SECRET_FILE=/run/secrets/jwt_secret
+      - TZ=Asia/Shanghai
+    ports:
+      - "8080:8080"
+    volumes:
+      - app_logs_prod:/opt/beijixing-ai/logs
+      - app_uploads_prod:/opt/beijixing-ai/uploads
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - beijixing-network-prod
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 8G
+        reservations:
+          cpus: '2.0'
+          memory: 4G
+    secrets:
+      - mysql_root_password
+      - mysql_password
+      - redis_password
+      - mongo_root_username
+      - mongo_root_password
+      - rabbitmq_user
+      - rabbitmq_password
+      - jwt_secret
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+  # ============================================
+  # 监控与可观测性
+  # ============================================
+
+  prometheus:
+    image: prom/prometheus:v2.47.0
+    container_name: beijixing-prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus:/etc/prometheus:ro
+      - prometheus_data:/prometheus
+    networks:
+      - beijixing-network-prod
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+
+  grafana:
+    image: grafana/grafana:10.2.0
+    container_name: beijixing-grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana_admin_password
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - TZ=Asia/Shanghai
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana:/etc/grafana/provisioning:ro
+    networks:
+      - beijixing-network-prod
+    secrets:
+      - grafana_admin_password
+
+networks:
+  beijixing-network-prod:
+    driver: bridge
+    name: beijixing-network-prod
+
+volumes:
+  mariadb_data_prod:
+    driver: local
+  mariadb_backup:
+    driver: local
+  redis_data_prod:
+    driver: local
+  mongodb_data_prod:
+    driver: local
+  rabbitmq_data_prod:
+    driver: local
+  elasticsearch_data_prod:
+    driver: local
+  app_logs_prod:
+    driver: local
+  app_uploads_prod:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+secrets:
+  mysql_root_password:
+    file: ./secrets/mysql_root_password.txt
+  mysql_password:
+    file: ./secrets/mysql_password.txt
+  redis_password:
+    file: ./secrets/redis_password.txt
+  mongo_root_username:
+    file: ./secrets/mongo_root_username.txt
+  mongo_root_password:
+    file: ./secrets/mongo_root_password.txt
+  rabbitmq_user:
+    file: ./secrets/rabbitmq_user.txt
+  rabbitmq_password:
+    file: ./secrets/rabbitmq_password.txt
+  jwt_secret:
+    file: ./secrets/jwt_secret.txt
+  grafana_admin_password:
+    file: ./secrets/grafana_admin_password.txt

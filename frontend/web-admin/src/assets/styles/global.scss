@@ -1,0 +1,190 @@
+/**
+ * global.scss
+ * 全局样式文件
+ * 功能：重置样式、定义全局样式类、布局基础样式
+ * 
+ * @author 王强 (EMP-FE-002)
+ * @date 2024-01
+ */
+
+// ============================================================
+// CSS Reset（样式重置）
+// ============================================================
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  color: $text-primary;
+  background-color: $bg-color-page;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+// ============================================================
+// 链接样式
+// ============================================================
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: $transition-fast;
+
+  &:hover {
+    color: $primary-light;
+  }
+}
+
+// ============================================================
+// 滚动条美化
+// ============================================================
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-color-page;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $border-color-base;
+  border-radius: 3px;
+
+  &:hover {
+    background: $text-secondary;
+  }
+}
+
+// ============================================================
+// 工具类
+// ============================================================
+
+// Flex 布局
+.flex { display: flex; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-1 { flex: 1; }
+.flex-wrap { flex-wrap: wrap; }
+
+// 文字对齐
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+// 文字颜色
+.text-primary { color: $text-primary; }
+.text-regular { color: $text-regular; }
+.text-secondary { color: $text-secondary; }
+.text-danger { color: $danger-color; }
+.text-success { color: $success-color; }
+.text-warning { color: $warning-color; }
+
+// 文字大小
+.text-sm { font-size: $font-size-small; }
+.text-base { font-size: $font-size-base; }
+.text-lg { font-size: $font-size-large; }
+.text-xl { font-size: $font-size-extra-large; }
+
+// 字体粗细
+.font-bold { font-weight: 700; }
+.font-medium { font-weight: 500; }
+.font-normal { font-weight: 400; }
+
+// 间距工具
+.mt-sm { margin-top: $spacing-sm; }
+.mt-base { margin-top: $spacing-base; }
+.mt-lg { margin-top: $spacing-lg; }
+.mb-sm { margin-bottom: $spacing-sm; }
+.mb-base { margin-bottom: $spacing-base; }
+.mb-lg { margin-bottom: $spacing-lg; }
+.ml-sm { margin-left: $spacing-sm; }
+.mr-sm { margin-right: $spacing-sm; }
+.p-base { padding: $spacing-base; }
+.p-lg { padding: $spacing-lg; }
+
+// 圆角
+.radius { border-radius: $border-radius-base; }
+.radius-lg { border-radius: $border-radius-large; }
+
+// 卡片阴影
+.card-shadow {
+  background: $bg-color;
+  box-shadow: $shadow-base;
+  border-radius: $border-radius-base;
+}
+
+// ============================================================
+// Element Plus 覆盖样式
+// ============================================================
+
+// 表格样式优化
+.el-table {
+  th.el-table__cell {
+    background-color: $bg-color-page !important;
+    color: $text-primary;
+    font-weight: 600;
+  }
+}
+
+// 表单标签样式
+.el-form-item__label {
+  color: $text-regular;
+  font-weight: 500;
+}
+
+// 按钮间距优化
+.el-button + .el-button {
+  margin-left: 8px;
+}
+
+// 输入框聚焦样式
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px $primary-color inset !important;
+}
+
+// 分页居右
+.el-pagination {
+  justify-content: flex-end;
+  margin-top: $spacing-base;
+}
+
+// ============================================================
+// 页面淡入动画
+// ============================================================
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+// 页面切换动画
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.25s ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateX(-10px);
+}

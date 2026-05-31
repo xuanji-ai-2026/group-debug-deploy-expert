@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 渐变背景 - 蓝紫科技风格（与PC端一致） -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="135"
+        android:startColor="#667EEA"
+        android:endColor="#764BA2"
+        android:type="linear" />
+</shape>

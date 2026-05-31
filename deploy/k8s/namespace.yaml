@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: beijixing
+  labels:
+    app.kubernetes.io/name: beijixing
+    app.kubernetes.io/part-of: beijixing-ai
+    environment: production
+    managed-by: kubernetes

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 波纹动画 -->
+<scale xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="1000"
+    android:fromXScale="1.0"
+    android:fromYScale="1.0"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:repeatCount="infinite"
+    android:toXScale="1.5"
+    android:toYScale="1.5"
+    android:fillAfter="false">
+    <alpha
+        android:fromAlpha="0.5"
+        android:toAlpha="0.0"
+        android:duration="1000" />
+</scale>

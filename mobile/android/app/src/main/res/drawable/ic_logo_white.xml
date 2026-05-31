@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    
+    <!-- 外圈光晕 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.1"
+        android:pathData="M60,10 C85,10 105,30 105,55 C105,80 85,100 60,100 C35,100 15,80 15,55 C15,30 35,10 60,10 Z"/>
+    
+    <!-- 主星星 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,20 L68.5,45 L95,47 L75,65 L80,90 L60,77 L40,90 L45,65 L25,47 L51.5,45 Z"/>
+    
+</vector>

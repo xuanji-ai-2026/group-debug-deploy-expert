@@ -1,0 +1,79 @@
+# ==============================================
+# 北极星AI - 测试环境配置 (H2内存数据库)
+# 用于单元测试和集成测试
+# 最后更新: 2026-05-20
+# ==============================================
+
+spring:
+  # ====== H2内存数据库配置 ======
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:beijixing_ai_test;DB_CLOSE_DELAY=-1;MODE=MySQL;CASE_INSENSITIVE_IDENTIFIERS=true
+    username: sa
+    password:
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-timeout: 30000
+
+  # ====== 禁用Redis (使用内存实现) ======
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+
+  # ====== 禁用Nacos ======
+  cloud:
+    nacos:
+      config:
+        import-check:
+          enabled: false
+      discovery:
+        enabled: false
+    compatibility-verifier:
+      enabled: false
+
+  # ====== 禁用RabbitMQ ======
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  # ====== JPA/Hibernate配置 ======
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+
+# ====== MyBatis-Plus配置 ======
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# ====== JWT配置 (测试用) ======
+jwt:
+  secret: test-secret-key-for-unit-testing-only-12345678
+  expiration: 86400000
+  refresh-expiration: 604800000
+  issuer: beijixing-ai-test
+  token-header: Authorization
+  token-prefix: Bearer
+
+# ====== 日志级别 ======
+logging:
+  level:
+    com.beijixing: DEBUG
+    org.springframework: WARN
+    com.zaxxer.hikari: WARN

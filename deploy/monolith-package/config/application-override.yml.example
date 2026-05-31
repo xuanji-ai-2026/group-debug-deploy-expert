@@ -1,0 +1,142 @@
+# ============================================================
+#  北极星AI - 外部配置覆盖模板 (可选)
+#  此文件用于覆盖JAR包内的默认配置，无需重新构建
+#
+#  使用方式:
+#    1. 复制此文件为 application-override.yml (去掉 .example 后缀)
+#    2. 取消需要修改的配置项注释
+#    3. 重启服务: ./stop.sh && ./start.sh
+#
+#  配置优先级:
+#    application-override.yml (此文件) > application.yml (JAR包内)
+#
+#  适用场景:
+#    ✅ 调整服务端口
+#    ✅ 修改日志级别
+#    ✅ 调整连接池大小
+#    ✅ 启用/禁用功能模块
+#    ❌ 不要在此文件中放置敏感信息（请使用 .env 文件）
+#
+#  最后更新: 2026-05-20
+# ============================================================
+
+# ====== 服务器配置 ======
+# server:
+#   port: 8080                    # 服务端口（默认8080）
+#   tomcat:
+#     threads:
+#       max: 200                  # 最大线程数（默认200）
+#       min-spare: 10             # 最小空闲线程（默认10）
+#     connection-timeout: 10000   # 连接超时时间ms（默认10000）
+
+# ====== 日志配置 ======
+# logging:
+#   level:
+#     root: INFO                 # 全局日志级别
+#     com.beijixing: DEBUG        # 业务代码日志级别
+#     org.springframework.web: WARN  # Spring Web日志级别
+#   file:
+#     name: ./logs/app.log       # 日志文件路径
+#   pattern:
+#     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+#     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# ====== 数据库连接池调整 ======
+# spring:
+#   datasource:
+#     hikari:
+#       minimum-idle: 10          # 最小空闲连接（默认10）
+#       maximum-pool-size: 50     # 最大连接池大小（默认50）
+#       connection-timeout: 30000 # 连接超时ms（默认30000）
+#       idle-timeout: 600000      # 空闲超时ms（默认600000）
+#       max-lifetime: 1800000     # 连接最大生命周期ms（默认1800000）
+
+# ====== Redis连接池调整 ======
+# spring:
+#   data:
+#     redis:
+#       lettuce:
+#         pool:
+#           max-active: 50        # 最大活跃连接数（默认50）
+#           max-idle: 20          # 最大空闲连接数（默认20）
+#           min-idle: 10          # 最小空闲连接数（默认10）
+
+# ====== JVM性能优化参数（通过JAVA_OPTS环境变量传递）=====
+# 示例: export JAVA_OPTS="-Xms512m -Xmx1024m -XX:+UseG1GC"
+# 提示: 在 .env 文件中设置 JAVA_OPTS 变量即可
+
+# ====== 功能开关 ======
+
+# WebSocket消息推送 (bx-message)
+# websocket:
+#   enabled: true                # 启用WebSocket（默认true）
+
+# 风控规则 (bx-risk)
+# risk:
+#   rules:
+#     login-rate-limit:
+#       enabled: true            # 登录限流（默认true）
+#     ip-blacklist:
+#       enabled: true            # IP黑名单（默认true）
+
+# 监控数据采集频率 (bx-monitor)
+# monitor:
+#   collect:
+#     system-interval: 30        # 系统指标采集间隔秒（默认30）
+#     app-interval: 15            # 应用指标采集间隔秒（默认15）
+
+# 定时任务 (bx-schedule)
+# schedule:
+#   task-timeout: 300             # 任务超时秒（默认300）
+#   retry-times: 3                # 任务重试次数（默认3）
+
+# ====== 生产环境建议配置 ======
+# （取消注释以启用）
+
+# production:
+#   mode: true                   # 标识生产模式
+#   
+# spring:
+#   jackson:
+#     serialization:
+#       write-dates-as-timestamps: false  # JSON日期格式化
+#   
+#   servlet:
+#     multipart:
+#       max-file-size: 50MB      # 上传文件大小限制
+#       max-request-size: 50MB   # 请求体大小限制
+#
+# logging:
+#   level:
+#     root: WARN                 # 生产环境降低日志级别
+#     com.beijixing: INFO
+#
+# server:
+#   tomcat:
+#     max-connections: 500       # 增加最大连接数
+#     accept-count: 100          # 增加等待队列长度
+
+# ====== 开发环境建议配置 ======
+# development:
+#   mode: true                   # 标识开发模式
+#
+# logging:
+#   level:
+#     root: INFO
+#     com.beijixing: DEBUG       # 开发环境开启DEBUG日志
+#     org.springframework.web: DEBUG
+#     com.baomidou.mybatisplus: DEBUG  # MyBatis-Plus SQL日志
+#
+# spring:
+#   devtools:
+#     restart:
+#       enabled: true            # 热部署（需引入devtools依赖）
+
+# ============================================================
+#  注意事项:
+#    1. 此文件的优先级高于 JAR 包内的 application.yml
+#    2. 敏感信息（密码、密钥）请放在 .env 文件中，不要放在这里
+#    3. 修改配置后必须重启服务才能生效
+#    4. YAML格式要求严格缩进，使用空格不要用Tab
+#    5. 如果不确定某项配置的作用，保持注释状态即可
+# ============================================================

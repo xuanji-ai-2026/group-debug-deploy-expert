@@ -1,0 +1,326 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: beijixing-grafana-dashboards
+  namespace: beijixing
+  labels:
+    app.kubernetes.io/name: beijixing-grafana-dashboards
+    app.kubernetes.io/part-of: beijixing-ai
+    grafana_dashboard: "1"
+data:
+  beijixing-overview.json: |
+    {
+      "dashboard": {
+        "id": null,
+        "title": "北极星AI - 系统概览",
+        "tags": ["beijixing", "overview"],
+        "timezone": "Asia/Shanghai",
+        "schemaVersion": 36,
+        "refresh": "30s",
+        "panels": [
+          {
+            "id": 1,
+            "title": "服务状态",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "up{namespace=\"beijixing\"}",
+                "legendFormat": "{{service}}"
+              }
+            ],
+            "gridPos": {"h": 4, "w": 12, "x": 0, "y": 0}
+          },
+          {
+            "id": 2,
+            "title": "请求总量 (QPS)",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "sum(rate(http_requests_total{namespace=\"beijixing\"}[5m]))",
+                "legendFormat": "QPS"
+              }
+            ],
+            "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0}
+          },
+          {
+            "id": 3,
+            "title": "错误率",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "sum(rate(http_requests_total{namespace=\"beijixing\",status=~\"5..\"}[5m])) / sum(rate(http_requests_total{namespace=\"beijixing\"}[5m])) * 100",
+                "legendFormat": "错误率 %"
+              }
+            ],
+            "gridPos": {"h": 4, "w": 6, "x": 18, "y": 0}
+          },
+          {
+            "id": 4,
+            "title": "服务响应时间 (P95)",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{namespace=\"beijixing\"}[5m])) by (le, service))",
+                "legendFormat": "{{service}}"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+            "yAxes": [
+              {"label": "秒", "min": 0}
+            ]
+          },
+          {
+            "id": 5,
+            "title": "各服务请求量",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "sum(rate(http_requests_total{namespace=\"beijixing\"}[5m])) by (service)",
+                "legendFormat": "{{service}}"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4}
+          },
+          {
+            "id": 6,
+            "title": "Pod内存使用",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "container_memory_usage_bytes{namespace=\"beijixing\", container!=\"\"} / 1024 / 1024",
+                "legendFormat": "{{pod}} - {{container}}"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
+            "yAxes": [
+              {"label": "MB", "min": 0}
+            ]
+          },
+          {
+            "id": 7,
+            "title": "Pod CPU使用",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "rate(container_cpu_usage_seconds_total{namespace=\"beijixing\", container!=\"\"}[5m]) * 100",
+                "legendFormat": "{{pod}} - {{container}}"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
+            "yAxes": [
+              {"label": "%", "min": 0}
+            ]
+          },
+          {
+            "id": 8,
+            "title": "JVM内存（Java服务）",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "jvm_memory_used_bytes{namespace=\"beijixing\", area=\"heap\"} / 1024 / 1024",
+                "legendFormat": "{{pod}}"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 0, "y": 20},
+            "yAxes": [
+              {"label": "MB", "min": 0}
+            ]
+          },
+          {
+            "id": 9,
+            "title": "数据库连接池",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "db_connections_active{namespace=\"beijixing\"}",
+                "legendFormat": "{{service}} - Active"
+              },
+              {
+                "expr": "db_connections_idle{namespace=\"beijixing\"}",
+                "legendFormat": "{{service}} - Idle"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 12, "y": 20}
+          }
+        ]
+      }
+    }
+  
+  beijixing-ai-metrics.json: |
+    {
+      "dashboard": {
+        "id": null,
+        "title": "北极星AI - AI服务监控",
+        "tags": ["beijixing", "ai"],
+        "timezone": "Asia/Shanghai",
+        "schemaVersion": 36,
+        "refresh": "30s",
+        "panels": [
+          {
+            "id": 1,
+            "title": "AI请求量",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "sum(rate(ai_requests_total{namespace=\"beijixing\"}[5m])) by (model)",
+                "legendFormat": "{{model}}"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+          },
+          {
+            "id": 2,
+            "title": "AI响应时间",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "histogram_quantile(0.95, sum(rate(ai_request_duration_seconds_bucket{namespace=\"beijixing\"}[5m])) by (le, model))",
+                "legendFormat": "{{model}} - P95"
+              },
+              {
+                "expr": "histogram_quantile(0.99, sum(rate(ai_request_duration_seconds_bucket{namespace=\"beijixing\"}[5m])) by (le, model))",
+                "legendFormat": "{{model}} - P99"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+          },
+          {
+            "id": 3,
+            "title": "Token使用量",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "sum(rate(ai_tokens_total{namespace=\"beijixing\"}[5m])) by (type)",
+                "legendFormat": "{{type}}"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8}
+          },
+          {
+            "id": 4,
+            "title": "GPU利用率",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "nvidia_gpu_utilization_gpu{namespace=\"beijixing\"}",
+                "legendFormat": "{{pod}} - GPU {{gpu}}"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}
+          },
+          {
+            "id": 5,
+            "title": "GPU显存使用",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "nvidia_gpu_memory_used_bytes{namespace=\"beijixing\"} / 1024 / 1024 / 1024",
+                "legendFormat": "{{pod}} - GPU {{gpu}}"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 0, "y": 16},
+            "yAxes": [
+              {"label": "GB", "min": 0}
+            ]
+          },
+          {
+            "id": 6,
+            "title": "AI模型加载状态",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "ai_model_loaded{namespace=\"beijixing\"}",
+                "legendFormat": "{{model}}"
+              }
+            ],
+            "gridPos": {"h": 4, "w": 12, "x": 12, "y": 16}
+          }
+        ]
+      }
+    }
+  
+  beijixing-business-metrics.json: |
+    {
+      "dashboard": {
+        "id": null,
+        "title": "北极星AI - 业务指标",
+        "tags": ["beijixing", "business"],
+        "timezone": "Asia/Shanghai",
+        "schemaVersion": 36,
+        "refresh": "1m",
+        "panels": [
+          {
+            "id": 1,
+            "title": "线索总数",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "business_leads_total{namespace=\"beijixing\"}",
+                "legendFormat": "总数"
+              }
+            ],
+            "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0}
+          },
+          {
+            "id": 2,
+            "title": "今日新增线索",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "increase(business_leads_total{namespace=\"beijixing\"}[1d])",
+                "legendFormat": "今日新增"
+              }
+            ],
+            "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0}
+          },
+          {
+            "id": 3,
+            "title": "活跃租户数",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "business_active_tenants{namespace=\"beijixing\"}",
+                "legendFormat": "活跃租户"
+              }
+            ],
+            "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0}
+          },
+          {
+            "id": 4,
+            "title": "付费用户数",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "business_paid_users{namespace=\"beijixing\"}",
+                "legendFormat": "付费用户"
+              }
+            ],
+            "gridPos": {"h": 4, "w": 6, "x": 18, "y": 0}
+          },
+          {
+            "id": 5,
+            "title": "线索趋势",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "increase(business_leads_total{namespace=\"beijixing\"}[1h])",
+                "legendFormat": "每小时新增"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4}
+          },
+          {
+            "id": 6,
+            "title": "AI调用量",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "increase(business_ai_calls_total{namespace=\"beijixing\"}[1h])",
+                "legendFormat": "每小时调用"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4}
+          }
+        ]
+      }
+    }

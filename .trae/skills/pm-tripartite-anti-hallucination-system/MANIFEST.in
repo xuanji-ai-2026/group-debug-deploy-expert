@@ -1,0 +1,12 @@
+include README.md
+include LICENSE
+include requirements.txt
+include pyproject.toml
+
+recursive-include .trae/skills/pm-tripartite-anti-hallucination-system *.py
+recursive-exclude .trae/skills/pm-tripartite-anti-hallucination-system __pycache__
+recursive-exclude .trae/skills/pm-tripartite-anti-hallucination-system .logs
+recursive-exclude .trae/skills/pm-tripartite-anti-hallucination-system demo_*
+recursive-exclude .trae/skills/pm-tripartite-anti-hallucination-system test_*
+recursive-exclude .trae/skills/pm-tripartite-anti-hallucination-system *.pyc
+recursive-include .trae/skills/pm-tripartite-anti-hallucination-system *.md

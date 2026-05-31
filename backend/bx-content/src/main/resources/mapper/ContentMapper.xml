@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.content.mapper.ContentMapper">
+
+    <!-- 基础结果映射 -->
+    <resultMap id="BaseResultMap" type="com.beijixing.content.entity.Content">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="summary" property="summary"/>
+        <result column="content" property="content"/>
+        <result column="content_type" property="contentType"/>
+        <result column="status" property="status"/>
+        <result column="publish_status" property="publishStatus"/>
+        <result column="author_id" property="authorId"/>
+        <result column="author_name" property="authorName"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="cover_image" property="coverImage"/>
+        <result column="tags" property="tags"/>
+        <result column="view_count" property="viewCount"/>
+        <result column="like_count" property="likeCount"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="share_count" property="shareCount"/>
+        <result column="publish_time" property="publishTime"/>
+        <result column="scheduled_time" property="scheduledTime"/>
+        <result column="is_top" property="isTop"/>
+        <result column="sort_order" property="sortOrder"/>
+        <result column="source_type" property="sourceType"/>
+        <result column="source_url" property="sourceUrl"/>
+        <result column="version" property="version"/>
+        <result column="allow_comment" property="allowComment"/>
+        <result column="seo_title" property="seoTitle"/>
+        <result column="seo_keywords" property="seoKeywords"/>
+        <result column="seo_description" property="seoDescription"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <!-- 基础列 -->
+    <sql id="Base_Column_List">
+        id, title, summary, content, content_type, status, publish_status,
+        author_id, author_name, category_id, cover_image, tags, view_count,
+        like_count, comment_count, share_count, publish_time, scheduled_time,
+        is_top, sort_order, source_type, source_url, version, allow_comment,
+        seo_title, seo_keywords, seo_description, create_time, update_time, deleted
+    </sql>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <!-- 插入内容 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO content (
+            title, summary, content, content_type, status, publish_status,
+            author_id, author_name, category_id, cover_image, tags, view_count,
+            like_count, comment_count, share_count, publish_time, scheduled_time,
+            is_top, sort_order, source_type, source_url, version, allow_comment,
+            seo_title, seo_keywords, seo_description, create_time, update_time, deleted
+        ) VALUES (
+            #{title}, #{summary}, #{content}, #{contentType}, #{status}, #{publishStatus},
+            #{authorId}, #{authorName}, #{categoryId}, #{coverImage}, #{tags}, 0,
+            0, 0, 0, #{publishTime}, #{scheduledTime},
+            #{isTop}, #{sortOrder}, #{sourceType}, #{sourceUrl}, 1, #{allowComment},
+            #{seoTitle}, #{seoKeywords}, #{seoDescription}, NOW(), NOW(), 0
+        )
+    </insert>
+
+    <!-- 更新内容 -->
+    <update id="update">
+        UPDATE content
+        <set>
+            <if test="title != null">title = #{title},</if>
+            <if test="summary != null">summary = #{summary},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="contentType != null">content_type = #{contentType},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="publishStatus != null">publish_status = #{publishStatus},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="coverImage != null">cover_image = #{coverImage},</if>
+            <if test="tags != null">tags = #{tags},</if>
+            <if test="publishTime != null">publish_time = #{publishTime},</if>
+            <if test="scheduledTime != null">scheduled_time = #{scheduledTime},</if>
+            <if test="isTop != null">is_top = #{isTop},</if>
+            <if test="sortOrder != null">sort_order = #{sortOrder},</if>
+            <if test="sourceType != null">source_type = #{sourceType},</if>
+            <if test="sourceUrl != null">source_url = #{sourceUrl},</if>
+            <if test="version != null">version = version + 1,</if>
+            <if test="allowComment != null">allow_comment = #{allowComment},</if>
+            <if test="seoTitle != null">seo_title = #{seoTitle},</if>
+            <if test="seoKeywords != null">seo_keywords = #{seoKeywords},</if>
+            <if test="seoDescription != null">seo_description = #{seoDescription},</if>
+            update_time = NOW()
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <!-- 删除内容（逻辑删除） -->
+    <delete id="deleteById">
+        UPDATE content SET deleted = 1, status = 4, update_time = NOW() WHERE id = #{id}
+    </delete>
+
+    <!-- 更新发布状态 -->
+    <update id="updatePublishStatus">
+        UPDATE content
+        SET publish_status = #{publishStatus},
+            publish_time = #{publishTime},
+            update_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 更新内容状态 -->
+    <update id="updateStatus">
+        UPDATE content
+        SET status = #{status},
+            update_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 增加阅读量 -->
+    <update id="incrementViewCount">
+        UPDATE content SET view_count = view_count + 1 WHERE id = #{id}
+    </update>
+
+    <!-- 增加点赞数 -->
+    <update id="incrementLikeCount">
+        UPDATE content SET like_count = like_count + #{count} WHERE id = #{id}
+    </update>
+
+    <!-- 增加评论数 -->
+    <update id="incrementCommentCount">
+        UPDATE content SET comment_count = comment_count + #{count} WHERE id = #{id}
+    </update>
+
+    <!-- 增加分享数 -->
+    <update id="incrementShareCount">
+        UPDATE content SET share_count = share_count + 1 WHERE id = #{id}
+    </update>
+
+    <!-- 查询待发布的定时内容 -->
+    <select id="selectScheduledContents" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content
+        WHERE status = 0 AND scheduled_time IS NOT NULL AND scheduled_time &lt;= #{currentTime}
+          AND deleted = 0
+    </select>
+
+    <!-- 查询需要发布的内容 -->
+    <select id="selectContentsToPublish" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content
+        WHERE status = 0 AND scheduled_time &lt;= #{now} AND scheduled_time IS NOT NULL
+          AND deleted = 0
+    </select>
+
+    <!-- 分页查询租户内容列表 -->
+    <select id="selectByAuthorId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content
+        WHERE author_id = #{authorId} AND deleted = 0
+        ORDER BY
+            <choose>
+                <when test="sortBy == 'publishTime'">publish_time DESC</when>
+                <when test="sortBy == 'viewCount'">view_count DESC</when>
+                <when test="sortBy == 'likeCount'">like_count DESC</when>
+                <otherwise>create_time DESC</otherwise>
+            </choose>
+    </select>
+
+    <!-- 分页查询内容列表（动态条件） -->
+    <select id="selectContentPage" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content
+        <where>
+            deleted = 0
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="contentType != null">
+                AND content_type = #{contentType}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="publishStatus != null">
+                AND publish_status = #{publishStatus}
+            </if>
+            <if test="authorId != null">
+                AND author_id = #{authorId}
+            </if>
+            <if test="categoryId != null">
+                AND category_id = #{categoryId}
+            </if>
+            <if test="isTop != null">
+                AND is_top = #{isTop}
+            </if>
+            <if test="startTime != null">
+                AND create_time >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND create_time &lt;= #{endTime}
+            </if>
+        </where>
+        ORDER BY
+            <choose>
+                <when test="sortBy == 'publishTime'">publish_time DESC</when>
+                <when test="sortBy == 'viewCount'">view_count DESC</when>
+                <when test="sortBy == 'likeCount'">like_count DESC</when>
+                <otherwise>create_time DESC</otherwise>
+            </choose>
+    </select>
+
+    <!-- 批量更新状态 -->
+    <update id="batchUpdateStatus">
+        UPDATE content
+        SET status = #{status},
+            update_time = NOW()
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <!-- 批量删除 -->
+    <update id="batchDelete">
+        UPDATE content
+        SET deleted = 1, status = 4, update_time = NOW()
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

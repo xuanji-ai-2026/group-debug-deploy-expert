@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.tenant.repository.mapper.TenantMapper">
+
+    <!-- 基础结果映射 -->
+    <resultMap id="BaseResultMap" type="com.beijixing.tenant.entity.Tenant">
+        <id column="id" property="id"/>
+        <result column="tenant_code" property="tenantCode"/>
+        <result column="tenant_name" property="tenantName"/>
+        <result column="industry" property="industry"/>
+        <result column="contact_name" property="contactName"/>
+        <result column="contact_phone" property="contactPhone"/>
+        <result column="contact_email" property="contactEmail"/>
+        <result column="business_license" property="businessLicense"/>
+        <result column="license_image" property="licenseImage"/>
+        <result column="status" property="status"/>
+        <result column="risk_level" property="riskLevel"/>
+        <result column="package_type" property="packageType"/>
+        <result column="package_expire_time" property="packageExpireTime"/>
+        <result column="point_balance" property="pointBalance"/>
+        <result column="total_consumption" property="totalConsumption"/>
+        <result column="inviter_id" property="inviterId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <!-- 基础列 -->
+    <sql id="Base_Column_List">
+        id, tenant_code, tenant_name, industry, contact_name, contact_phone,
+        contact_email, business_license, license_image, status, risk_level,
+        package_type, package_expire_time, point_balance, total_consumption,
+        inviter_id, create_time, update_time, create_by, update_by, deleted
+    </sql>
+
+    <!-- 根据租户编码查询 -->
+    <select id="selectByTenantCode" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_tenant
+        WHERE tenant_code = #{tenantCode}
+          AND deleted = 0
+    </select>
+
+    <!-- 查询待审核租户列表 -->
+    <select id="selectPendingTenants" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_tenant
+        WHERE status = 0
+          AND deleted = 0
+        ORDER BY create_time ASC
+    </select>
+
+    <!-- 批量更新状态 -->
+    <update id="batchUpdateStatus">
+        UPDATE sys_tenant
+        SET status = #{status},
+            update_by = #{updateBy},
+            update_time = NOW()
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

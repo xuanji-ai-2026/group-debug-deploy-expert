@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_dialog_rounded"
+    android:padding="24dp">
+
+    <!-- 标题 -->
+    <TextView
+        android:id="@+id/tvDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📋 用户协议与隐私政策"
+        android:textColor="#1a1a2e"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 内容区域 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FAFBFE"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- ==================== 用户服务协议 ==================== -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📄 用户服务协议"
+                android:textColor="#667eea"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="欢迎使用北极星AI商机获客系统（以下简称&quot;本应用&quot;）。请您在使用前仔细阅读以下条款，您点击&quot;同意并继续&quot;即表示您已充分理解并同意接受本协议所有条款。\n\n【服务内容】\n本应用为用户提供AI智能获客、商机管理、任务自动化等商业服务。具体功能包括但不限于：潜在客户挖掘、商机智能分析、营销自动化、数据统计分析等。\n\n【账号注册与安全】\n1. 用户需提供真实、准确、完整的个人信息进行注册；\n2. 用户对账号安全和密码保管负全部责任；\n3. 禁止转让、借用或共享账号；\n4. 如发现账号被盗用，应立即通知我们。\n\n【使用规范】\n1. 不得利用本应用从事任何违法活动；\n2. 不得干扰、破坏本应用的正常运行；\n3. 尊重知识产权，不得侵犯他人合法权益；\n4. 不得利用本应用发送垃圾信息或骚扰他人。\n\n【服务变更与终止】\n1. 我们保留随时修改或中断服务的权利；\n2. 用户违反本协议，我们有权暂停或终止服务；\n3. 服务终止后，用户账号数据可能被删除。\n\n【免责声明】\n1. 本应用按&quot;现状&quot;提供服务，不作任何明示或暗示的担保；\n2. 不保证服务无中断或无误；\n3. 因不可抗力导致的服务中断不承担责任；\n4. 用户自行承担使用本应用的风险。\n\n完整协议请访问：https://beijixing.ai/agreement"
+                android:textColor="#555555"
+                android:textSize="11sp"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="20dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:height="1dp"
+                android:background="#E0E4EC"
+                android:layout_marginVertical="12dp" />
+
+            <!-- ==================== 隐私政策 ==================== -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🔒 隐私政策"
+                android:textColor="#4CAF50"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="【信息收集】\n我们会收集以下类型的信息：\n• 注册信息：手机号、邮箱、密码（加密存储）\n• 设备信息：设备型号、操作系统版本、唯一设备标识符\n• 使用数据：操作日志、功能使用频率、错误日志\n• 位置信息：仅在用户授权且必要时收集\n\n【信息使用】\n收集的信息将用于：\n• 提供、维护和改进我们的服务\n• 账号身份验证和安全保护\n• 发送服务通知和更新提醒\n• 数据分析和产品优化\n• 法律法规要求的用途\n\n【信息存储与保护】\n• 采用业界标准的安全技术保护您的信息\n• 数据传输采用SSL/TLS加密\n• 访问权限严格控制，仅授权人员可访问\n• 定期进行安全审计和风险评估\n\n【信息共享】\n除以下情况外，我们不会向第三方共享您的个人信息：\n• 获得您的明确同意\n• 法律法规要求\n• 保护本应用或用户的权利和安全\n\n【Cookie与追踪技术】\n• 使用Cookie提升用户体验\n• 使用分析工具了解使用情况\n• 您可以在设置中管理Cookie偏好\n\n【用户权利】\n您有权：\n• 访问和更正您的个人信息\n• 删除您的账号和相关数据\n• 撤回已给予的同意\n• 导出您的个人数据\n• 投诉我们的数据处理方式\n\n完整隐私政策请访问：https://beijixing.ai/privacy"
+                android:textColor="#555555"
+                android:textSize="11sp"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="20dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:height="1dp"
+                android:background="#E0E4EC"
+                android:layout_marginVertical="12dp" />
+
+            <!-- ==================== 权限使用说明 ==================== -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📱 权限使用说明"
+                android:textColor="#FF9800"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="本应用需要以下权限才能正常工作：\n\n【网络权限】\n• 用途：访问互联网，与服务器通信\n• 必要性：核心功能必需\n• 说明：用于API调用、数据同步、内容加载\n\n【存储权限】\n• 用途：读写本地存储空间\n• 必要性：部分功能需要\n• 说明：缓存数据、导出报告、保存文件\n\n【电话/设备信息权限】\n• 用途：获取设备唯一标识\n• 必要性：账号安全必需\n• 说明：用于设备绑定、防刷机制\n\n【相机权限】\n• 用途：扫描二维码、拍摄图片\n• 必要性：可选功能\n• 说明：扫码登录、上传头像等功能\n\n【位置权限】\n• 用途：获取地理位置信息\n• 必要性：可选功能\n• 说明：基于位置的服务推荐\n\n【通知权限】\n• 用途：推送消息通知\n• 必要性：可选功能\n• 说明：任务提醒、系统公告等\n\n注意：所有权限均在必要时才请求，您可以随时在系统设置中撤销权限。"
+                android:textColor="#555555"
+                android:textSize="11sp"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="20dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:height="1dp"
+                android:background="#E0E4EC"
+                android:layout_marginVertical="12dp" />
+
+            <!-- ==================== 个人信息收集清单 ==================== -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📋 个人信息收集清单"
+                android:textColor="#9C27B0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="根据《个人信息保护法》及相关法规，我们向您公示以下信息收集详情：\n\n【基本信息】\n• 手机号码：注册登录、账号验证、客服联系\n• 电子邮箱：备用联系方式、接收通知\n• 昵称/姓名：个性化展示、身份识别\n• 头像图片：个人标识（自愿上传）\n\n【设备与技术信息】\n• 设备型号：适配优化、兼容性判断\n• 操作系统版本：功能适配、问题排查\n• 设备唯一标识符（IMEI/IDFV）：账号安全、防作弊\n• IP地址：网络定位、安全审计\n• MAC地址：网络识别、设备绑定\n\n【日志与使用数据】\n• 操作日志：功能使用记录、行为分析\n• 错误日志：问题排查、质量改进\n• 功能使用频率：产品优化、个性化推荐\n• 页面停留时间：用户体验分析\n\n【第三方SDK数据】\n本应用集成了以下第三方SDK，可能会收集相关信息：\n• 推送服务SDK：设备标识、推送Token\n• 统计分析SDK：使用数据、崩溃报告\n• 地图服务SDK：位置信息（授权后）\n• 支付服务SDK：交易信息（支付时）\n\n【数据存储与期限】\n• 存储位置：中国大陆服务器\n• 存储期限：账号存续期间及法律要求期限\n• 删除方式：注销账号后30天内删除\n• 匿名化：超过保留期的数据将匿名化处理\n\n【跨境传输】\n原则上不会跨境传输。如确需传输，我们将：\n• 获得您的单独同意\n• 确保同等保护水平\n• 进行安全评估并采取保护措施\n\n如需查看完整的个人信息收集清单，请访问：https://beijixing.ai/data-collection"
+                android:textColor="#555555"
+                android:textSize="11sp"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- 快捷链接 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/tvLinkAgreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《用户协议》"
+            android:textColor="#667eea"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" | "
+            android:textColor="#CCCCCC"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvLinkPrivacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《隐私政策》"
+            android:textColor="#4CAF50"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" | "
+            android:textColor="#CCCCCC"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvLinkCollection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《收集清单》"
+            android:textColor="#9C27B0"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp" />
+
+    </LinearLayout>
+
+    <!-- 按钮区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnDisagree"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:text="不同意并退出"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:background="@drawable/bg_button_secondary"
+            android:layout_marginEnd="12dp"
+            android:elevation="2dp"
+            android:stateListAnimator="@null" />
+
+        <Button
+            android:id="@+id/btnAgree"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:text="✅ 同意并继续"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:background="@drawable/bg_button_primary"
+            android:elevation="2dp"
+            android:stateListAnimator="@null" />
+
+    </LinearLayout>
+
+</LinearLayout>

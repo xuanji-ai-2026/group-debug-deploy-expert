@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    资源保留配置 - 防止R8/Shrinker误删除资源
+    保留所有drawable、layout、mipmap资源
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/*,
+             @layout/*,
+             @mipmap/*,
+             @menu/*,
+             @anim/*,
+             @color/*,
+             @xml/*" />

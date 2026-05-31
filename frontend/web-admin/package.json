@@ -1,0 +1,33 @@
+{
+  "name": "beijixing-web-admin",
+  "version": "1.0.0",
+  "description": "北极星AI商机获客系统 - 管理端Web应用",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .vue,.js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint src --ext .vue,.js,.jsx,.ts,.tsx --fix"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "echarts": "^6.0.0",
+    "element-plus": "^2.5.6",
+    "@element-plus/icons-vue": "^2.3.1",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.21.1",
+    "sass": "^1.71.1",
+    "vite": "^5.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

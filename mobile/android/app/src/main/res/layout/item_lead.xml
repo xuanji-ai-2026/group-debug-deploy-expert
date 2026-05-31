@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    北极星AI商机获客系统 - 商机列表项布局
+    展示：头像、姓名、意向等级、来源平台、跟进状态、跟进时间
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/bg_divider"
+    app:strokeWidth="1dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp">
+
+        <!-- 头像 -->
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_avatar"
+            android:contentDescription="用户头像"
+            android:padding="12dp"
+            android:src="@drawable/ic_user"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_tertiary" />
+
+        <!-- 意向等级标签 -->
+        <TextView
+            android:id="@+id/tvLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:background="@drawable/bg_level_high"
+            android:gravity="center"
+            android:paddingHorizontal="8dp"
+            android:textColor="@color/text_on_primary"
+            android:textSize="10sp"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="高意向" />
+
+        <!-- 姓名 -->
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintEnd_toStartOf="@id/tvLevel"
+            app:layout_constraintStart_toEndOf="@id/ivAvatar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="张先生" />
+
+        <!-- 需求描述 -->
+        <TextView
+            android:id="@+id/tvNeed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivAvatar"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="想了解餐饮加盟项目，预算30-50万" />
+
+        <!-- 来源平台图标 -->
+        <ImageView
+            android:id="@+id/ivSource"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="来源"
+            app:layout_constraintStart_toStartOf="@id/tvNeed"
+            app:layout_constraintTop_toBottomOf="@id/tvNeed"
+            app:tint="@color/text_tertiary"
+            tools:src="@drawable/ic_douyin" />
+
+        <!-- 来源平台名称 -->
+        <TextView
+            android:id="@+id/tvSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/text_tertiary"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivSource"
+            app:layout_constraintStart_toEndOf="@id/ivSource"
+            app:layout_constraintTop_toTopOf="@id/ivSource"
+            tools:text="抖音" />
+
+        <!-- 分隔点 -->
+        <View
+            android:id="@+id/dot"
+            android:layout_width="3dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_dot"
+            app:layout_constraintBottom_toBottomOf="@id/tvSource"
+            app:layout_constraintStart_toEndOf="@id/tvSource"
+            app:layout_constraintTop_toTopOf="@id/tvSource" />
+
+        <!-- 跟进时间 -->
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/text_tertiary"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/dot"
+            app:layout_constraintStart_toEndOf="@id/dot"
+            app:layout_constraintTop_toTopOf="@id/dot"
+            tools:text="10分钟前" />
+
+        <!-- 跟进状态 -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:background="@drawable/bg_status_following"
+            android:gravity="center"
+            android:paddingHorizontal="8dp"
+            android:textColor="@color/info"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTime"
+            tools:text="跟进中" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

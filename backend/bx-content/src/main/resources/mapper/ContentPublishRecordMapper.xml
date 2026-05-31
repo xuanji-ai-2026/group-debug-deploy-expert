@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.content.mapper.ContentPublishRecordMapper">
+
+    <!-- 基础结果映射 -->
+    <resultMap id="BaseResultMap" type="com.beijixing.content.entity.ContentPublishRecord">
+        <id column="id" property="id"/>
+        <result column="content_id" property="contentId"/>
+        <result column="platform" property="platform"/>
+        <result column="platform_content_id" property="platformContentId"/>
+        <result column="platform_url" property="platformUrl"/>
+        <result column="status" property="status"/>
+        <result column="retry_count" property="retryCount"/>
+        <result column="max_retry_count" property="maxRetryCount"/>
+        <result column="error_msg" property="errorMsg"/>
+        <result column="publish_time" property="publishTime"/>
+        <result column="complete_time" property="completeTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <!-- 基础列 -->
+    <sql id="Base_Column_List">
+        id, content_id, platform, platform_content_id, platform_url, status,
+        retry_count, max_retry_count, error_msg, publish_time, complete_time,
+        create_time, update_time, deleted
+    </sql>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content_publish_record
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <!-- 根据内容ID查询发布记录 -->
+    <select id="selectByContentId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content_publish_record
+        WHERE content_id = #{contentId} AND deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据内容ID和平台查询发布记录 -->
+    <select id="selectByContentIdAndPlatform" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content_publish_record
+        WHERE content_id = #{contentId} AND platform = #{platform} AND deleted = 0
+    </select>
+
+    <!-- 插入发布记录 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO content_publish_record (
+            content_id, platform, platform_content_id, platform_url, status,
+            retry_count, max_retry_count, error_msg, publish_time, complete_time,
+            create_time, update_time, deleted
+        ) VALUES (
+            #{contentId}, #{platform}, #{platformContentId}, #{platformUrl}, #{status},
+            #{retryCount}, #{maxRetryCount}, #{errorMsg}, #{publishTime}, #{completeTime},
+            NOW(), NOW(), 0
+        )
+    </insert>
+
+    <!-- 更新发布记录 -->
+    <update id="update">
+        UPDATE content_publish_record
+        <set>
+            <if test="platformContentId != null">platform_content_id = #{platformContentId},</if>
+            <if test="platformUrl != null">platform_url = #{platformUrl},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="retryCount != null">retry_count = #{retryCount},</if>
+            <if test="errorMsg != null">error_msg = #{errorMsg},</if>
+            <if test="publishTime != null">publish_time = #{publishTime},</if>
+            <if test="completeTime != null">complete_time = #{completeTime},</if>
+            update_time = NOW()
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除发布记录（逻辑删除） -->
+    <delete id="deleteById">
+        UPDATE content_publish_record SET deleted = 1, update_time = NOW() WHERE id = #{id}
+    </delete>
+
+    <!-- 更新发布状态 -->
+    <update id="updateStatus">
+        UPDATE content_publish_record
+        SET status = #{status},
+            <if test="status == 2">complete_time = NOW(),</if>
+            <if test="errorMsg != null">error_msg = #{errorMsg},</if>
+            update_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 增加重试次数 -->
+    <update id="incrementRetryCount">
+        UPDATE content_publish_record
+        SET retry_count = retry_count + 1,
+            update_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 查询待发布记录 -->
+    <select id="selectPendingRecords" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content_publish_record
+        WHERE status = 0 AND deleted = 0
+        ORDER BY create_time ASC
+    </select>
+
+    <!-- 查询发布失败记录（可重试） -->
+    <select id="selectFailedRecords" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content_publish_record
+        WHERE status = 3 AND retry_count &lt; max_retry_count AND deleted = 0
+        ORDER BY create_time ASC
+    </select>
+
+    <!-- 查询指定平台的发布记录 -->
+    <select id="selectByPlatform" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content_publish_record
+        WHERE platform = #{platform} AND deleted = 0
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 统计内容发布情况 -->
+    <select id="countByContentIdAndStatus" resultType="int">
+        SELECT COUNT(*)
+        FROM content_publish_record
+        WHERE content_id = #{contentId} AND status = #{status} AND deleted = 0
+    </select>
+
+    <!-- 分页查询发布记录 -->
+    <select id="selectPublishRecordPage" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM content_publish_record
+        <where>
+            deleted = 0
+            <if test="contentId != null">
+                AND content_id = #{contentId}
+            </if>
+            <if test="platform != null">
+                AND platform = #{platform}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="startTime != null">
+                AND create_time >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND create_time &lt;= #{endTime}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 批量插入发布记录 -->
+    <insert id="batchInsert">
+        INSERT INTO content_publish_record (
+            content_id, platform, platform_content_id, platform_url, status,
+            retry_count, max_retry_count, error_msg, publish_time, complete_time,
+            create_time, update_time, deleted
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.contentId}, #{item.platform}, #{item.platformContentId}, #{item.platformUrl}, #{item.status},
+                #{item.retryCount}, #{item.maxRetryCount}, #{item.errorMsg}, #{item.publishTime}, #{item.completeTime},
+                NOW(), NOW(), 0
+            )
+        </foreach>
+    </insert>
+
+    <!-- 批量更新状态 -->
+    <update id="batchUpdateStatus">
+        UPDATE content_publish_record
+        SET status = #{status},
+            update_time = NOW()
+        WHERE content_id IN
+        <foreach collection="contentIds" item="contentId" open="(" separator="," close=")">
+            #{contentId}
+        </foreach>
+        AND platform = #{platform}
+    </update>
+
+</mapper>

@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: beijixing-config
+  namespace: beijixing
+  labels:
+    app.kubernetes.io/name: beijixing-config
+    app.kubernetes.io/part-of: beijixing-ai
+data:
+  # 应用基础配置
+  APP_ENV: "production"
+  APP_DEBUG: "false"
+  APP_LOG_LEVEL: "info"
+  APP_PORT: "8080"
+
+  # 数据库连接配置
+  DB_HOST: "mysql.beijixing.svc.cluster.local"
+  DB_PORT: "3306"
+  DB_NAME: "beijixing_ai"
+  DB_MAX_OPEN_CONNS: "100"
+  DB_MAX_IDLE_CONNS: "20"
+  DB_CONN_MAX_LIFETIME: "3600"
+
+  # Redis配置
+  REDIS_HOST: "redis.beijixing.svc.cluster.local"
+  REDIS_PORT: "6379"
+  REDIS_DB: "0"
+  REDIS_POOL_SIZE: "50"
+  REDIS_MIN_IDLE_CONNS: "10"
+
+  # 消息队列配置
+  RABBITMQ_HOST: "rabbitmq.beijixing.svc.cluster.local"
+  RABBITMQ_PORT: "5672"
+  RABBITMQ_VHOST: "/beijixing"
+
+  # Elasticsearch配置
+  ES_HOST: "elasticsearch.beijixing.svc.cluster.local"
+  ES_PORT: "9200"
+
+  # MinIO存储配置
+  MINIO_ENDPOINT: "minio.beijixing.svc.cluster.local:9000"
+  MINIO_REGION: "cn-beijing"
+  MINIO_BUCKET: "beijixing-files"
+  MINIO_USE_SSL: "false"
+
+  # 日志配置
+  LOG_FORMAT: "json"
+  LOG_OUTPUT: "stdout"
+  LOG_MAX_SIZE: "100"
+  LOG_MAX_BACKUPS: "10"
+  LOG_MAX_AGE: "30"
+
+  # 链路追踪配置
+  JAEGER_AGENT_HOST: "jaeger-agent.beijixing.svc.cluster.local"
+  JAEGER_AGENT_PORT: "6831"
+  JAEGER_SAMPLER_TYPE: "const"
+  JAEGER_SAMPLER_PARAM: "1"
+
+  # AI服务配置
+  AI_MODEL_PATH: "/models"
+  AI_BATCH_SIZE: "32"
+  AI_MAX_TOKENS: "4096"
+  AI_TEMPERATURE: "0.7"
+
+  # 风控配置
+  RISK_CHECK_INTERVAL: "5"
+  RISK_MAX_REQUESTS_PER_MINUTE: "1000"
+
+  # 通知配置
+  SMS_PROVIDER: "aliyun"
+  EMAIL_PROVIDER: "smtp"
+  PUSH_PROVIDER: "jpush"

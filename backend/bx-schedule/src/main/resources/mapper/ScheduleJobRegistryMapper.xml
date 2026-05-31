@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.schedule.mapper.ScheduleJobRegistryMapper">
+
+    <resultMap id="BaseResultMap" type="com.beijixing.schedule.entity.ScheduleJobRegistry">
+        <id column="id" property="id"/>
+        <result column="group_name" property="groupName"/>
+        <result column="app_name" property="appName"/>
+        <result column="executor_name" property="executorName"/>
+        <result column="address" property="address"/>
+        <result column="registry_time" property="registryTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="online" property="online"/>
+    </resultMap>
+
+    <select id="selectOnlineRegistries" resultMap="BaseResultMap">
+        SELECT id, group_name, app_name, executor_name, address, registry_time, update_time, online
+        FROM schedule_job_registry
+        WHERE app_name = #{appName} AND online = 1
+        ORDER BY update_time DESC
+    </select>
+</mapper>

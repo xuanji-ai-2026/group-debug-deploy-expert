@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.bxlead.mapper.LeadMapper">
+
+    <!-- 分页查询商机列表 -->
+    <select id="selectLeadPage" resultType="com.beijixing.bxlead.entity.Lead">
+        SELECT * FROM bx_lead
+        WHERE deleted = 0
+        <if test="query.keyword != null and query.keyword != ''">
+            AND (title LIKE CONCAT('%', #{query.keyword}, '%')
+            OR customer_name LIKE CONCAT('%', #{query.keyword}, '%')
+            OR customer_company LIKE CONCAT('%', #{query.keyword}, '%'))
+        </if>
+        <if test="query.statusList != null and query.statusList.size() > 0">
+            AND status IN
+            <foreach collection="query.statusList" item="status" open="(" separator="," close=")">
+                #{status}
+            </foreach>
+        </if>
+        <if test="query.levelList != null and query.levelList.size() > 0">
+            AND level IN
+            <foreach collection="query.levelList" item="level" open="(" separator="," close=")">
+                #{level}
+            </foreach>
+        </if>
+        <if test="query.sourceList != null and query.sourceList.size() > 0">
+            AND source IN
+            <foreach collection="query.sourceList" item="source" open="(" separator="," close=")">
+                #{source}
+            </foreach>
+        </if>
+        <if test="query.industry != null and query.industry != ''">
+            AND industry = #{query.industry}
+        </if>
+        <if test="query.region != null and query.region != ''">
+            AND region = #{query.region}
+        </if>
+        <if test="query.ownerId != null">
+            AND owner_id = #{query.ownerId}
+        </if>
+        <if test="query.minIntentScore != null">
+            AND intent_score >= #{query.minIntentScore}
+        </if>
+        <if test="query.maxIntentScore != null">
+            AND intent_score &lt;= #{query.maxIntentScore}
+        </if>
+        <if test="query.createTimeStart != null">
+            AND create_time >= #{query.createTimeStart}
+        </if>
+        <if test="query.createTimeEnd != null">
+            AND create_time &lt;= #{query.createTimeEnd}
+        </if>
+        <if test="query.expectedDealTimeStart != null">
+            AND expected_deal_time >= #{query.expectedDealTimeStart}
+        </if>
+        <if test="query.expectedDealTimeEnd != null">
+            AND expected_deal_time &lt;= #{query.expectedDealTimeEnd}
+        </if>
+        <if test="query.isIntercept != null">
+            AND intercept_source_id IS NOT NULL
+        </if>
+        ORDER BY 
+        <choose>
+            <when test="query.sortField != null and query.sortField != ''">
+                ${query.sortField}
+                <choose>
+                    <when test="query.sortOrder == 'asc'">ASC</when>
+                    <otherwise>DESC</otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                create_time DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!-- 统计漏斗数据 -->
+    <select id="selectFunnelStats" resultType="java.util.HashMap">
+        SELECT status, COUNT(*) as count, SUM(budget_amount) as total_amount
+        FROM bx_lead
+        WHERE deleted = 0
+        GROUP BY status
+    </select>
+
+</mapper>

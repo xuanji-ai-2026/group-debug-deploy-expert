@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.system.mapper.SysDictItemMapper">
+
+    <resultMap id="BaseResultMap" type="com.beijixing.system.entity.SysDictItem">
+        <id column="id" property="id"/>
+        <result column="dict_id" property="dictId"/>
+        <result column="item_value" property="itemValue"/>
+        <result column="item_label" property="itemLabel"/>
+        <result column="item_type" property="itemType"/>
+        <result column="sort_order" property="sortOrder"/>
+        <result column="status" property="status"/>
+        <result column="is_default" property="isDefault"/>
+        <result column="description" property="description"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <select id="selectByDictId" resultMap="BaseResultMap">
+        SELECT * FROM sys_dict_item
+        WHERE dict_id = #{dictId} AND deleted = 0
+        ORDER BY sort_order ASC, id ASC
+    </select>
+
+    <select id="selectEnabledByDictId" resultMap="BaseResultMap">
+        SELECT * FROM sys_dict_item
+        WHERE dict_id = #{dictId} AND status = 1 AND deleted = 0
+        ORDER BY sort_order ASC, id ASC
+    </select>
+
+</mapper>

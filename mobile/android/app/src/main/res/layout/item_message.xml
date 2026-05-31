@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    北极星AI商机获客系统 - 消息列表项布局
+    展示：消息图标、标题、内容、时间、未读标记、类型标签
+    对应产品需求：5.4.2节 消息中心
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/bg_divider"
+    app:strokeWidth="1dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp">
+
+        <!-- 左侧消息类型图标 -->
+        <FrameLayout
+            android:id="@+id/layoutIcon"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_message_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/message_type"
+                app:tint="@color/brand_primary"
+                tools:src="@drawable/ic_notification" />
+
+        </FrameLayout>
+
+        <!-- 未读红点 -->
+        <View
+            android:id="@+id/ivUnreadDot"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/bg_unread_dot"
+            app:layout_constraintEnd_toEndOf="@id/layoutIcon"
+            app:layout_constraintTop_toTopOf="@id/layoutIcon"
+            tools:visibility="visible" />
+
+        <!-- 消息标题 -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintEnd_toStartOf="@id/tvTime"
+            app:layout_constraintStart_toEndOf="@id/layoutIcon"
+            app:layout_constraintTop_toTopOf="@id/layoutIcon"
+            tools:text="您有一条新的商机提醒" />
+
+        <!-- 消息时间 -->
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_tertiary"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTitle"
+            tools:text="10:30" />
+
+        <!-- 消息内容 -->
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:lineSpacingMultiplier="1.1"
+            app:layout_constraintEnd_toStartOf="@id/btnMarkRead"
+            app:layout_constraintStart_toEndOf="@id/layoutIcon"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:text="有新的高意向客户【张先生】咨询餐饮加盟项目，请及时跟进处理。" />
+
+        <!-- 标记已读按钮 -->
+        <ImageButton
+            android:id="@+id/btnMarkRead"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/mark_as_read"
+            android:src="@drawable/ic_check_circle"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tvContent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/brand_primary"
+            tools:visibility="visible" />
+
+        <!-- 底部信息栏 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/layoutIcon"
+            app:layout_constraintTop_toBottomOf="@id/tvContent">
+
+            <!-- 消息类型标签 -->
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:background="@drawable/bg_message_type"
+                android:gravity="center"
+                android:paddingHorizontal="6dp"
+                android:textColor="@color/brand_primary"
+                android:textSize="10sp"
+                tools:text="新商机" />
+
+            <!-- 高优先级标识 -->
+            <TextView
+                android:id="@+id/tvPriority"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_priority_high"
+                android:gravity="center"
+                android:paddingHorizontal="6dp"
+                android:text="@string/priority_high"
+                android:textColor="@color/error"
+                android:textSize="10sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

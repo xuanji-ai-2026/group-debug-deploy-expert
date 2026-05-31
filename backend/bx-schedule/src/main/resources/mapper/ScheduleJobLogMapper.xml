@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beijixing.schedule.mapper.ScheduleJobLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.beijixing.schedule.entity.ScheduleJobLog">
+        <id column="id" property="id"/>
+        <result column="job_id" property="jobId"/>
+        <result column="job_name" property="jobName"/>
+        <result column="job_type" property="jobType"/>
+        <result column="executor_address" property="executorAddress"/>
+        <result column="executor_handler" property="executorHandler"/>
+        <result column="params" property="params"/>
+        <result column="status" property="status"/>
+        <result column="retry_times" property="retryTimes"/>
+        <result column="fail_reason" property="failReason"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="cost_time" property="costTime"/>
+        <result column="result" property="result"/>
+        <result column="host_address" property="hostAddress"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="selectJobLogList" resultType="com.beijixing.schedule.vo.JobLogVO">
+        SELECT id, job_id, job_name, job_type, executor_address, executor_handler,
+               params, status, retry_times, fail_reason, start_time, end_time,
+               cost_time, result, host_address, create_time
+        FROM schedule_job_log
+        <where>
+            <if test="jobId != null">
+                AND job_id = #{jobId}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                AND create_time &gt;= #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                AND create_time &lt;= #{endTime}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+        LIMIT 100
+    </select>
+
+    <select id="selectJobLogById" resultType="com.beijixing.schedule.vo.JobLogVO">
+        SELECT id, job_id, job_name, job_type, executor_address, executor_handler,
+               params, status, retry_times, fail_reason, start_time, end_time,
+               cost_time, result, host_address, create_time
+        FROM schedule_job_log
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectRecentLogs" resultType="com.beijixing.schedule.vo.JobLogVO">
+        SELECT id, job_id, job_name, job_type, executor_address, executor_handler,
+               params, status, retry_times, fail_reason, start_time, end_time,
+               cost_time, result, host_address, create_time
+        FROM schedule_job_log
+        ORDER BY create_time DESC
+        LIMIT #{limit}
+    </select>
+</mapper>

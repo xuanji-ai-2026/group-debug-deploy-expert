@@ -1,0 +1,99 @@
+# project.yml
+# XcodeGen配置文件 - 北极星AI商机获客系统 iOS客户端
+# 适用于XcodeGen 2.x版本
+
+name: BxApp
+options:
+  bundleIdPrefix: com.beijixing
+  deploymentTarget:
+    iOS: "12.0"
+  developmentLanguage: zh-Hans
+  xcodeVersion: "15.0"
+  generateEmptyDirectories: true
+  groupSortPosition: top
+  createIntermediateGroups: true
+
+settings:
+  base:
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+
+targets:
+  BxApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: BxApp
+        excludes:
+          - "**/*.xcassets/**"
+          - "**/Info.plist"
+    resources:
+      - path: BxApp/Resources/Assets.xcassets
+      - path: BxApp/Resources/Localizable.strings
+    settings:
+      base:
+        INFOPLIST_FILE: BxApp/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.beijixing.app
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        SWIFT_EMIT_LOC_STRINGS: YES
+        GENERATE_INFOPLIST_FILE: NO
+        CODE_SIGN_ENTITLEMENTS: ""
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks"
+    dependencies:
+      - framework: Alamofire.framework
+        embed: true
+      - framework: KeychainAccess.framework
+        embed: true
+
+  BxAppTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: BxAppTests
+    dependencies:
+      - target: BxApp
+    settings:
+      base:
+        INFOPLIST_FILE: BxAppTests/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.beijixing.app.tests
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/BxApp.app/BxApp"
+
+  BxAppUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: BxAppUITests
+    dependencies:
+      - target: BxApp
+    settings:
+      base:
+        INFOPLIST_FILE: BxAppUITests/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.beijixing.app.uitests
+        TEST_TARGET_NAME: BxApp
+
+schemes:
+  BxApp:
+    build:
+      targets:
+        BxApp: all
+        BxAppTests: [test]
+        BxAppUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - BxAppTests
+        - BxAppUITests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

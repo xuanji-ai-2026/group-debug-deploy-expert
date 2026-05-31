@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    北极星AI商机获客系统 - 自定义属性定义
+-->
+<resources>
+
+    <!-- WaveView 属性 -->
+    <declare-styleable name="WaveView">
+        <attr name="waveWidth" format="dimension" />
+        <attr name="waveGap" format="dimension" />
+        <attr name="maxWaveHeight" format="dimension" />
+        <attr name="waveColor" format="color" />
+    </declare-styleable>
+
+</resources>
