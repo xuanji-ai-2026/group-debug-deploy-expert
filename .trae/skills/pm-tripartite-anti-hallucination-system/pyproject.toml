@@ -94,8 +94,11 @@ Issues = "https://github.com/your-org/pm-tripartite-anti-hallucination-system/is
 Changelog = "https://github.com/your-org/pm-tripartite-anti-hallucination-system/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
-packages = ["."]
 include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
 
 [tool.black]
 line-length = 100
@@ -142,7 +145,7 @@ branch = true
 omit = [
     "*/tests/*",
     "*/__pycache__/*",
-    "*/\.*",
+    "*/.*",
 ]
 
 [tool.coverage.report]
@@ -151,7 +154,7 @@ exclude_lines = [
     "def __repr__",
     "raise AssertionError",
     "raise NotImplementedError",
-    "if __name__ == .__main__.:",
+    'if __name__ == "__main__":',
     "if TYPE_CHECKING:",
 ]
 fail_under = 80
